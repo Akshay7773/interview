@@ -155,16 +155,16 @@ Streaming in Node.js refers to the ability to read from or write to a continuous
 
 e.g. Youtube, we dont wait for the entire video download, video will start playing when some of the data is downloaded.
 
-i.e. The contents arrive in chunks and you watch in chunks while the rest of the data arrives over time.
+i.e. The contents arrive in chunks and you watch in chunks while the rest of the data arrives over time.Process streams of data in chunks as they arrive instead of waiting for the entire data to be available before processing.
 
-	Process streams of data in chunks as they arrive instead of waiting for the entire data to be available before processing.
 
 Buffer:
 	suppose in hall there is only 30 people seating arrangement, but remaining 70 out of 100 needs to wait,
 	So the area where people waits is nothing but the buffer.
 
-	e.g.  streming a video online
+ e.g.  streming a video online 
 		If your connection is fast enough, the speed of the stream will be fast enough to instantly fill up the buffer and send it out for processing. That will repeat till the stream is finished. If your connection is slow, after processing the first chunk of data that arrived, the video player will display a loading spinner which indicates it is waiting for more data to arrive. Once the buffer is filled up and data is processed, the video player shows the video.
+
 
 **Types of Streaming :** 
 
