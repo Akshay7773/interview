@@ -177,9 +177,10 @@ Buffer:
 <br>
 
 ## Q.6 What is event Emitter ? 
-In Node.js, an Event Emitter is a core module that allows objects to emit and listen for events. It provides a mechanism for implementing the observer pattern, allowing different parts of an application to communicate with each other asynchronously.
+EventEmitter is a class in node.js that is responsible for handling the events created using the ‘events’ module in node.js. Events are created to make custom operations while a set of operations is performed. EventEmitter can return two properties namely newListener if we want to create a new event listener and removeListener when we want to remove existing event listeners. Both of these mentioned properties emit an event whenever called to perform the operation.
+In order to perform operations on EventEmitter, we need to create a reference using the ‘events’ module and then we need to initialize an instance of the EventEmitter so that we can use it further. 
 
-The Event Emitter module provides the **`EventEmitter`** class, which serves as the foundation for creating objects that can emit events and handle event listeners. Here's how it works:
+Here's how it works:
 
 1. **Emitting Events**: An object that inherits from **`EventEmitter`** can emit named events. These events can carry data or be simple notifications that something has occurred. Events are emitted using the **`emit()`** method, specifying the event name and optionally passing data as arguments.
 2. **Listening for Events**: Other parts of the application can listen for specific events emitted by an **`EventEmitter`** object. Event listeners are registered using the **`on()`** method, specifying the event name and a callback function to be executed when the event is emitted.
