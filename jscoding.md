@@ -905,3 +905,177 @@ console.log(null == undefined); // true
 console.log(null === undefined); // false
 
 ```
+
+
+
+
+# FROM GIT 
+
+Q.1 Why do we call Javascript as a dynamic language?
+==> Javascript is a dynamic language means data types of the variables can change during the runtime. 
+	
+	e.g .
+ ```jsx
+		var a=10;
+		console.log(typeof a)   // number 
+		a="akshay";
+		console.log(typeof a)  // string
+```
+
+
+Q.2 Null
+==>  Null indicates intentional absense of data. It is not zero , it is not empty string, It is null.
+
+	e.g. var a=null;
+
+Q. 3 What happens if you declare variable without VAR?
+==> 	the variable becomes global.
+	
+	e.g.
+ ```jsx
+	
+		function fun(){
+  		  y=100;
+		}
+		fun();
+		console.log(y)    // op= 100
+```
+
+Q.4 What is IIFE (Immediately Invoked Function Expression):
+	it is an anonymous function means 	it does not have name and it gets immediately invoke this function immediately.
+	e.g. 
+ ```jsx
+		(function (){
+   		 console.log("hello")
+		})()
+
+```
+
+Q.5 What is name  collision?
+==> Name collision happens when you name the same variable names  or method names in the same context.
+
+e.g.
+```jsx
+function f(){
+    console.log("hello")
+}
+var f=10;
+f()
+```
+
+op: gives type error as  f is not a function
+
+
+Q.6 Module pattern or revealing Module pattern:
+	it is a combination of IIFE (Immediately Invoked Function Expression) and closures.
+	Suppose we want to hide perticular information .
+e.g.
+```jsx
+    let A=(function(){
+       function a(){
+        console.log("A")
+    }
+    function b(){
+        console.log("B")
+    }  
+    function c(){
+        console.log("C")
+    }
+    return{
+        a,b
+    }
+    })
+
+var ab=A();
+ab.a()
+```
+
+note : here only function a and b are called but function c is not called i.e. hided. Check return statement inside anonymous function.
+
+
+
+
+
+Q. 7 Inheritance in javascript .
+=> it is done by using Object inheritance , it is done by using prototype object 
+
+e.g
+```jsx
+function Employee(){
+    this.name="";
+    this.doWork=function(){
+        alert("Employee=> Do you Work")
+    }
+    this.attendance=function(){
+        alert("Attendance is required for all employees")
+    }
+}
+
+function Manager(){
+    this.managerName="Hello";
+    this.doWork=function(){
+        alert("Manager=> do your work !!",this.managerName)
+    }
+}
+
+var emp=new Employee()
+Manager.prototype=emp; //here manager is a child and Employee here is Parent
+var man=new Manager();
+man.doWork()
+man.attendance()
+
+```
+
+Prototype :
+1. Every javascript object has a prototype object.
+2. It is an inbuilt object provided by javascript.
+
+Prototype chaining:
+	It is a process where the property/ methods are first checked in the current object , if not found then it checks in the prototype object ,
+	if it does not find in that it try checking the prototypes prototype object , until he get the prototype object null.
+
+
+
+
+Q. 8 let is hoisted or not ?
+=> yes, in case of let keyword also hoisting happens , but there is no default value assigned, so it will gives an error => cannot access X before initiliazation. In var keyword it have default value undefined.
+
+
+
+Q.9 Temporal Dead Zone:(TDZ):
+	it is a period of it is a state of a variable where variables are named in memory but they are not initialized with any value.
+	It is a section or a time where variables are named in a memory but they are not initialized 
+
+e.g.
+```jsx
+	console.log(x); // Error : you are in TDZ
+	//This is temporal Dead Zone
+	// This is temporal Dead Zone
+	console.log(x); // Error : you are in TDZ
+	//This is temporal Dead Zone
+	// This is temporal Dead Zone
+	let x=10; // End of Temporal Dead Zone
+	
+```
+
+Q.10 Difference between let and var.
+Var:
+	1. var scoped to the immediate function body.
+	2. value initialized with undefined.
+Let : 
+	1. Scoped to the immediate enclosing block.
+	2. Value initialized with nothing.
+e.g.
+```jsx
+function hello(){
+    if(1===1){
+        var x=10;
+        let y=293;
+    }
+    console.log(x)
+    console.log(y)
+}
+hello()
+```
+op: 	10
+	error y is not defined.
