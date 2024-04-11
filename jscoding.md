@@ -93,8 +93,9 @@ output=>[ { name: 'a', email: 'abc' }, { name: 'b', email: 'xyz' } ]
 
 //-----------------------------------------replace string with link-----------------------------------------------
 //-------using for loop and array--------
-
+```jsx
 let text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+```
 
 ```jsx
 
@@ -197,7 +198,7 @@ console.log(obj5.name + " " + obj1.age);
 
 --------add properties to constructor funtion (prototype)-----
 
-```
+```jsx
 function Student() {
   this.name = "John";
   this.gender = "M";
@@ -237,7 +238,7 @@ console.log(a);
 
 //---------------------------------------------------string reverse--------
 
-```
+```jsx
 let str1="Akash";
 console.log(str1.charAt(0))
 for(let i=str1.length-1;i>=0;i--){
@@ -264,7 +265,7 @@ for (let i = 0; i < arr.length; i++) {
 
 //this is second way
 
-```
+```jsx
 for (let i = 0; i < arr.length; i++) {
   if (arr[i] > 0 && arr[i + 1] < 0) {
     let temp = arr[i];
