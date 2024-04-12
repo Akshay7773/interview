@@ -284,3 +284,8 @@ The ORDER BY clause is very flexible and allows you to sort data in various ways
 ## Q.23 What are some of the common MySQL commands ? 
 
 ## Q.24 What are aggregate functions in MySQL ? 
+
+
+## Q.25 What is DDL, DQL, DML, DCL and TCL Commands?
+
+
