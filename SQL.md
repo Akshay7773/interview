@@ -250,3 +250,37 @@ The ORDER BY clause is very flexible and allows you to sort data in various ways
 
 ## Q.8 Explain 1NF, 2NF and 3NF in mysql normalization.
 
+## Q.9 What is Primary key and Foreign Key? 
+
+## Q.10 Difference between Primary and Foreign key? 
+
+## Q.11 Primary key vs Candidate key vs Unique key
+
+## Q.12 What is trigger? How you can create trigger in MySQL? 
+
+## Q.13 Explain TRANSACTIONS and how to implement it in MySQL? 
+
+## Q.14 What is index ? How can an index be declared in MySQL ? 
+
+## Q.15 What is view ? How can you create and drop view in MySQL? 
+
+## Q.16 Explain Join?  ( Inner , Left, Right, cross ) 
+
+## Q.17 Union vs Union all
+
+## Q.18 What are MySQL aliases ? 
+
+## Q.19 Explain MySQL subqueryy .
+
+## Q.20 Blob vs text data type in MySQL.
+
+
+## Q.21 Char vs Varchar in data types .
+
+
+## Q.22 What are the differences between InnoDB and MyISAM engines ? 
+
+
+## Q.23 What are some of the common MySQL commands ? 
+
+## Q.24 What are aggregate functions in MySQL ? 
