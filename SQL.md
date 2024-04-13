@@ -289,3 +289,41 @@ The ORDER BY clause is very flexible and allows you to sort data in various ways
 ## Q.25 What is DDL, DQL, DML, DCL and TCL Commands?
 
 
+## Q.26 Difference between DBMS and RDBMS. 
+
+## Q.27 Explain types of SQL commands ( DDL, DML, DCL, TCL, Constraints )
+
+## Q.28 Difference between Delete, Drop and Truncate.
+
+## Q.29 Difference between GROUP BY and ORDER BY.
+
+## Q.30 Nested subquery vs   Correlated subquery
+
+## Q.31 What is pattern matching in SQL ( LIKE operator )? 
+
+
+## Q.32 Find Second largest salary.
+ SELECT name, MAX( salary ) AS salary FROM employee 
+   WHERE salary <> ( SELECT MAX (salary) FROM employee)
+
+NOTE : here it first runs sub query then main query . 
+       <> means not in
+
+
+<br> 
+
+
+## Q.33 SQL vs NOSQL.
+
+
+## Q.34 Varchar vs Varchar2 
+
+## Q.35 What is ACID properties ? 
+
+
+## Q.36 What is order of execution in SQL ? 
+
+## Q.37 
+
+
+   
