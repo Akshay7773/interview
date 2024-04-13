@@ -323,7 +323,38 @@ NOTE : here it first runs sub query then main query .
 
 ## Q.36 What is order of execution in SQL ? 
 
-## Q.37 
+## Q.37 Can we put more than one primary key in a table ? 
+
+## Q.38 what is the use of nvl function in mysql 
+
+## Q.39 What is the difference between OLTP and OLAP ? 
+
+## Q.40 Explain character manipulation function in MySQL.
+
+## Q.41 What is the difference between NOSQL AND SQL.
+
+## Q.42 What is the difference between char , varchar and varchar2.
+
+## Q.43 What do you understand by query optimization. 
+
+## Q.44 what are the different types of sql sandboxes 
+
+## Q.45 Difference between WHERE and HAVING clause.
+
+## Q.46 What is unique constraints? 
+
+## Q.47 What is composite key ? 
+
+## Q.48 What is surrogate key in mysql?
+
+## Q.49 What is common table expression in mysql ? 
+
+## Q.50 What is the SQL query to create a  tabel with same structure of another table ? 
+
+## Q.51 SQL query to create a table with same structure with data of another table.
+
+## Q.52 
+
 
 
    
