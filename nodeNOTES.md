@@ -198,10 +198,10 @@ node index.js command ,
 ===================================================> BUILT-IN MODULES <===========================================================================
 	
 	
-BUILT IN MODULES :
-	Modules that node js ships with.
-	They are also refered to as core modules.
-	Import the module before you can use it.	
+## BUILT IN MODULES :
+Modules that node js ships with.
+They are also refered to as core modules.
+Import the module before you can use it.	
 
  Some important built-in modules are:
 		1. path
@@ -255,75 +255,71 @@ Types of callback function :
 		
 		
 		
-####. 2. EVENTS MODULE: 
- 	The events module allows us to work with events in Node.js.
- 	An event is an action or occurence that has happened in our application that we can respond to.
- 	Using the events module, we can dispatch our own custom events and respond to those custom events in a non-blocking manner.
+## 2. EVENTS MODULE: 
+ The events module allows us to work with events in Node.js.
+ An event is an action or occurence that has happened in our application that we can respond to.
+ Using the events module, we can dispatch our own custom events and respond to those custom events in a non-blocking manner.
+ 
  	
- 	
- 	e.g. 
- 	 in index.js 
- 	 
- 	 const EventEmitter= require("events");
- 	 const emitter=new EventEmitter();
- 	 emitter.on("order-pizza", (h)=>{
- 	 	console.log("Order received!! baking a pizza", h)
- 	 })
+ e.g. 
+  in index.js 
+```jsx 
+const EventEmitter= require("events");
+const emitter=new EventEmitter();
+emitter.on("order-pizza", (h)=>{
+	console.log("Order received!! baking a pizza", h)
+ })
 	
-	emitter.emit("order-pizza", "hello")
-	
-	
+emitter.emit("order-pizza", "hello")
+```
 	
 	
+
+
+## Binary data:
+0's and 1's that computers can understand.
+		
+Character sets:
+	Predefined lists of characters represented by numbers.
+		
+Character encoding:
+	First it converts character to its ASCII code or UNICODE and then convert it into its binary code.
+		
+Streams:
+	e.g. Youtube, we dont wait for the entire video download, video will start playing when some of the data is downloaded.
+	i.e. The contents arrive in chunks and you watch in chunks while the rest of the data arrives over time. 
 	
-	Binary data:
-		0's and 1's that computers can understand.
-		
-	Character sets:
-		Predefined lists of characters represented by numbers.
-		
-	Character encoding:
-		First it converts character to its ASCII code or UNICODE and then convert it into its binary code.
-		
-	Streams:
-		e.g. Youtube, we dont wait for the entire video download, video will start playing when some of the data is downloaded.
-		
-		i.e. The contents arrive in chunks and you watch in chunks while the rest of the data arrives over time. 
-		
-		Process streams of data in chunks as they arrive instead of waiting for the entire data to be available before processing.
+ Process streams of data in chunks as they arrive instead of waiting for the entire data to be available before processing.
 		
 		
-	Buffer:
-		suppose in hall there is only 30 people seating arrangement, but remaining 70 out of 100 needs to wait, 
+Buffer:
+	suppose in hall there is only 30 people seating arrangement, but remaining 70 out of 100 needs to wait, 
 		So the area where people waits is nothing but the buffer.
-		
-		
-		e.g.  streming a video online
+	
+  e.g.  streming a video online
 			If your connection is fast enough, the speed of the stream will be fast enough to instantly fill up the buffer and send 
-it out for processing.
-			That will repeat till the stream is finished.
-			If your connection is slow, after processing the first chunk of data that arrived, the video player will display a loading 
-spinner which indicates it is waiting for more data to arrive.
-			Once the buffer is filled up and data is processed, the video player shows the video.
+it out for processing. That will repeat till the stream is finished.
+	If your connection is slow, after processing the first chunk of data that arrived, the video player will display a loading 
+spinner which indicates it is waiting for more data to arrive. Once the buffer is filled up and data is processed, the video player shows the video.
 			
 			
 	
 ####. 3. FS MODULE: (File System module)
 	e.g . 
 	 in file.text 
-	 
 	 	Hello
 	 	
-	 in index.js
+in index.js
+	  ```jsx
 	 const fs=require("fs")
 	 const content=fs.readFileSync("./file.txt", "utf-8")
 	 console.log(content);
-	 
+	``` 
 	 O/p: hello 
 	 	Note: if we do not write utf-8 then it will display ascii code of characters.
 	
-	
-	//below is synchronous
+```jsx	
+//below is synchronous
 	fs.writeFileSync("./greet.txt", "hellow world")   // it will create greet.txt file if not exist and add hellow world in it
 	
 	fs.writeFile("./greet.txt", "Hii",(err)=>{               //asynchronous 
@@ -344,23 +340,24 @@ spinner which indicates it is waiting for more data to arrive.
 	
 	
 	
+```
 	
 	
-	
-	##############fs using promise###################
+ ## ##############fs using promise###################
 	
 	index.js
-	
+	```jsx
 	const fs=require("fs/promises")
 	fs.readFile("./greet.txt","utf-8")
 	.then((data)=>console.log(data))
 	.catch((error)=>console.log(error))
 
-
-	note=> 
+	```
+note=> 
 		it will gives us a proper output. 
 		it is also ASYNCHRONOUS that means other task are executed before it.
-		
+
+  ```jsx
 		const fs=require("fs/promises")
 		console.log("first")
 		
@@ -370,28 +367,26 @@ spinner which indicates it is waiting for more data to arrive.
 
 		console.log("second")
 		
-		
-		Output:
-			first
-			second
-			Hello 3.Akshay
+```
+Output:
+	first
+	second
+	Hello 3.Akshay
 			
 	
 	
 ########3. STREAMS :
 		e.g. Youtube, we dont wait for the entire video download, video will start playing when some of the data is downloaded.
-		
 		i.e. The contents arrive in chunks and you watch in chunks while the rest of the data arrives over time. 
-		
 		Process streams of data in chunks as they arrive instead of waiting for the entire data to be available before processing.
 		
 		
 		
 ##### 4. PIPES:
-	used for chaining. i.e. for copying data from one file to another file .
+used for chaining. i.e. for copying data from one file to another file .
 	
 	in index.js
-	
+```jsx	
 	const fs=require("fs")
 	const readableStream=fs.createReadStream("./file.txt",{
 		encoding:"utf-8",
@@ -401,16 +396,15 @@ spinner which indicates it is waiting for more data to arrive.
 	const writableStream=fs.createWriteStream("./file2.txt")
 	readableStream.pipe(writeableStrem)
 	
+```
 	
-	
-	NOTE: 
-		it will copy all data inside readableStream to writableStream
+NOTE: 	it will copy all data inside readableStream to writableStream
 		
 		
 		
 		
-########5. HTTP MODULE:
-		in web server there is a communication between client and server, but what type of request send by client is can not understand 
+## ########5. HTTP MODULE:
+in web server there is a communication between client and server, but what type of request send by client is can not understand 
 by server and also what kind of response send to the server can not understand by client.
 		The client sends an HTTP requests and the server responds with a HTTP response.
 
@@ -424,6 +418,7 @@ by server and also what kind of response send to the server can not understand b
 1. CREATING SERVER IN NODE JS :
 
 	e.g.
+```jsx
 		const http = require("http");
 		const server = http.createServer((req, res) => {
   		
@@ -434,36 +429,40 @@ by server and also what kind of response send to the server can not understand b
 		server.listen(3000, () => console.log("server up and running"));
 
 
+```
 
-2. DISPLAY HTML IN RESPONSE OF REQUEST:
-		const http = require("http");
-		const server = http.createServer((req, res) => {
-  		
-		res.writeHead(200, { "Content-Type": "text/html" });
-		res.end("Hello world");
-		});
+3. DISPLAY HTML IN RESPONSE OF REQUEST:
+```jsx   
+	const http = require("http");
+	const server = http.createServer((req, res) => {
+  	
+	res.writeHead(200, { "Content-Type": "text/html" });
+	res.end("Hello world");
+	});
+	server.listen(3000, () => console.log("server up and running"));
+```
+   
 
-		server.listen(3000, () => console.log("server up and running"));
-	
-	
-3. DISPLAY OBJECT IN RESPONSE:
-		const http = require("http");
-		const server = http.createServer((req, res) => {
-  		const obj = {
-    			fname: "Akshay",
-			lname: "Gawade",
-  		};
-		res.writeHead(200, { "Content-Type": "application/json" });
-		res.end(JSON.stringify(obj));
-		});
 
-		server.listen(3000, () => console.log("server up and running"));	
-		
+5. DISPLAY OBJECT IN RESPONSE:
+```jsx   
+	const http = require("http");
+	const server = http.createServer((req, res) => {
+ 		const obj = {
+   			fname: "Akshay",
+		lname: "Gawade",
+	};
+	res.writeHead(200, { "Content-Type": "application/json" });
+	res.end(JSON.stringify(obj));
+	});
+
+	server.listen(3000, () => console.log("server up and running"));	
+```
 
 
 4.DISPLAY ANOTHER HTML FILE IN NODE JS AS RESPONSE : 
 	in index.html 
-	
+```jsx	
 	<html>
 		<body>
 			<h3>Hello another file</h3>
@@ -491,14 +490,13 @@ by server and also what kind of response send to the server can not understand b
 	
 	
 	
-	
-	
+```
 	
 	
 	
 5. PASSING DATA FROM INDEX.JS TO INDEX.HTML
 	in index.html
-	
+```jsx	
 	<html>
 		<body>
 			<h1>Hello {{name}}, WElcome to our page</h1>
@@ -520,8 +518,10 @@ by server and also what kind of response send to the server can not understand b
 
 	server.listen(3000,()=>console.log("Server up and running"))
 	
-	
-6 NODE ROUTING :
+```
+
+6. NODE ROUTING :
+```jsx
 	const server=http.createServer((req, res)=>{
 		if(req.url==="/"){
 			res.writeHead(200, {"Content-Type":"text/plain"})
@@ -537,7 +537,7 @@ by server and also what kind of response send to the server can not understand b
 		}
 	})
 	
-	
+```
 	NOTE : 
 		HERE ALSO WE HAVE req.method 
 
@@ -548,68 +548,68 @@ by server and also what kind of response send to the server can not understand b
 libuv:
 	libuv is a cross platform open source library written in C language.
 	it handles asynchronous non-blocking oprations in node js by using Thread pool, Event loop
-	
-	in index.js 
-	
-		const crypto = require("crypto")
-		const MAX_CALLS=5;
-		const start=Date.now();
-		for(let i=0;i<MAX_CALLS;i++){
-			crypto.pbkdf2("password", "salt", 1000000, 512, "sha512", ()=>{
-				console.log(`Hash: ${i+1}`, Date.now()-start)
-			})
-		}
-		
-		OUTPUT:
-			Hash: 4 270
-			Hash: 3 297
-			Hash: 2 297
-			Hash: 1 314
-			Hash: 5 531
-			
-		NOTE : it takes about double time for 5th execution , so libuv has by default 4 threads.
-			if we set 
-			process.env.UV_THREADPOOL_SIZE=5;
-			
-			THEN 5TH THREAD WILL TAKE SAME TIME, ALSO WE CAN INCREASE THIS NUMBER .
-			
-			
-			
-		
-		
-		
-USING HTTPS REQUEST:
-	in index.js 
-	
-	const https=require("https");
-	const MAX_CALLS=12;
+		in index.js 
+	```jsx
+ 
+	const crypto = require("crypto")
+	const MAX_CALLS=5;
 	const start=Date.now();
 	for(let i=0;i<MAX_CALLS;i++){
-		https.request("https://www.google.com", (res)=>{
-			res.on("data",()=>{});
-			res.on("end",()=>{
-				console.log(`Request ${i+1}`, Date.now()-start)
-			})
+		crypto.pbkdf2("password", "salt", 1000000, 512, "sha512", ()=>{
+			console.log(`Hash: ${i+1}`, Date.now()-start)
 		})
-		.end()
 	}
 	
-	
-	OUTPUT : 
-		 Request: 5 202
-		 Request: 6 206
-		 Request: 1 209
-		 Request: 3 207
-		 Request: 2 204
-		 Request: 4 206
-		 Request: 7 205
-		 Request: 8 206
-		 Request: 9 201
-		 Request: 10 206
-		 Request: 12 203
-		 Request: 11 206
-		 
-		 
+	OUTPUT:
+		Hash: 4 270
+		Hash: 3 297
+		Hash: 2 297
+		Hash: 1 314
+		Hash: 5 531
+	```	
+ 
+NOTE : it takes about double time for 5th execution , so libuv has by default 4 threads.
+		if we set process.env.UV_THREADPOOL_SIZE=5;
+		THEN 5TH THREAD WILL TAKE SAME TIME, ALSO WE CAN INCREASE THIS NUMBER .
+			
+			
+			
+		
+		
+		
+## USING HTTPS REQUEST:
+
+ in index.js 
+```jsx	
+const https=require("https");
+const MAX_CALLS=12;
+const start=Date.now();
+for(let i=0;i<MAX_CALLS;i++){
+	https.request("https://www.google.com", (res)=>{
+		res.on("data",()=>{});
+		res.on("end",()=>{
+			console.log(`Request ${i+1}`, Date.now()-start)
+		})
+	})
+	.end()
+}
+
+
+OUTPUT : 
+	 Request: 5 202
+	 Request: 6 206
+	 Request: 1 209
+	 Request: 3 207
+	 Request: 2 204
+	 Request: 4 206
+	 Request: 7 205
+	 Request: 8 206
+	 Request: 9 201
+	 Request: 10 206
+	 Request: 12 203
+	 Request: 11 206
+	 
+```	 
 		THIS MEANS THAT  : 
 			1. https.request is a network input/output operation and not a CPU bound operation 
 			2. It does not use the thread pool.
@@ -617,6 +617,7 @@ USING HTTPS REQUEST:
 			
 	
 CALL STACK : 
+```jsx
 	function greeting(){
 		//some code
 		sayhi();
@@ -626,21 +627,20 @@ CALL STACK :
 		return "hello";
 	}
 	greeting();
-	
-	NOTE :
+```
+
+NOTE :
 		first it will push greeting to the stack , and then it pushes sayhi function to the stack , after execution of sayhi, 
 it will push sayhi to outside of the stack, all the variables inside sayhi function are destroyed, still greeting function is inside the stack,
 again after complete execution of greeting , this also push greeting function outside the stack.
 		
-		this is called as call stack.
+this is called as call stack.		
 		
-		
-TASK QUEUE:
-	1. Javascript can do one thing at a time.
-	2. The rest are queued to the task queue waiting to be executed.
-	3. When we run setTimeout, webapis will run a timer and push the function provided to setTimeout to the task queue once the timer ends.
-	4. These tasks will be pushed to the stack where they can executed.
-	
+## TASK QUEUE:
+1. Javascript can do one thing at a time.
+2. The rest are queued to the task queue waiting to be executed.
+3. When we run setTimeout, webapis will run a timer and push the function provided to setTimeout to the task queue once the timer ends.
+4. These tasks will be pushed to the stack where they can executed.
 
 
 EVENT LOOP: 
@@ -652,111 +652,110 @@ executing queued sub-tasks .
 	 
 	 
 ======================================><===============================================================
-MICROTASK QUEUE: 
-	console.log("first");
-	process.nextTick(()=>console.log("this is process.nextTick 1"))
-	console.log("second")
+## MICROTASK QUEUE: 
+console.log("first");
+process.nextTick(()=>console.log("this is process.nextTick 1"))
+console.log("second")
+
+O/P. : first	
+       second
+       this is process.nextTick 1
+       
+	       
+ e.g. 2 
+```jsx	 
+ Promise.resolve().then(()=>console.log("this is Promise.resole 1"))
+ process.nextTick(()=>console.log("this is process.nextTick 1 "))
+``` 
+ OP : this is process.nextTick 1
+      this is process.nextTick 1
+      
+	      
+NOTE : 	ALL CALLBACKS IN nextTick queue are executed before callbacks in promise queue.
+	      	
+	    
+	    
+  e.g. 3 
+  ```jsx
+        process.nextTick(()=>console.log("next tick 1"))
+	process.nextTick(()=>console.log("next tick 2"))
+	Promise.resolve().then(()=>console.log("promise 1"))
+	Promise.resolve().then(()=>console.log("promise 2"))
+	Promise.resolve().then(()=>{
+	    console.log("promise 2")
+	    process.nextTick(()=>console.log("next tick in promise 2"))
+	})
+	Promise.resolve().then(()=>console.log("promise 3"))
 	
-	O/P. : first	
-	       second
-	       this is process.nextTick 1
-	       
-	       
-	 e.g. 2 
-	 
-	 Promise.resolve().then(()=>console.log("this is Promise.resole 1"))
-	 process.nextTick(()=>console.log("this is process.nextTick 1 "))
-	 
-	 OP : this is process.nextTick 1
-	      this is process.nextTick 1
-	      
-	      
-	      NOTE : 
-	      	ALL CALLBACKS IN nextTick queue are executed before callbacks in promise queue.
-	      	
+	
+O/P: 
+		next tick 1
+		next tick 2
+		promise 1
+		promise 2
+		promise 2
+		promise 3
+		next tick in promise 2
+  ```
 	    
-	    
-	  e.g. 3 
-	        process.nextTick(()=>console.log("next tick 1"))
-		process.nextTick(()=>console.log("next tick 2"))
-		Promise.resolve().then(()=>console.log("promise 1"))
-		Promise.resolve().then(()=>console.log("promise 2"))
-		Promise.resolve().then(()=>{
-		    console.log("promise 2")
-		    process.nextTick(()=>console.log("next tick in promise 2"))
-		})
-		Promise.resolve().then(()=>console.log("promise 3"))
+## TIMER QUEUE:
+```jsx
+	setTimeout(()=>console.log("first timeout"),0)
+	setTimeout(()=>console.log("second timeout"),0)
+	process.nextTick(()=>console.log("next tick 1"))
+	process.nextTick(()=>console.log("next tick 2"))
+	Promise.resolve().then(()=>console.log("promise 1"))
+	Promise.resolve().then(()=>console.log("promise 2"))
+	Promise.resolve().then(()=>{
+	    console.log("promise 2")
+	    process.nextTick(()=>console.log("next tick in promise 2"))
+	})
+	Promise.resolve().then(()=>console.log("promise 3"))
+	
+	
+	O/P: 
+		next tick 1
+		next tick 2
+		promise 1
+		promise 2
+		promise 2
+		promise 3
+		next tick in promise 2
+		first timeout 
+		second timeout
 		
-		
-		O/P: 
-			next tick 1
-			next tick 2
-			promise 1
-			promise 2
-			promise 2
-			promise 3
-			next tick in promise 2
-
-	    
-TIMER QUEUE: 
-		setTimeout(()=>console.log("first timeout"),0)
-		setTimeout(()=>console.log("second timeout"),0)
-		process.nextTick(()=>console.log("next tick 1"))
-		process.nextTick(()=>console.log("next tick 2"))
-		Promise.resolve().then(()=>console.log("promise 1"))
-		Promise.resolve().then(()=>console.log("promise 2"))
-		Promise.resolve().then(()=>{
-		    console.log("promise 2")
-		    process.nextTick(()=>console.log("next tick in promise 2"))
-		})
-		Promise.resolve().then(()=>console.log("promise 3"))
-		
-		
-		O/P: 
-			next tick 1
-			next tick 2
-			promise 1
-			promise 2
-			promise 2
-			promise 3
-			next tick in promise 2
-			first timeout 
-			second timeout
-			
-			
-	NOTE :
-		IF WE PASS 0 IN setTimeout then this call back function will execute after all code executed.
+```		
+	
+ NOTE : IF WE PASS 0 IN setTimeout then this call back function will execute after all code executed.
 		
 		
 		
 	      	
-IO QUEUE: 
-	 Callbakcs in the microtask queue are executed before callback in the IO Queue.
+## IO QUEUE: 
+ Callbakcs in the microtask queue are executed before callback in the IO Queue.
+
+ ```jsx
+ const fs=require("fs");
+
+ fs.readFile(__filename, ()=>{
+ 	console.log("this is readfile 1")
+ })
 	 
-	 const fs=require("fs");
+ process.nextTick(()=>console.log("nextTick 1"))
+ Promise.resolve.then(()=>console.log("this is promise resolve 1"))
+ 
+ 
+ O/P: 
+ 	nextTick 1
+ 	this is promise resolve 1
+ 	this is readfile 1
 
-	 fs.readFile(__filename, ()=>{
-	 	console.log("this is readfile 1")
-	 })
-	 
-	 process.nextTick(()=>console.log("nextTick 1"))
-	 Promise.resolve.then(()=>console.log("this is promise resolve 1"))
-	 
-	 
-	 O/P: 
-	 	nextTick 1
-	 	this is promise resolve 1
-	 	this is readfile 1
-
-
-
-
-  ==============================================================================================================================================================================================================
+```
+ ==============================================================================================================================================================================================================
 
 WHAT IS NPM  : (node package manager)
 	it is the worlds largest software library.
 	it is the software package manager.
-	
 	npm is a library which contains code packages written by various developers. 
 	
 
@@ -765,63 +764,58 @@ WHAT IS package.json:
 	package.json is npm's configuration file.
 	It is a json file that typically lives in the root directory of your package and holds various metadata releavant to the package.
 	
-	why we need package.json
-		package.json is the central place to configure and describe how to interact with and run your package. 
-		
-	it is primarily used by npm CLI.
+why we need package.json. package.json is the central place to configure and describe how to interact with and run your package. 
+it is primarily used by npm CLI.
 	
- 	in dependencies of package.json we have all the packages which are installed in our project.
+ in dependencies of package.json we have all the packages which are installed in our project.
  	
  	
  
  PUBLISHING NODE PACKAGE: 
  	visit npmjs.com and click on sign up , after that go to your project directory, and type 
  		npm adduser __username__
- 		
  		after that enter what terminal asks.
- 		
- 		
  		after that enter command : npm publish 
- 		
  		then it will publish your application . 
  		
- 		NOTE: 
- 			for checking of published package, visit site: https://npmjs.com/package/package_name
+ NOTE: 
+ 	for checking of published package, visit site: https://npmjs.com/package/package_name
  			
  			
 
 
-CLI (COMMAND LINE INTERFACE) : BUILDING CLI:
-	CLI stands for Command Line Interface. 
-	A program that you can run from the terminal.
+## CLI (COMMAND LINE INTERFACE) : BUILDING CLI:
+CLI stands for Command Line Interface. 
+A program that you can run from the terminal.
 	
-	e.g. npm and git
+e.g. npm and git
 	
 	
-	=====above need to learn====
+=====above need to learn====
 
 
 
 =====================================><==========================================================================================================
 
 
-CLUSTER MODULE:
-	we know that node is a single threaded application.
-	No matter how many cores you have, node only uses single core of your CPU.
-	This is fine for I/O operations but if the code has long running and CPU intensive operations, your application might struggle from a 
+## CLUSTER MODULE:
+we know that node is a single threaded application.
+No matter how many cores you have, node only uses single core of your CPU.
+This is fine for I/O operations but if the code has long running and CPU intensive operations, your application might struggle from a 
 perfomance point of view.
 	
-	for avoid this issue node introduce cluster module.
+for avoid this issue node introduce cluster module.
 	
 	
-	The cluster module enables the creation of child processes (also called workers) that run simultaneously.
-	All created worker share the same worker port.	
+The cluster module enables the creation of child processes (also called workers) that run simultaneously.
+All created worker share the same worker port.	
  
- 	e.g. WITHOUT cluster module .
+e.g. WITHOUT cluster module .
  		suppose our applications have two routes , first route is taken 3 ms for fetching data and second route is taking 4 seconds for
 fetching data , then if we again refreshh first route then first route also takes 4 to 5 secondds or fetching data , so to avoid this we use 
 cluster model .
- 		
+
+```jsx
  		e.g. without cluster module 
  			const http=require("http");
  			const {Worker}=require("worker_threads");
@@ -843,12 +837,13 @@ cluster model .
  			server.listen(8000, ()=>console.log("server listen on port 8000"))
  		
  		
- 		
- 		
- 		
+```
+
+
+ 
  		e.g. with cluster 
  		
- 		
+ ```jsx		
  		const cluster=require("cluster");
  		if(cluster.isMaster){
  			console.log(`Master process ${process.pid} is running`);
@@ -882,24 +877,24 @@ cluster model .
  			
  			NOTE : HERE IT WILL NOT AFFECT ON / route as we use cluster.
  			
- 		
+ ```	
  =============================================================================================================================================
  
- WORKER THREAD MODULE: 
- 	The worker thread module enables the use of threads that execute the Javascript in parallel.
- 	Code executed in worker thread runs in a seperate child process, preventing it from blocking your main application.
+ 
+ 
+ ## WORKER THREAD MODULE: 
+ The worker thread module enables the use of threads that execute the Javascript in parallel.
+ Code executed in worker thread runs in a seperate child process, preventing it from blocking your main application.
  	
  	
- 	difference between cluster and worker module : 
+ difference between cluster and worker module : 
  		The cluster module can be used to run multiple instances of node js that can distribute workloads.
  		worker thread module allows running multiple application threads within a single Node.js instance.
  		
- 	
- 	
  	e.g. 
  	
  		in index.js 
- 			
+   ```jsx		
  			const http=require("http");
  			const {Worker}=require("worker_threads");
  			const server=http.createServer((req, res)=>{
@@ -931,3 +926,4 @@ cluster model .
  		
 	 
   
+```
