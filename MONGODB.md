@@ -53,4 +53,74 @@
 
 ## Q.25 What is lookup in mongodb ? 
 
-## Q.26  
+## Q.26 Can we create own functions in mongodb ? 
+
+## Q.27 Whats the difference between find and findOne in mongodb ? 
+
+## Q.28 What is explain in mongodb? 
+
+## Q.29 What are docuements in mongodb? 
+
+## Q.30 Transactions in mongodb ? 
+
+## Q.31 What is replica set in mongodb ? 
+
+## Q.32 How to use text search in mongodb ? 
+
+## Q.33 What is collection , document in mongodb ? 
+
+## Q.34 What are the different types of indexing in mongodb ? 
+
+## Q.35 What is MapReduce in mongodb ? 
+
+## Q.36 What is GridFS in mongodb ? 
+
+## Q.37 What is difference between primary and secondary key in mongodb ? 
+
+## Q.38 How does mongodb handle transactions ? 
+
+## Q.39 How does mongodb handle security ? 
+
+## Q.40 What is difference between join and lookup in mongodb ? 
+
+
+## Q.41 How does MongoDB handle data backup and recovery ? 
+
+## Q.42 What is NameSpaces in mongodb ? 
+
+## Q.43 Mention what is ObjectID composed of ? 
+
+## Q.44 What is BSON in mongodb? 
+
+## Q.45 What are the supported data types in mongodb ? 
+
+## Q.46 What is the use of pretty method in mongodb ? 
+
+## Q.47 Difference between insert(), insertOne(), insertMany() ? 
+
+## Q.48 What is bulk write operation in mongodb ? 
+
+## Q.49 What is the use of $set in mongodb ? 
+
+## Q.50 Difference between update and findOneAndUpdate() 
+
+## Q.51 Difference between drop and remove  ? 
+  drop() function removes the specified collection from the database .
+  remove() function deletes documents from a collection.
+
+<br> 
+
+## Q.52 Difference between createIndex and reIndex 
+  createIndex : builds an index on a collection.
+  reIndex : rebuilds all existing indexes on a collection .
+
+
+<br> 
+
+## Q.53 How to drop collection ? 
+
+## Q.54 How to rename collection ? 
+
+## Q.55 What is the difference between findModify() and findOneAndUpdate() ? 
+
+## Q.56
