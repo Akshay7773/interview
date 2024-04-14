@@ -1,149 +1,142 @@
-1. ECMA Script: 
-	ECMAScript (/ˈɛkməskrɪpt/; ES) is a standard for scripting languages, including JavaScript, JScript, and ActionScript. It is also best 
+## 1. ECMA Script: 
+ECMAScript (/ˈɛkməskrɪpt/; ES) is a standard for scripting languages, including JavaScript, JScript, and ActionScript. It is also best 
 known as a JavaScript standard intended to ensure the interoperability of web pages across different web browsers. It is standardized by Ecma 
 International in the document ECMA-262.
 	In the early days, for single websites developer needs to write code multiple times , for different browsers, so to avoid this , 
 ECMA script in used.
 	
 	
-2. JAVASCRIPT ENGINES:
-	Javascript code we write can not be understood by the computer.
-	So the javascript engine is the program that converts javascript code that developers write into machine code that allows computer
+## 2. JAVASCRIPT ENGINES:
+Javascript code we write can not be understood by the computer.
+So the javascript engine is the program that converts javascript code that developers write into machine code that allows computer
 to perform specific task.
 	
 	
-3. WHAT IS NODE JS:
-	Node js is open source, cross platform Javascript runtime environment.
-	
+## 3. WHAT IS NODE JS:
+Node js is open source, cross platform Javascript runtime environment.
 	Open source - source code is publicly available for sharing and modification.
 	cross platform- available on Mac, windows and Linux
 	Javascript runtime environment - provides all the necessary components which allows to use javascript program outside the browser.
 	
 	
 
-==================================================> MODULES <===================================================================================
+# ==================================================> MODULES <===================================================================================
 
 
-4. MODULES IN NODE JS : 
-	it is an encapsulated and reusable chunk of code that has its own context.
-	In node js, each file is treated as a separate module.
+## 4. MODULES IN NODE JS : 
+it is an encapsulated and reusable chunk of code that has its own context.
+In node js, each file is treated as a separate module.
 	
-	Types : 	
-		1. Local modules : Modules that we create in our application.
-		2. Build in modules : Modules that node js ships with out of the box
-		3. Third party modules : Modules written by other developers that we can use in our application.	
+Types : 	
+	1. Local modules : Modules that we create in our application.
+	2. Build in modules : Modules that node js ships with out of the box
+	3. Third party modules : Modules written by other developers that we can use in our application.	
 		
 
 ===================================================> LOCAL MODULES <=============================================================================
-
-	
-		Before modules code is executed node js is wrapped it in IIFE 
-		to load module into another file we use require() function.
-		
+Before modules code is executed node js is wrapped it in IIFE to load module into another file we use require() function.
 	Summary of MODULE SCOPE: 
 		Each loaded module in node js is wrapped with an IIFE that provides private scoping of code.
 		IIFE allows you to repeat variable or function names without any conflicts.
 		
 		
 		
-	## . MODULE WRAPPER: 
-			Every module in node js gets wrapped in IIFE before being loaded. 
-			IIFE helps keep top- level variables scoped to the module rather than the global object
-			The IIFE that wraps every module contains 5 parameters which are pretty important for the functioning of a module.
+## . MODULE WRAPPER: 	
+Every module in node js gets wrapped in IIFE before being loaded. 
+IIFE helps keep top- level variables scoped to the module rather than the global object
+The IIFE that wraps every module contains 5 parameters which are pretty important for the functioning of a module.
 			
 	
-	passing argument to IIFE: 
-		(function(message){
-			console.log(message);
-		})("hello") 			
-		
-		o/p: hello
+passing argument to IIFE: 
+```jsx
+(function(message){
+	console.log(message);
+})("hello")
+```		
+  o/p: hello
 				
 	
-	Structure of MODULE WRAPPER: 
+## Structure of MODULE WRAPPER: 
 	
-	//these parameters are by default available in node IIFE function. 
-	
-		(function(exports, require, module, __filename, __dirname){
-			const superhero="superman";
-			console.log(superhero);
-		})()
-	
+//these parameters are by default available in node IIFE function. 
+```jsx	
+(function(exports, require, module, __filename, __dirname){
+	const superhero="superman";
+	console.log(superhero);
+})()
+```
 	
 	
 16
 	
 	
 	
-	## . MODULE CACHING: 
-		e.g. 
-			super-hero.js
-			
-			class SuperHero{
-				constructor(name){
-					this.name=name;
-				}
-				getName(){
-					returnt this.name;
-				}
+## . MODULE CACHING: 
+e.g. 
+super-hero.js
+```jsx
+	class SuperHero{
+		constructor(name){
+			this.name=name;
+		}
+		getName(){
+			returnt this.name;
+		}
 				
-				setName(name){
-					this.name=name;
-				}
-			}
+		setName(name){
+			this.name=name;
+		}
+	}
 			
-			module.exports=new SuperHero("Superman");
+	module.exports=new SuperHero("Superman");
 			
 			
-			NOW IN index.js
+	NOW IN index.js
 			 
-			const superhero=require("./super-hero");
-			console.log(superhero.getName());    // Superman    =>  this generates from superHero class  check exports function
-			superhero.setName("Batman");
-			console.log(superhero.getName());    // Batman
+	const superhero=require("./super-hero");
+	console.log(superhero.getName());    // Superman    =>  this generates from superHero class  check exports function
+	superhero.setName("Batman");
+	console.log(superhero.getName());    // Batman
 			
-			const newSuperhero=require("./super-hero")
-			console.log(newSuperhero.getName());      // Batman       => it still displays batman 
+	const newSuperhero=require("./super-hero")
+	console.log(newSuperhero.getName());      // Batman       => it still displays batman 
+```
+			
+when we write require() two times for same file , it will cached only single time , second time it will not goes to that file 
 			
 			
-			when we write require() two times for same file , it will cached only single time , second time it will not goes to that 
-			 file 
-			
-			
-			if we want to change it then in super-hero.js when exporting export just class as SuperHero and not SuperHero("Superman") .
-			
-			note => no need to write new .
+if we want to change it then in super-hero.js when exporting export just class as SuperHero and not SuperHero("Superman") .
+					note => no need to write new .
 			
 		i.e. =====>
 		super-hero.js
+```jsx			
+	class SuperHero{
+		constructor(name){
+			this.name=name;
+		}
+		getName(){
+			returnt this.name;
+		}
+		
+		setName(name){
+			this.name=name;
+		}
+	}
 			
-			class SuperHero{
-				constructor(name){
-					this.name=name;
-				}
-				getName(){
-					returnt this.name;
-				}
-				
-				setName(name){
-					this.name=name;
-				}
-			}
-			
-			module.exports=SuperHero;
-
+	module.exports=SuperHero;
 	
-			NOW IN index.js
+	NOW IN index.js
 			 
-			const SuperHero=require("./super-hero");
-			const s1=new SuperHero("Hello");    // Hello
-			console.log(s1.getName());
-			s1.setName("Hii")
-			console.log(s1.getName());   // Hii
-			const s2=new SuperHero("World")
-			console.log(s2.getName());      // World           Here it change the name .
-			
-			
+	const SuperHero=require("./super-hero");
+	const s1=new SuperHero("Hello");    // Hello
+	console.log(s1.getName());
+	s1.setName("Hii")
+	console.log(s1.getName());   // Hii
+	const s2=new SuperHero("World")
+	console.log(s2.getName());      // World           Here it change the name .
+	
+```			
 			
 
 16. ECMA Modules:
@@ -152,7 +145,7 @@ to perform specific task.
 	 
 	  e.g. 
 	  	in math.mjs
-	  	
+	```jsx  	
 	  	const add=(a,b)=>{
 	  		return a+b;
 	  	}
@@ -175,7 +168,7 @@ to perform specific task.
 		console.log(add(3,4));
 		console.log(sub(5,1);
 		
-				
+	```		
 
 	
 	
@@ -209,8 +202,8 @@ BUILT IN MODULES :
 	Modules that node js ships with.
 	They are also refered to as core modules.
 	Import the module before you can use it.	
-	
-	Some important built-in modules are:
+
+ Some important built-in modules are:
 		1. path
 		2. events 
 		3. fs
@@ -227,11 +220,9 @@ BUILT IN MODULES :
 
 callback funcction: 
 	Any function that passed as an argument to another function is called as callback function.
-	
 	Also a function which accepts a function or return another function is called as higher order function.
-	
-	e.g. 
-	
+		e.g. 
+```jsx
 	 	function greet(name){                  //this is callback function
    		 console.log(`hello ${name}`)
 		}
@@ -242,24 +233,24 @@ callback funcction:
 		}
 
 		greetAkshay(greet)
+```
 
 
 
-	Types of callback function :
+Types of callback function :
 		1. Synchronous 
 		2. Asynchronous
 			
 		
-	1. Synchronous callback function:
+1. Synchronous callback function:
 		A callback which is executed immediately is called synchronous callback function.
 		e.g. above greet function, sort, filter, map
 		
 		
-	2. Asynchronou callback function:
+2. Asynchronou callback function:
 		A callback that is often used to continue or resume code execution after an asynchronous operation has completed.
 		Callback used to delay the execution of a function until a perticular time or event has occurred. 
-		
-		e.g. click handler on some button , means the function is only invoked when someone click on the button.
+	e.g. click handler on some button , means the function is only invoked when someone click on the button.
 		
 		
 		
