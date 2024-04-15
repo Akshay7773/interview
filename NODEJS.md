@@ -74,6 +74,32 @@ it's the mechanism that allows Node.js to handle asynchronous operations efficie
 
 In summary, the event loop is the heart of Node.js, enabling it to handle asynchronous operations efficiently and maintain high concurrency while remaining single-threaded. Understanding how the event loop works is crucial for building scalable and performant Node.js applications.
 
+<br> 
+
+=================================================================================================================================================
+
+## How actually event loop works with callback and microtask Queue? 
+In Node.js, the event loop is a fundamental concept for understanding how asynchronous operations are handled. Callbacks and microtasks play crucial roles within this event loop.
+
+1. **Callback Queue**: When asynchronous operations complete, they don't immediately execute their callbacks. Instead, they are placed in a queue called the "Callback Queue" (also known as the "Task Queue" or "Message Queue"). These operations could be I/O operations like file reading, network requests, or timer events.
+
+2. **Event Loop**: The event loop continuously checks the call stack and the callback queue. If the call stack is empty, it takes the first callback from the callback queue and pushes it onto the call stack for execution.
+
+3. **Microtask Queue**: Microtasks are a special type of callback that have higher priority than regular callbacks. They're used for tasks like promises and certain APIs like `process.nextTick()` in Node.js. Microtasks are executed before the next event loop cycle begins, ensuring they're processed as soon as possible after the current operation completes. 
+
+   - When a promise settles (fulfilled or rejected), its `.then()` or `.catch()` callbacks are queued in the microtask queue.
+   - `process.nextTick()` callbacks are also queued in the microtask queue and are executed before any I/O events or timers.
+   - Microtasks are executed until the microtask queue is empty before moving to the next event loop iteration.
+
+Here's a simplified sequence of how this works:
+
+1. Asynchronous operations (e.g., file reading, network requests, timers) are initiated.
+2. Once an asynchronous operation completes, its callback is placed in the callback queue.
+3. The event loop checks if the call stack is empty. If so, it takes the first callback from the callback queue and pushes it onto the call stack for execution.
+4. If the callback contains microtasks (e.g., promises or `process.nextTick()`), those microtasks are executed before the next event loop iteration.
+5. The event loop continues this process, ensuring asynchronous operations are executed in a non-blocking manner.
+
+Understanding this event-driven architecture is crucial for writing efficient and non-blocking Node.js applications.
 
 ======================================================================================================================================================
 <br>
