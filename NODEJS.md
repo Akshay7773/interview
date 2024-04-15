@@ -1,6 +1,6 @@
 
 ## Q. 1 Node js is single threaded or multi-threaded? How can we make node application multi threaded? 
-Node.js is primarily single-threaded. It uses an event-driven architecture, based on the JavaScript event loop, which allows it to handle concurrent operations without multiple threads. This single-threaded model can handle asynchronous I/O operations efficiently, making it suitable for building scalable and high-performance applications.
+Node.js is primarily single-threaded. It uses an event-driven architecture, based on the JavaScript event loop, which allows it to handle concurrent operations without multiple threads. This single-threaded model can handle asynchronous I/O operations efficiently.
 
 However, Node.js does support multi-threaded operations through the use of Worker Threads API introduced in Node.js version 10.5.0.
 
