@@ -100,11 +100,11 @@ Here's a simplified sequence of how this works:
 
 
 ### Difference between callback and microtask queue : 
-1. Callback Queue:
+1. Callback Queue: <br>
    a. Callback Queue gets the ordinary callback functions coming from the setTimeout() API after the timer expires. <br>
    b. Callback Queue has lesser priority than Microtask Queue of fetching the callback functions to Event Loop. <br>
 
-2. Microtask Queue:
+2. Microtask Queue: <br>
    a. Microtask Queue gets the callback functions coming through Promises and Mutation Observer. <br> 
    b. Microtask Queue has higher priority than Callback Queue of fetching the callback functions to Event Loop. <br>
 ======================================================================================================================================================
