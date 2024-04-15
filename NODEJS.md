@@ -1037,6 +1037,7 @@ In Node.js, there are two main packages for handling concurrency and parallelism
     - Cluster module simplifies scaling Node.js applications horizontally, allowing them to handle more incoming requests or tasks by utilizing multiple CPU cores effectively.
     - It's particularly useful for networked applications like web servers, where incoming connections can be distributed among multiple worker processes.
 2. **Worker Threads**:
+    - Worker thread module allows running multiple application threads within a single Node.js instance.
     - Worker Threads, introduced in Node.js version 10.5, allow developers to create and run JavaScript code in separate threads alongside the main event loop.
     - Unlike Cluster, Worker Threads operate within a single process and share memory, enabling more efficient communication and data sharing between threads.
     - Worker Threads are typically used for CPU-bound tasks or computationally intensive operations that can benefit from parallel execution, such as heavy data processing, image manipulation, or machine learning tasks.
