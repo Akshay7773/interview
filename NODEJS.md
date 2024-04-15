@@ -81,15 +81,14 @@ In summary, the event loop is the heart of Node.js, enabling it to handle asynch
 ## How actually event loop works with callback and microtask Queue? 
 In Node.js, the event loop is a fundamental concept for understanding how asynchronous operations are handled. Callbacks and microtasks play crucial roles within this event loop.
 
-1. **Callback Queue**: When asynchronous operations complete, they don't immediately execute their callbacks. Instead, they are placed in a queue called the "Callback Queue" (also known as the "Task Queue" or "Message Queue"). These operations could be I/O operations like file reading, network requests, or timer events.
+1. **Callback Queue**: After the timer gets expired, the callback function is put inside the Callback Queue, and the Event Loop checks if the Call Stack is empty and if empty, pushes the callback function from Callback Queue to Call Stack and the callback function gets removed from the Callback Queue. Then the Call Stack creates an Execution Context and executes it. Sometimes this callback queue is also referred as Task Queue or Macrotask queue.
 
 2. **Event Loop**: The event loop continuously checks the call stack and the callback queue. If the call stack is empty, it takes the first callback from the callback queue and pushes it onto the call stack for execution.
 
-3. **Microtask Queue**: Microtasks are a special type of callback that have higher priority than regular callbacks. They're used for tasks like promises and certain APIs like `process.nextTick()` in Node.js. Microtasks are executed before the next event loop cycle begins, ensuring they're processed as soon as possible after the current operation completes. 
+3. **Microtask Queue**:Microtask Queue is like the Callback Queue, but Microtask Queue has higher priority. All the callback functions coming through Promises and Mutation Observer will go inside the Microtask Queue. For example, in the case of .fetch(), the callback function gets to the Microtask Queue. Promise handling always has higher priority so the JavaScript engine executes all the tasks from Microtask Queue and then moves to the Callback Queue.
 
-   - When a promise settles (fulfilled or rejected), its `.then()` or `.catch()` callbacks are queued in the microtask queue.
-   - `process.nextTick()` callbacks are also queued in the microtask queue and are executed before any I/O events or timers.
-   - Microtasks are executed until the microtask queue is empty before moving to the next event loop iteration.
+
+
 
 Here's a simplified sequence of how this works:
 
@@ -99,8 +98,15 @@ Here's a simplified sequence of how this works:
 4. If the callback contains microtasks (e.g., promises or `process.nextTick()`), those microtasks are executed before the next event loop iteration.
 5. The event loop continues this process, ensuring asynchronous operations are executed in a non-blocking manner.
 
-Understanding this event-driven architecture is crucial for writing efficient and non-blocking Node.js applications.
 
+### Difference between callback and microtask queue : 
+1. Callback Queue:
+   a. Callback Queue gets the ordinary callback functions coming from the setTimeout() API after the timer expires.
+   b. Callback Queue has lesser priority than Microtask Queue of fetching the callback functions to Event Loop.
+
+2. Microtask Queue:
+   a. Microtask Queue gets the callback functions coming through Promises and Mutation Observer.
+   b. Microtask Queue has higher priority than Callback Queue of fetching the callback functions to Event Loop.
 ======================================================================================================================================================
 <br>
 
