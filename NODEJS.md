@@ -1683,26 +1683,30 @@ It's important to consult the documentation of the modules and libraries you are
 ## Q.44 what is libuv in node js ?
 Libuv provides non-blocking I/O operations, allowing Node.js to handle multiple tasks concurrently without waiting for an operation to complete. This is achieved through a combination of callbacks, event-driven programming, and a worker thread pool.
 Libuv's Architecture
-Libuv's architecture consists of several components that work together to provide efficient asynchronous I/O operations. The main components are:
+Libuv's architecture consists of several components that work together to provide efficient asynchronous I/O operations. 
+<br> 
 
-Handles and Requests
+The main components are:
+
+### Handles and Requests
 Handles and requests are the two primary data structures used by libuv to represent and manage various I/O operations.
 
 Handles represent long-lived objects associated with a particular type of resource, such as a TCP socket or a timer. They are responsible for managing the lifetime and state of the resource.
 
 Requests, on the other hand, represent short-lived operations, such as reading from a socket or opening a file. They are used to perform specific tasks and are typically created and destroyed during the course of an operation.
 
-Event Loop
+## Event Loop
 The event loop is a central component of libuv's architecture, responsible for polling for events and executing the corresponding callbacks. It consists of multiple phases, each handling a specific type of event:
 
-Timers: Executes timer callbacks scheduled for the current time.
+
+### Timers: Executes timer callbacks scheduled for the current time.
 Pending callbacks: Executes callbacks for completed I/O operations.
 Poll: Waits for new events and processes them.
 Check: Executes check callbacks after the poll phase.
 Close callbacks: Executes callbacks for closing handles.
 The event loop continually iterates through these phases, ensuring that all events are processed and their corresponding callbacks are executed.
 
-Worker Thread Pool
+## Worker Thread Pool
 Libuv uses a worker thread pool to offload some I/O operations, such as file system and DNS operations, which can block the event loop. The thread pool allows these operations to be performed asynchronously without blocking the main event loop, ensuring that Node.js remains responsive and efficient.
 
 
