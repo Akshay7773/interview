@@ -1699,11 +1699,11 @@ Requests, on the other hand, represent short-lived operations, such as reading f
 The event loop is a central component of libuv's architecture, responsible for polling for events and executing the corresponding callbacks. It consists of multiple phases, each handling a specific type of event:
 
 
-### Timers: Executes timer callbacks scheduled for the current time.
-Pending callbacks: Executes callbacks for completed I/O operations.
-Poll: Waits for new events and processes them.
-Check: Executes check callbacks after the poll phase.
-Close callbacks: Executes callbacks for closing handles.
+Timers: Executes timer callbacks scheduled for the current time. <br> 
+Pending callbacks: Executes callbacks for completed I/O operations.<br>
+Poll: Waits for new events and processes them.<br>
+Check: Executes check callbacks after the poll phase.<br> 
+Close callbacks: Executes callbacks for closing handles. <br> 
 The event loop continually iterates through these phases, ensuring that all events are processed and their corresponding callbacks are executed.
 
 ## Worker Thread Pool
