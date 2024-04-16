@@ -6,7 +6,44 @@ When it was created it is known as livescript , but at that time java was very p
 There is no relation between Java and JS, both are totally different languages.
 
 
+<br>
+
 <br> 
+
+## Q. What is throttling in javascript ? 
+
+Ah, I see! It seems like you meant "throttling" in JavaScript. Throttling is a technique used to control the rate at which a function is executed. It's commonly used to limit the frequency of execution of a function, especially for events that may trigger rapidly, such as scroll or resize events.
+
+Throttling ensures that a function is only executed at most once per specified interval, even if it's called multiple times during that interval. This can be useful for optimizing performance, reducing unnecessary function calls, and preventing overload in event-driven scenarios.
+
+Here's a simple example of how throttling can be implemented in JavaScript:
+
+```javascript
+function throttle(func, delay) {
+  let lastExecuted = 0;
+  return function() {
+    const context = this;
+    const args = arguments;
+    const now = Date.now();
+    if (now - lastExecuted >= delay) {
+      func.apply(context, args);
+      lastExecuted = now;
+    }
+  };
+}
+
+// Example usage:
+function handleScroll() {
+  console.log('Scrolled!');
+}
+
+const throttledScroll = throttle(handleScroll, 1000); // Throttle to once per second
+
+// Attach the throttled function to the scroll event
+window.addEventListener('scroll', throttledScroll);
+```
+
+In this example, the `throttle` function takes a function `func` and a delay `delay` as arguments. It returns a new function that wraps around the original function `func`, ensuring that it's called at most once every `delay` milliseconds. This helps prevent the `handleScroll` function from being called too frequently during scrolling events.
 
 ## Q.2 what is javascript ?
 JavaScript is a programming language used to make websites more interactive and dynamic. It's like the glue that holds web pages together. With JavaScript,
