@@ -316,6 +316,8 @@ Modules allow developers to break down their codebase into smaller, manageable u
 
 <br> 
 
+# MODULES 
+<br> 
 ## Q.14 How many ways are there to export a module ? 
 In Node.js, there are several ways to export a module for use in other modules or files. The most common methods include:
 
@@ -519,6 +521,364 @@ In summary, the `package.json` file plays a crucial role in Node.js development 
 
 <br>
 
+## Q.20 What are the top 5 built in modules commonly used in node js ? 
+Some of the most commonly used built-in modules in Node.js include:
+
+1. **fs (File System)**:
+   - The `fs` module provides functions for interacting with the file system, allowing you to read from and write to files, create directories, manipulate file metadata, and perform other file-related operations.
+
+2. **http (HTTP)**:
+   - The `http` module enables you to create HTTP servers and clients, allowing you to build web servers, RESTful APIs, and web applications in Node.js. It provides classes and methods for handling HTTP requests and responses, routing, serving static files, and more.
+
+3. **path (Path)**:
+   - The `path` module provides utilities for working with file paths and directory paths in a platform-independent manner. It allows you to manipulate file paths, resolve relative paths, extract file extensions, and perform other path-related operations.
+
+4. **os (Operating System)**:
+   - The `os` module provides information about the operating system, including details about the CPU, memory, network interfaces, and operating system platform. It allows you to access system-level information and perform system-related tasks in your Node.js applications.
+
+5. **util (Utilities)**:
+   - The `util` module provides utility functions and classes that are commonly used in Node.js applications. It includes functions for debugging, formatting, inspecting objects, and working with asynchronous functions, among other things. The `util` module also provides classes such as `EventEmitter` for implementing event-driven architectures.
+
+These built-in modules are part of the Node.js core and are available for use in any Node.js application without the need for external dependencies. They provide essential functionalities for performing common tasks, interacting with the environment, and building various types of applications and systems in Node.js.
 
 <br> 
 
+## Q.21 explain the name of fs module ? name some functions of it ?  
+The name "fs" in the Node.js `fs` module stands for "File System." This module provides functions for interacting with the file system, including reading from and writing to files, manipulating file metadata, creating and deleting files and directories, and performing other file-related operations.
+
+Here are some common functions provided by the `fs` module:
+
+1. **fs.readFile()**: Reads the contents of a file asynchronously and returns the data as a buffer or string.
+   ```javascript
+   const fs = require('fs');
+
+   fs.readFile('example.txt', 'utf8', (err, data) => {
+     if (err) throw err;
+     console.log(data);
+   });
+   ```
+
+2. **fs.readFileSync()**: Reads the contents of a file synchronously and returns the data as a buffer or string.
+   ```javascript
+   const fs = require('fs');
+
+   const data = fs.readFileSync('example.txt', 'utf8');
+   console.log(data);
+   ```
+
+3. **fs.writeFile()**: Writes data to a file asynchronously, replacing the file if it already exists.
+   ```javascript
+   const fs = require('fs');
+
+   fs.writeFile('example.txt', 'Hello, world!', (err) => {
+     if (err) throw err;
+     console.log('File written successfully!');
+   });
+   ```
+
+4. **fs.writeFileSync()**: Writes data to a file synchronously, replacing the file if it already exists.
+   ```javascript
+   const fs = require('fs');
+
+   fs.writeFileSync('example.txt', 'Hello, world!');
+   console.log('File written successfully!');
+   ```
+
+5. **fs.readdir()**: Reads the contents of a directory asynchronously and returns an array of filenames.
+   ```javascript
+   const fs = require('fs');
+
+   fs.readdir('.', (err, files) => {
+     if (err) throw err;
+     console.log(files);
+   });
+   ```
+
+6. **fs.stat()**: Retrieves information about a file or directory asynchronously.
+   ```javascript
+   const fs = require('fs');
+
+   fs.stat('example.txt', (err, stats) => {
+     if (err) throw err;
+     console.log(stats);
+   });
+   ```
+
+These are just a few examples of the functions provided by the `fs` module. The `fs` module offers many other functions for performing various file system operations, such as renaming files, deleting files, creating directories, changing file permissions, and more.
+
+<br> 
+
+## Q.22 Explain the role of path module ? name some functions of it.
+The `path` module in Node.js provides utilities for working with file paths and directory paths in a platform-independent manner. It allows you to manipulate file paths, resolve relative paths, extract file extensions, normalize paths, and perform other path-related operations. The primary role of the `path` module is to abstract away platform-specific differences in file paths and provide consistent path manipulation functionalities across different operating systems.
+
+Here are some common functions provided by the `path` module:
+
+1. **path.join()**: Concatenates multiple path segments into a single path, using the appropriate platform-specific path separator (`\` on Windows, `/` on Unix-like systems).
+   ```javascript
+   const path = require('path');
+
+   const fullPath = path.join('/path/to', 'file.txt');
+   console.log(fullPath); // Output: /path/to/file.txt
+   ```
+
+2. **path.resolve()**: Resolves a sequence of paths or path segments into an absolute path. It resolves relative paths based on the current working directory.
+   ```javascript
+   const path = require('path');
+
+   const absolutePath = path.resolve('folder', 'file.txt');
+   console.log(absolutePath); // Output: /current/working/directory/folder/file.txt
+   ```
+
+3. **path.basename()**: Returns the last portion of a path, excluding the directory part.
+   ```javascript
+   const path = require('path');
+
+   const filename = path.basename('/path/to/file.txt');
+   console.log(filename); // Output: file.txt
+   ```
+
+4. **path.dirname()**: Returns the directory name of a path.
+   ```javascript
+   const path = require('path');
+
+   const dirname = path.dirname('/path/to/file.txt');
+   console.log(dirname); // Output: /path/to
+   ```
+
+5. **path.extname()**: Returns the extension of a file path.
+   ```javascript
+   const path = require('path');
+
+   const extension = path.extname('/path/to/file.txt');
+   console.log(extension); // Output: .txt
+   ```
+
+6. **path.normalize()**: Normalizes a path by resolving '..' and '.' segments and removing redundant separators.
+   ```javascript
+   const path = require('path');
+
+   const normalizedPath = path.normalize('/path//to/../file.txt');
+   console.log(normalizedPath); // Output: /path/file.txt
+   ```
+
+These are just a few examples of the functions provided by the `path` module. The `path` module offers many other functions for manipulating file paths, resolving paths, extracting path components, and performing various path-related operations.
+
+<br> 
+
+## Q.23 Explain the role of OS module? name some functions of it .
+The `os` module in Node.js provides utilities for interacting with the operating system, allowing you to access system-level information, retrieve operating system-related details, and perform system-related tasks. It provides platform-independent interfaces for accessing operating system functionalities, abstracting away platform-specific differences.
+
+Here are some common functions provided by the `os` module:
+
+1. **os.platform()**: Returns a string indicating the operating system platform.
+   ```javascript
+   const os = require('os');
+
+   console.log(os.platform()); // Output: 'linux', 'darwin', 'win32', etc.
+   ```
+
+2. **os.arch()**: Returns a string indicating the CPU architecture of the operating system.
+   ```javascript
+   const os = require('os');
+
+   console.log(os.arch()); // Output: 'x64', 'arm', 'ia32', etc.
+   ```
+
+3. **os.cpus()**: Returns an array of objects containing information about the available CPU cores.
+   ```javascript
+   const os = require('os');
+
+   console.log(os.cpus()); // Output: [{model, speed, times: {user, nice, sys, idle, irq}}, ...]
+   ```
+
+4. **os.totalmem()**: Returns the total amount of system memory in bytes.
+   ```javascript
+   const os = require('os');
+
+   console.log(os.totalmem()); // Output: Total system memory in bytes
+   ```
+
+5. **os.freemem()**: Returns the amount of free system memory in bytes.
+   ```javascript
+   const os = require('os');
+
+   console.log(os.freemem()); // Output: Free system memory in bytes
+   ```
+
+6. **os.hostname()**: Returns the hostname of the operating system.
+   ```javascript
+   const os = require('os');
+
+   console.log(os.hostname()); // Output: Hostname of the operating system
+   ```
+
+7. **os.type()**: Returns a string indicating the operating system type.
+   ```javascript
+   const os = require('os');
+
+   console.log(os.type()); // Output: 'Linux', 'Darwin', 'Windows_NT', etc.
+   ```
+
+8. **os.userInfo()**: Returns information about the current user.
+   ```javascript
+   const os = require('os');
+
+   console.log(os.userInfo()); // Output: {username, uid, gid, shell, homedir}
+   ```
+
+These are just a few examples of the functions provided by the `os` module. The `os` module offers many other functions for retrieving operating system-related information, accessing environment variables, working with network interfaces, and performing various system-related tasks.
+
+
+<br> 
+
+## Q.24 Explain the role of events module ? How to handle events in node js ? 
+The `events` module in Node.js provides an event-driven architecture for building asynchronous applications. It allows objects (known as "event emitters") to emit named events that can be listened to by other objects (known as "event listeners" or "event handlers"). This mechanism facilitates the implementation of asynchronous, non-blocking code by decoupling the producer of events from the consumer of events.
+
+The role of the `events` module can be summarized as follows:
+
+1. **Event Emitter**: The `events` module provides the `EventEmitter` class, which serves as the foundation for creating objects that can emit events. Any JavaScript object can inherit from `EventEmitter` to gain event-emitting capabilities.
+
+2. **Event Listener**: Objects that inherit from `EventEmitter` can define event listener functions that are invoked when a specific event is emitted. These listener functions respond to events by executing custom logic or performing actions.
+
+3. **Event Handling**: The `events` module facilitates the handling of events by providing methods to register event listeners, emit events, remove event listeners, and manage event subscriptions.
+
+Here's an example of how to handle events using the `events` module in Node.js:
+
+```javascript
+const EventEmitter = require('events');
+
+// Create a new event emitter object
+const myEmitter = new EventEmitter();
+
+// Define an event listener function for the 'myEvent' event
+myEmitter.on('myEvent', (arg1, arg2) => {
+  console.log('Event occurred with arguments:', arg1, arg2);
+});
+
+// Emit the 'myEvent' event with arguments
+myEmitter.emit('myEvent', 'arg1', 'arg2');
+```
+
+In this example:
+
+- We import the `events` module and create a new instance of `EventEmitter` using the `new EventEmitter()` constructor.
+- We define an event listener function using the `on()` method, which listens for the `'myEvent'` event and logs the provided arguments to the console.
+- We emit the `'myEvent'` event using the `emit()` method, passing two arguments `'arg1'` and `'arg2'`. This triggers the execution of the event listener function, which logs the arguments to the console.
+
+By using the `events` module, you can implement event-driven architectures, build scalable and responsive applications, and handle asynchronous operations effectively in Node.js.
+
+<br> 
+
+
+## Q.25 What are Event Arguments ? 
+Event arguments, also known as event payloads or event data, are additional pieces of information that can be passed along with an event when it is emitted. Event arguments provide context or data related to the event, allowing event listeners to access and use this information when responding to the event.
+
+In an event-driven architecture, when an event emitter emits an event, it can include one or more arguments that provide relevant data or parameters associated with the event. These arguments can be of any data type, such as strings, numbers, objects, arrays, or custom data structures.
+
+Event arguments are typically passed as parameters to event listener functions, allowing the listener to access and use the data provided by the event emitter. Event listeners can then perform actions or execute logic based on the event arguments, making event-driven programming flexible and powerful.
+
+For example, consider an application that emits a `'userLoggedIn'` event when a user successfully logs in. The event emitter could include the user's username or user ID as event arguments. Event listener functions listening for the `'userLoggedIn'` event could then access this information and perform actions specific to the logged-in user, such as updating the UI or fetching user data from a database.
+
+Here's an example of how event arguments are used in Node.js:
+
+```javascript
+const EventEmitter = require('events');
+
+const myEmitter = new EventEmitter();
+
+// Define an event listener function for the 'userLoggedIn' event
+myEmitter.on('userLoggedIn', (username) => {
+  console.log(`User '${username}' logged in.`);
+});
+
+// Simulate a user login event and pass the username as an event argument
+const username = 'john_doe';
+myEmitter.emit('userLoggedIn', username);
+```
+
+In this example, the `'userLoggedIn'` event is emitted with the `username` argument `'john_doe'`. The event listener function accesses this argument and logs a message indicating that the user with the provided username has logged in.
+
+<br> 
+
+## Q.26 What is the difference between functions and events ? 
+Sure, here's a comparison between functions and events in tabular format:
+
+| Aspect          | Functions                                           | Events                                              |
+|-----------------|-----------------------------------------------------|-----------------------------------------------------|
+| Purpose         | Perform specific tasks or operations                | Represent occurrences or state changes              |
+| Invocation      | Explicitly called by name and arguments             | Triggered by event emitters asynchronously          |
+| Handling        | Called directly where needed                        | Handled by event listeners asynchronously           |
+| Communication   | Accept inputs, produce outputs, modify state        | Facilitate communication between loosely coupled components |
+| Temporal Coupling | Execute immediately when called                   | Triggered asynchronously, promoting loose coupling  |
+
+This format provides a concise comparison between the two concepts, highlighting their differences in purpose, invocation, handling, communication, and temporal coupling.
+
+
+<br> 
+
+## Q.27 what is the role of http module in node js ? 
+The `http` module in Node.js provides functionality for creating HTTP servers and making HTTP requests. It enables developers to build web servers, RESTful APIs, web applications, and other networked applications in Node.js. The `http` module encapsulates the HTTP protocol, allowing Node.js applications to handle HTTP traffic, parse incoming requests, and generate HTTP responses.
+
+Here are some key roles and functionalities of the `http` module:
+
+1. **Creating HTTP Servers**:
+   - The `http` module allows developers to create HTTP servers using the `http.createServer()` method. This method takes a callback function that is executed for each incoming HTTP request, allowing developers to define how the server responds to different types of requests.
+   ```javascript
+   const http = require('http');
+
+   const server = http.createServer((req, res) => {
+     res.writeHead(200, {'Content-Type': 'text/plain'});
+     res.end('Hello, world!');
+   });
+
+   server.listen(3000, () => {
+     console.log('Server is listening on port 3000');
+   });
+   ```
+
+2. **Handling HTTP Requests**:
+   - HTTP servers created with the `http` module can handle various types of HTTP requests, including GET, POST, PUT, DELETE, and others. Developers can define request handlers to process incoming requests and generate appropriate responses.
+   
+3. **Parsing Request and Response Headers**:
+   - The `http` module automatically parses incoming request headers and provides access to request properties such as URL, method, headers, and query parameters. It also allows developers to set response headers and status codes when sending responses back to clients.
+   
+4. **Streaming Data**:
+   - The `http` module supports streaming data between clients and servers. It provides methods for reading data from request bodies and writing data to response bodies, allowing for efficient handling of large datasets.
+   
+5. **HTTP Client Requests**:
+   - In addition to creating HTTP servers, the `http` module also allows Node.js applications to make HTTP requests to external servers using the `http.request()` method. This enables applications to interact with external APIs, fetch remote resources, and consume web services.
+   
+6. **Support for HTTPS**:
+   - The `http` module also provides support for creating HTTPS servers and making secure HTTPS requests using the `https` module, which is built on top of the `http` module. This allows developers to create secure web servers and communicate securely with external services over HTTPS.
+
+Overall, the `http` module plays a crucial role in enabling Node.js applications to handle HTTP traffic, implement server-side logic, and interact with clients and external services over the HTTP protocol. It provides a powerful and flexible foundation for building networked applications in Node.js.
+
+<br> 
+
+## Q. 28 What is the role of createServer method of http module ? 
+The `createServer()` method of the `http` module in Node.js is used to create an HTTP server instance. This method takes a callback function as its argument, which will be invoked each time the server receives an HTTP request.
+
+Here's the basic syntax of the `createServer()` method:
+
+```javascript
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  // Request handling logic goes here
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+```
+
+The `createServer()` method creates an HTTP server instance with the specified request handler function. When an HTTP request is received by the server, Node.js invokes this callback function with two arguments:
+
+1. `req` (request): An instance of the `http.IncomingMessage` class representing the incoming HTTP request. It contains information about the request, such as the request URL, method, headers, and body.
+2. `res` (response): An instance of the `http.ServerResponse` class representing the outgoing HTTP response. It provides methods for sending the response back to the client, including setting response headers, writing response body, and ending the response.
+
+Inside the callback function, developers can implement the logic to handle the incoming HTTP request and generate an appropriate HTTP response. This may include tasks such as parsing request parameters, processing data, accessing databases, generating dynamic content, and sending response data back to the client.
+
+The `createServer()` method returns an instance of the `http.Server` class, which represents the HTTP server. Once the server is created, developers typically call the `listen()` method on the server instance to start the server and make it listen for incoming HTTP requests on a specified port and hostname.
+
+In summary, the `createServer()` method of the `http` module is used to create an HTTP server in Node.js, allowing developers to define custom request handling logic and build web servers, RESTful APIs, and other networked applications.
