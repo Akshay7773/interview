@@ -2482,6 +2482,130 @@ In summary, `useCallback` is used for memoizing callback functions, while `useMe
 <br> 
 
 
+## Difference between useState and useRef hook.
+`useState` and `useRef` are both hooks provided by React, but they serve different purposes.
+
+1. **useState**:
+   - `useState` is used to add state variables to functional components in React. 
+   - When you call `useState`, it returns a stateful value (the current state) and a function to update it. 
+   - It's typically used when you need to store and update state within a component, such as input values, toggles, counters, etc.
+   - Every time the state is updated using `useState`, the component re-renders to reflect the new state.
+
+Example:
+```jsx
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+2. **useRef**:
+   - `useRef` returns a mutable ref object whose `.current` property is initialized to the passed argument (initial value).
+   - The `current` property of the ref object can be updated independently and it does not cause re-rendering of the component.
+   - It's commonly used to persist values across renders without causing re-renders or to access DOM nodes directly.
+
+Example:
+```jsx
+import React, { useRef, useEffect } from 'react';
+
+function TextInputWithFocusButton() {
+  const inputEl = useRef(null);
+  
+  const focusInput = () => {
+    inputEl.current.focus();
+  };
+
+  useEffect(() => {
+    focusInput(); // Focuses the input on component mount
+  }, []);
+
+  return (
+    <div>
+      <input ref={inputEl} type="text" />
+      <button onClick={focusInput}>Focus the input</button>
+    </div>
+  );
+}
+```
+
+In summary, `useState` is for managing stateful values within a component, causing re-renders when the state updates, while `useRef` is for persisting values across renders without causing re-renders and accessing DOM nodes directly.
+
+
+<br>
+
+## Q. Difference between useState and useReducer hook ?  
+
+`useState` and `useReducer` are both hooks provided by React for managing state in functional components, but they have some differences in terms of usage and complexity.
+
+1. **useState**:
+   - `useState` is a basic hook for managing state in functional components.
+   - It returns an array with two elements: the current state value and a function to update it.
+   - This function updates the state by replacing the old state with the new one. It does not provide any way to compute the next state based on the previous state.
+   - It's simple and easy to use for managing independent state values or state that can be updated directly.
+
+Example:
+```jsx
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+2. **useReducer**:
+   - `useReducer` is a more advanced hook for managing state in functional components, especially when state logic is complex and involves multiple sub-values or when the next state depends on the previous one.
+   - It takes a reducer function and an initial state, similar to the `useReducer` function in traditional React class components.
+   - The reducer function receives the current state and an action, and returns the new state based on the action.
+   - It's useful when the state logic involves multiple actions or when the state needs to be updated based on its previous value.
+
+Example:
+```jsx
+import React, { useReducer } from 'react';
+
+// Reducer function
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+    </div>
+  );
+}
+```
+
+In summary, `useState` is simpler and more suitable for basic state management, while `useReducer` is more powerful and suitable for managing complex state logic or state that depends on its previous value.
+
+<br> 
+
 ## Q.29 PURE AND IMPURE COMPONENTS IN REACTJS  
 
 **Pure components are stateless and do not have any internal state.** **Impure components can have internal state and manage their own data**. Pure components are primarily used for rendering UI based on props only. Impure components can perform side effects, such as making API calls or modifying global state.
