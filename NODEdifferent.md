@@ -879,6 +879,10 @@ The `createServer()` method creates an HTTP server instance with the specified r
 
 Inside the callback function, developers can implement the logic to handle the incoming HTTP request and generate an appropriate HTTP response. This may include tasks such as parsing request parameters, processing data, accessing databases, generating dynamic content, and sending response data back to the client.
 
+
+<br> 
+
+
 The `createServer()` method returns an instance of the `http.Server` class, which represents the HTTP server. Once the server is created, developers typically call the `listen()` method on the server instance to start the server and make it listen for incoming HTTP requests on a specified port and hostname.
 
 In summary, the `createServer()` method of the `http` module is used to create an HTTP server in Node.js, allowing developers to define custom request handling logic and build web servers, RESTful APIs, and other networked applications.
