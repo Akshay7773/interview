@@ -20,7 +20,7 @@ There is no relation between Java and JS, both are totally different languages.
 
 ## Q. What is throttling in javascript ? 
 
-Ah, I see! It seems like you meant "throttling" in JavaScript. Throttling is a technique used to control the rate at which a function is executed. It's commonly used to limit the frequency of execution of a function, especially for events that may trigger rapidly, such as scroll or resize events.
+ Throttling is a technique used to control the rate at which a function is executed. It's commonly used to limit the frequency of execution of a function, especially for events that may trigger rapidly, such as scroll or resize events.
 
 Throttling ensures that a function is only executed at most once per specified interval, even if it's called multiple times during that interval. This can be useful for optimizing performance, reducing unnecessary function calls, and preventing overload in event-driven scenarios.
 
