@@ -1,4 +1,12 @@
 
+## Q. What is javascript ? 
+JavaScript is a high-level programming language commonly used for creating dynamic and interactive content on websites. Initially developed by Brendan Eich at Netscape in 1995, it has since become one of the most widely used programming languages on the web.
+
+JavaScript allows developers to add functionality to web pages, such as user interaction, form validation, animations, and dynamic content updates, without needing to reload the entire page. It is supported by all modern web browsers and can be used on both the client-side (in the browser) and the server-side (with platforms like Node.js).
+
+JavaScript is known for its versatility and is often used in conjunction with HTML and CSS to create rich, interactive web experiences. It has a large ecosystem of libraries and frameworks, such as React, Angular, and Vue.js, which simplify the development process and provide additional functionality for building complex web applications.
+
+<br> 
 
 ## Q.1 Why it is called javascript ? is java and  javascript are same ? 
 When it was created it is known as livescript , but at that time java was very popular so later it is named as javascript. 
