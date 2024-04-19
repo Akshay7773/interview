@@ -628,19 +628,184 @@ Despite these limitations, the `$lookup` aggregation stage in MongoDB provides a
 
 <br> 
 
+
+
+
 ## Q.25 What is lookup in mongodb ? 
+In MongoDB, `$lookup` is an aggregation stage used to perform a left outer join between documents from two collections in the same database. It allows you to enrich documents in one collection with related data from another collection based on matching criteria.
+
+The `$lookup` stage is commonly used to combine data from multiple collections into a single result set, similar to a SQL join operation. It can be useful for scenarios where data is distributed across multiple collections and you need to aggregate or analyze data across different document structures.
+
+Here's the basic syntax of the `$lookup` stage:
+
+```javascript
+{
+  $lookup: {
+    from: "foreignCollection",
+    localField: "localField",
+    foreignField: "foreignField",
+    as: "outputArray"
+  }
+}
+```
+
+- `from`: Specifies the name of the foreign collection to join with.
+- `localField`: Specifies the field from the input documents (in the current collection) to use for matching.
+- `foreignField`: Specifies the field from the foreign documents (in the foreign collection) to use for matching.
+- `as`: Specifies the name of the output array field that will contain the joined documents.
+
+Here's a simple example of how to use `$lookup`:
+
+Suppose you have two collections, `orders` and `customers`, and you want to join them based on the `customerId` field in the `orders` collection and the `_id` field in the `customers` collection:
+
+```javascript
+db.orders.aggregate([
+  {
+    $lookup: {
+      from: "customers",
+      localField: "customerId",
+      foreignField: "_id",
+      as: "customerData"
+    }
+  }
+])
+```
+
+This `$lookup` stage will enrich each document in the `orders` collection with related data from the `customers` collection, storing the joined data in the `customerData` field.
+
+The `$lookup` stage allows you to perform left outer joins, meaning that even if there are no matching documents in the foreign collection, the output will still contain the original documents from the input collection with an empty array or null value for the output array field.
+
+<br> 
+
+
 
 ## Q.26 Can we create own functions in mongodb ? 
+MongoDB 4.4 comes with two new operators: $function and $accumulator . These two operators allow us to write custom JavaScript functions that can be used in a MongoDB aggregation pipeline.
+
+<br> 
+
 
 ## Q.27 Whats the difference between find and findOne in mongodb ? 
+In MongoDB, both the `find()` and `findOne()` methods are used to query documents in a collection, but they differ in their behavior and the results they return:
+
+1. **find() Method**:
+   - The `find()` method returns a cursor that yields all documents that match the query criteria.
+   - If no documents match the query criteria, `find()` returns an empty cursor.
+   - `find()` can return multiple documents that match the query criteria, even if there is only one matching document.
+   - The returned cursor can be iterated over to access each matching document.
+
+   Example:
+   ```javascript
+   // Find all documents where the "status" field is "active"
+   db.collection.find({ status: "active" })
+   ```
+
+2. **findOne() Method**:
+   - The `findOne()` method returns the first document that matches the query criteria.
+   - If multiple documents match the query criteria, `findOne()` returns only the first matching document.
+   - If no documents match the query criteria, `findOne()` returns `null`.
+   - `findOne()` is useful when you only need to retrieve a single document or when you are not sure if multiple documents match the query criteria, and you only want the first one.
+
+   Example:
+   ```javascript
+   // Find the first document where the "status" field is "active"
+   db.collection.findOne({ status: "active" })
+   ```
+
+In summary, the main differences between `find()` and `findOne()` are:
+
+- `find()` returns a cursor that yields all matching documents, while `findOne()` returns only the first matching document (or `null` if none).
+- `find()` is useful when you need to retrieve multiple documents or iterate over all matching documents, while `findOne()` is useful when you only need a single document or want to quickly check if a document exists.
+
+<br>
+
 
 ## Q.28 What is explain in mongodb? 
+In MongoDB, the `explain()` method is used to provide information about the execution of a query or an aggregation operation. It returns metadata and statistics about how MongoDB executed the query or aggregation, helping developers and database administrators understand the performance characteristics and optimization strategies used by MongoDB.
+
+The `explain()` method can be called on queries executed using the `find()` method for document queries or on aggregation pipelines executed using the `aggregate()` method for aggregation queries.
+
+Here's how you can use the `explain()` method:
+
+1. **Document Query Explain**:
+
+   ```javascript
+   db.collection.find({}).explain()
+   ```
+
+   This command will provide metadata and statistics about the execution of the specified query, including information about the query plan, indexes used, execution time, and other relevant details.
+
+2. **Aggregation Explain**:
+
+   ```javascript
+   db.collection.aggregate([]).explain()
+   ```
+
+   This command will provide similar metadata and statistics about the execution of the specified aggregation pipeline, including information about the stages in the pipeline, execution time, and other relevant details.
+
+<br> 
 
 ## Q.29 What are docuements in mongodb? 
+In MongoDB, a document is the basic unit of data storage, similar to a row in a relational database. It is a data structure composed of field-value pairs, where each field has a unique name and contains a value of a specific data type. Documents are stored in collections, which are analogous to tables in relational databases.
+
+<br> 
+
 
 ## Q.30 Transactions in mongodb ? 
+MongoDB transactions provide the means to execute multiple operations as a single logical unit of work. This ensures that either all operations within the transaction are completed successfully, or none of them take effect, maintaining data consistency and integrity.
+Real-World Example: E-Commerce Order Processing
+
+Let’s consider a real-world example to showcase MongoDB transactions. Imagine an e-commerce platform that needs to deduct stock from inventory and create an order when a customer makes a purchase.
+
+1. Begin Transaction: When a customer initiates a purchase, a transaction is started.
+
+2. Deduct Stock: Within the transaction, the system updates the inventory collection to deduct the purchased quantity from the available stock.
+
+3. Create Order: Simultaneously, the system creates an order document in the orders collection, capturing the details of the customer, items purchased, and transaction timestamp.
+
+4. Commit Transaction: Upon successful deduction of stock and creation of the order, the transaction is committed. The stock is reduced, and the order is visible in the database.
+
+5. Rollback Scenario: If the deduction or order creation fails (due to stock unavailability, for instance), the transaction is aborted. The stock remains unchanged, and no incomplete order is left in the system.
+   
+<br> 
+
 
 ## Q.31 What is replica set in mongodb ? 
+In MongoDB, a replica set is a group of MongoDB instances (nodes) that maintain the same data set, providing high availability and data redundancy. Replica sets are the primary mechanism for implementing fault tolerance and data resilience in MongoDB deployments.
+
+Key features and components of a MongoDB replica set include:
+
+1. **Primary Node**:
+   - One node within the replica set serves as the primary node.
+   - The primary node receives all write operations from clients and propagates changes to the secondary nodes.
+   - The primary node is responsible for processing write operations and coordinating read operations.
+
+2. **Secondary Nodes**:
+   - Secondary nodes replicate data from the primary node and serve as hot standby copies.
+   - Secondary nodes can serve read operations in addition to replicating data.
+   - Secondary nodes help distribute read traffic and provide fault tolerance by allowing automatic failover in case the primary node becomes unavailable.
+
+3. **Data Replication**:
+   - MongoDB uses replication to maintain identical copies of data across all nodes within the replica set.
+   - Data replication occurs asynchronously, with the primary node sending replication operations (oplog entries) to secondary nodes.
+   - Secondary nodes apply the replication operations to their data sets to ensure consistency with the primary node.
+
+4. **Oplog**:
+   - The oplog (short for operation log) is a special capped collection that records all write operations (inserts, updates, deletes) on the primary node.
+   - Secondary nodes use the oplog to replicate changes from the primary node and apply them to their own data sets.
+   - The oplog allows secondary nodes to catch up with the primary node's state and maintain data consistency.
+
+5. **Automatic Failover**:
+   - MongoDB replica sets support automatic failover, allowing secondary nodes to automatically elect a new primary node in the event of a primary node failure.
+   - Automatic failover ensures high availability and data resilience by minimizing downtime and ensuring continuous operation even in the event of node failures.
+
+6. **Arbiter Nodes**:
+   - Arbiter nodes are optional lightweight nodes that participate in replica set elections but do not replicate data.
+   - Arbiter nodes help break ties during elections and ensure that replica set configurations remain stable.
+
+Overall, MongoDB replica sets provide fault tolerance, high availability, and data redundancy, making them a fundamental building block for resilient MongoDB deployments. Replica sets are widely used in production environments to ensure continuous operation and data durability.
+<br> 
+
 
 ## Q.32 How to use text search in mongodb ? 
 
