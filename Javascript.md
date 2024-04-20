@@ -208,9 +208,8 @@ some different ways to use this keyword is :
 ## Q.6 What is call, apply and bind ? 
 1. Call :  
     
-            Call is a function that helps you change the context of the invoking function. In other words it helps you to replace the value of this inside a function with whatever value you want . 
-    
-       The call() method calls the function directly and sets this to the first argument passed to the call method and if any other sequences of the arguments precending the first argument are passed to the call method then they are passed as an arugment to the function.
+	 Call is a function that helps you change the context of the invoking function. In other words it helps you to replace the value of this inside a function with whatever value you want . 
+         The call() method calls the function directly and sets this to the first argument passed to the call method and if any other sequences of the arguments precending the first argument are passed to the call method then they are passed as an arugment to the function.
     
     note : call method allows an object to use the method (function) of another object.
     
