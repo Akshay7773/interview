@@ -293,8 +293,7 @@ const sum = numbers.reduce((accumulator, num) => accumulator + num, 0);
 <br> 
 
 ## Q.8 What is promise in javascript ?# Promise::
-
-        A promise is a special javascript object. It produces a value after an asynchronous operation completes successfully, or an error if it does not completes successfully due to timeout, network error and so on.
+A promise is a special javascript object. It produces a value after an asynchronous operation completes successfully, or an error if it does not completes successfully due to timeout, network error and so on.
 
 syntax:
 
@@ -424,8 +423,7 @@ output : 2
 note : here 4 also matches the condition but it only returns 2 as output.
 
 # 2. filter():
-
-          filter function finds all the elements inside the array which matches the condition. It returns the array with elements which satisfies the condition.
+filter function finds all the elements inside the array which matches the condition. It returns the array with elements which satisfies the condition.
 
 e.g. 
 
@@ -438,8 +436,7 @@ output :
  [ 2, 4 ]
 
 # 3. slice():
-
-       slice method get a subset of the array from start index to end index.
+slice method get a subset of the array from start index to end index.
 
 end is not included.
 
@@ -476,20 +473,17 @@ NOTE: it changes the original array.
 
 ## Q.11 push , pop, shift, unshift
 # push():
-
-        it adds elements to the last position.
+it adds elements to the last position.
 
 # pop():
-
-        it removes last element of the array and return that element.
+ it removes last element of the array and return that element.
 
 # shift():
-
-        it removes first element of the array and returns that element.
+it removes first element of the array and returns that element.
 
 # unshift():
 
-         it adds element to the first index of array.
+it adds element to the first index of array.
 
 NOTE : 
 
@@ -500,8 +494,7 @@ all methods made changes in original array.
 
 ## Q.12 map, forEach
 # map():
-
-       The map method is used when you want to modify each element of an array and create a new array with modified values.
+ The map method is used when you want to modify each element of an array and create a new array with modified values.
 
 it returns new array with modified value.
 
@@ -520,8 +513,7 @@ output:
 NOTE : it will not modify original array.
 
 # forEach():
-
-        The forEach method is used when you want to perform some operation on each element of an array without creating new array.
+ The forEach method is used when you want to perform some operation on each element of an array without creating new array.
 
 e.g.
 ```jsx
@@ -543,8 +535,7 @@ NOTE: it will not modify new array , also it will not return anything.
 
 ## Q.13 what is Array destructuring? 
 # Destructuring:
-
-       Array destructuring allows you to extract elements from an array and assign them to individual variables in a single statement.
+ Array destructuring allows you to extract elements from an array and assign them to individual variables in a single statement.
 
 it is introduced in ES6
 
@@ -600,12 +591,10 @@ output :
 
 ## Q.15 what is callback function, higher order function? 
 ### callback function:
-
-          callback function is a function that is passed as an argument of another function.
+callback function is a function that is passed as an argument of another function.
 
 ### higher order function :
-
-           function  which take another function as an argument is called as higher order function.
+function  which take another function as an argument is called as higher order function.
 
 ```jsx
 function display(x, y, operation) {
@@ -629,12 +618,10 @@ NOTE : here function display is higher order function and operation is callback 
 
 ## Q.16 What is parameters and arguments?
 # parameters:
-
-      parameters are the placeholders defined in the function declaration.
+parameters are the placeholders defined in the function declaration.
 
 # arguments:
-
-      arguments are the actual values passed to the function when it is invoked or called .
+arguments are the actual values passed to the function when it is invoked or called .
 
  
 ```jsx
@@ -655,8 +642,7 @@ add(3,5)   //this is arguments.
 
 ## Q.17 what is first class functions ? 
 ### First class functions :
-
-       if function treated like another variables  then it is called as first class function.
+ if function treated like another variables  then it is called as first class function.
 
 Functions treated like variables : 
 
@@ -677,8 +663,7 @@ console.log(”hello”)
 
 ## Q.18 what are pure and impure functions ? 
 # pure functions :
-
-          A pure function is a function that always produces the same output for the same input.
+A pure function is a function that always produces the same output for the same input.
 
 e.g.
 ```jsx
@@ -697,8 +682,7 @@ fun(4, 5)  // output: 9
 NOTE : here output is same for both the inputs .
 
 # impure functions :
-
-        An impure functions produces different output for the same input
+ An impure functions produces different output for the same input
 
 e.g. 
 ```jsx
@@ -719,8 +703,7 @@ NOTE : here inputs are same for both function calling but output is different.
 
 ## Q.19 what is currying in node js ? 
 ### Currying:
-
-       currying in javascript transforms a function with multiple arguments into a nested  series of functions, each taking a single argument.
+ currying in javascript transforms a function with multiple arguments into a nested  series of functions, each taking a single argument.
 
 e.g. 
 
@@ -743,12 +726,10 @@ output : 24
 
 
 ## Q.20 what is DO# DOM : (Document Object Model)
-
-      The DOM represents the web page as a tree like structure that allows javascript to dynamically access and manipulate the content and structure of a web page.
+  The DOM represents the web page as a tree like structure that allows javascript to dynamically access and manipulate the content and structure of a web page.
 
 ### Selectors in js:
-
-      Selectors in javascript help to get specific elements from DOM based on IDs, class names , tag names .
+ Selectors in javascript help to get specific elements from DOM based on IDs, class names , tag names .
 
 1. getElementById()
 2. getElementsByClassName()
@@ -767,8 +748,7 @@ catch
 finally
 
 # throw statement:
-
-       throw statement stops the execution of the current function and passes the error to the catch block of calling function.
+  throw statement stops the execution of the current function and passes the error to the catch block of calling function.
 
 e.g.
 ```jsx
@@ -788,8 +768,7 @@ function validateAge(a) {
 }
 ```
 # Error propogation:
-
-       Error propogation refers to the process of passing or propagating an error from one part of the code to another by using the throw statement with try catch .
+ Error propogation refers to the process of passing or propagating an error from one part of the code to another by using the throw statement with try catch .
 
 # Types of errors in js :
 
@@ -803,8 +782,7 @@ function validateAge(a) {
 
 ## Q.21 What are objects in javascript ?
 ### OBJECTS IN JAVASCRIPT :
-
-     An object is a data type that allows you to store  key-value pairs .  
+   An object is a data type that allows you to store  key-value pairs .  
 
 OBJECT is a real world entity . 
 
@@ -900,8 +878,7 @@ console.log(”hello world”);
     
 
 # Difference  between Deep copy and Shallow copy in javascript:
-
-     Shallow copy in nested objects case will modify the parent object property value, if cloned object property value is changed. 
+   Shallow copy in nested objects case will modify the parent object property value, if cloned object property value is changed. 
 
 But deep copy will not modify the parent object property value
 
@@ -971,9 +948,8 @@ Events are actions that happen in the browser, such as button click, mouse movem
 4. key up event.
 5. focus , blur, change , load , resize.
 
-# Q. What is event object in js?
-
-          Whenever any event is triggered, the browser automatically creates an event object and passes it as an argument to the event handler function. 
+# Q. What is event object in js? 
+  Whenever any event is triggered, the browser automatically creates an event object and passes it as an argument to the event handler function. 
 
 function handleclick(event){
 
@@ -982,8 +958,7 @@ console.log(event)
 }
 
 # Event delegation:
-
-       it is a technique where you attach a single event handler to a parent element to handle events on its child element.
+ it is a technique where you attach a single event handler to a parent element to handle events on its child element.
 
 1. Event bubbling: 
     
@@ -1007,8 +982,7 @@ console.log(event)
 
 ## Q.22 What is memoization in javascript ? 
 ## Memoization in javascript :
-
-       Memoization is an optimization technique that can be used to reduce time consuming calculations by saving previous input to something called cache and returning the result from it. 
+  Memoization is an optimization technique that can be used to reduce time consuming calculations by saving previous input to something called cache and returning the result from it. 
 
 ```jsx
 function calc(n){
@@ -1047,12 +1021,10 @@ console.log(res(7))
 
 ## Q.24 what is rest and spread operator in javascript? 
 ## Rest and Spread operator:
-
-               **Spread operators allow us to expand an array or object into its individual elements, while rest operators allow us to collects multiple elements into a single array or object.**
+   **Spread operators allow us to expand an array or object into its individual elements, while rest operators allow us to collects multiple elements into a single array or object.**
 
 ## Spread operator:
-
-         Spread operators are written using three consecutive dots (...), and they provide us with an easy way to break up an array or an object into its individual elements.
+ Spread operators are written using three consecutive dots (...), and they provide us with an easy way to break up an array or an object into its individual elements.
 
 For example, let’s say we have the following array:
 
@@ -1074,8 +1046,7 @@ newArray = [1, 2, 3, 4, 5];
 ```
 
 ## Rest operator:
-
-        The rest operator is essentially the opposite of the spread operator. It collects multiple elements into an array. This is useful if you don’t know how many arguments a function may receive, and you want to capture all of them as an array.
+The rest operator is essentially the opposite of the spread operator. It collects multiple elements into an array. This is useful if you don’t know how many arguments a function may receive, and you want to capture all of them as an array.
 
 ```jsx
 function fun(a, ...rest){
@@ -1099,8 +1070,7 @@ temporal dead zone
 
 ## Q.25 What is temporal dead zone? 
 ## Temporal Dead Zone:
-
-       The **temporal dead zone** (TDZ) is a specific period in the execution of JavaScript code where variables declared with `let` and `const` exist but cannot be accessed or assigned any value. During this phase, accessing or using the variable will result in a `ReferenceError`.
+   The **temporal dead zone** (TDZ) is a specific period in the execution of JavaScript code where variables declared with `let` and `const` exist but cannot be accessed or assigned any value. During this phase, accessing or using the variable will result in a `ReferenceError`.
 
 To better understand the TDZ, let’s consider an example:
 
