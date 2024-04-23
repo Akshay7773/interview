@@ -2585,6 +2585,66 @@ In summary, the event loop is responsible for managing the execution of asynchro
 This table summarizes the main differences between `Promise.all()` and `Promise.allSettled()` in terms of their behavior and usage.
 
 
+### example of promise.all()
+```jsx
+// Example promises
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise 1 resolved');
+  }, 1000);
+});
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise 2 resolved');
+  }, 2000);
+});
+
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise 3 resolved');
+  }, 3000);
+});
+
+// Using Promise.all
+Promise.all([promise1, promise2, promise3])
+  .then((results) => {
+    console.log('All promises resolved:', results);
+  })
+  .catch((error) => {
+    console.error('At least one promise rejected:', error);
+  });
+```
+
+
+### example of promise.allSettled(): 
+```jsx
+// Example promises
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise 1 resolved');
+  }, 1000);
+});
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject('Promise 2 rejected');
+  }, 2000);
+});
+
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise 3 resolved');
+  }, 3000);
+});
+
+// Using Promise.allSettled
+Promise.allSettled([promise1, promise2, promise3])
+  .then((results) => {
+    console.log('All promises settled:', results);
+  });
+```
+
 <br>
 
 ## Q.62 freeze method Object
