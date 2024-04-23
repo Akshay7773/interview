@@ -2734,6 +2734,23 @@ In JavaScript, when you want to copy an object, you can perform either a shallow
     console.log(deepCopy.b.c); // Output: 2
     
     ```
+
+
+    ## Deep copy implementation
+    ```jsx
+ 		function deepCloneObj(obj) {
+    			if (typeof obj !== 'object') return obj;
+    			const clonedObj = Array.isArray(obj) ? [] : {};
+    			for (let key in obj) {
+      				clonedObj[key] = deepCloneObj(obj[key]);
+    			}
+    			return clonedObj;
+  		}
+  		// const obj2 = obj1;
+  		// const obj2 = {...obj1}
+  		const obj2 = deepCloneObj(obj1);
+
+    ```
     
 
 In summary, a shallow copy copies only the top-level properties of an object, while a deep copy copies all properties, including nested objects, creating a completely independent copy of the original object. The choice between shallow copy and deep copy depends on whether you need a completely independent copy of the original object or if shallow copying is sufficient.
