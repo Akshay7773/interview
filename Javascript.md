@@ -27,18 +27,16 @@ Throttling ensures that a function is only executed at most once per specified i
 Here's a simple example of how throttling can be implemented in JavaScript:
 
 ```javascript
-function throttle(func, delay) {
-  let lastExecuted = 0;
-  return function() {
-    const context = this;
-    const args = arguments;
-    const now = Date.now();
-    if (now - lastExecuted >= delay) {
-      func.apply(context, args);
-      lastExecuted = now;
-    }
+ const throttle = (cb, delay) => {
+    let lastcall = 0;
+
+    return function (...args) {
+      let now = Date.now();
+      if (now - lastcall < delay) return;
+      lastcall = now;
+      cb.apply(this, args);
+    };
   };
-}
 
 // Example usage:
 function handleScroll() {
