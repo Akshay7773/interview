@@ -1103,3 +1103,18 @@ let arr = [1, 2, 3];
 let combinations = findAllCombinations(arr);
 console.log(combinations);
 ```
+
+### Second way 
+```jsx
+let arr = [1,2,3, 4];
+function subArr(arr){
+    if(arr.length == 1 ){
+        return [arr];
+    }
+    else{
+        let sub = subArr(arr.slice(1));
+        return sub.concat(sub.map(ele=> ele.concat(arr[0])), [[arr[0]]])
+    }
+}
+console.log(subArr(arr));
+```
