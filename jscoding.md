@@ -1079,3 +1079,27 @@ hello()
 ```
 op: 	10
 	error y is not defined.
+
+
+
+## Q.11 Find all possible combinations of array .
+```jsx
+function findAllCombinations(arr) {
+    const result = [];
+    function backtrack(tempArr, start) {
+        console.log(tempArr)
+        if(tempArr.length>0) result.push(tempArr.slice()); // Push a copy of the current combination to the result
+        for (let i = start; i < arr.length; i++) {
+            tempArr.push(arr[i]); // Include current element
+            backtrack(tempArr, i + 1); // Recursively generate combinations starting from the next index
+            tempArr.pop(); // Backtrack: remove the last element to try other combinations
+        }
+    }
+    backtrack([], 0); // Start backtrack from an empty temporary array and index 0
+    return result;
+}
+
+let arr = [1, 2, 3];
+let combinations = findAllCombinations(arr);
+console.log(combinations);
+```
