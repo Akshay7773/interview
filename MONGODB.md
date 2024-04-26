@@ -60,9 +60,10 @@ This table provides a simplified overview of some key differences between MongoD
 
 
 ## Q.5 What are the different data models in mongodb ?
-Data in MongoDB has a flexible schema.documents in the same collection. They do not need to have the same set of fields or structure Common fields in a collection’s documents may hold different types of data.
-Data Model Design
-MongoDB provides two types of data models: — Embedded data model and Normalized data model. Based on the requirement, you can use either of the models while preparing your document.
+### Data Modeling :
+  Data modeling is the process of determining how data is stored and what connections exists between various entities in our data. 
+  Data models helps to create a simplified and optimized logical database that eleminates redundancy, reduces storage requirements and enables efficient retrieval.
+  
 
 ### 1. Embedded Data Model
 In this model, you can have (embed) all the related data in a single document, it is also known as de-normalized data model.
