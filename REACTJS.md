@@ -3347,6 +3347,117 @@ Here, We create the **usePrevious** hook with the value parameter which is sta
 
 <br> 
 
+## Q. What is error  boundaries in reactjs ? 
+
+Error boundaries in React are components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of crashing the entire React application. They are a feature introduced in React 16 to help developers handle errors gracefully.
+
+Here's how error boundaries work:
+
+1. **Definition**: Error boundaries are regular React components that define special lifecycle methods to catch errors during rendering, in lifecycle methods, and in constructors of the components below them in the tree.
+
+2. **Lifecycle Methods**: Error boundaries define two lifecycle methods:
+   - `static getDerivedStateFromError(error)`: This method is used to update the component state when an error is caught. It returns an object to update the state, and it is called during the rendering phase.
+   - `componentDidCatch(error, info)`: This method is invoked after an error has been thrown by a descendant component. It receives two arguments: `error`, which is the error that was thrown, and `info`, which is an object with a `componentStack` key containing information about which component in the tree threw the error.
+
+3. **Usage**: To use an error boundary in your application, you simply wrap the component tree that you want to protect with the error boundary component. Any errors thrown within the error boundary's subtree will be caught by the error boundary.
+
+4. **Fallback UI**: Inside the `componentDidCatch` method, you can implement logic to display a fallback UI, such as an error message or a custom error component, instead of rendering the component tree that caused the error.
+
+5. **Error Propagation**: Error boundaries catch errors in their child component tree, but not in the component itself or in other error boundary components higher in the tree. If an error occurs within an error boundary itself, it will propagate up to the next error boundary in the tree.
+
+Error boundaries are useful for building more robust React applications by preventing errors from crashing the entire UI and providing a better user experience by displaying informative error messages or fallback UIs instead.
+
+we can not use it in : 
+	1. Evet handlers
+ 	2. Asynchronouse code 
+  	3. server side rendering
+   	4. Error thrown in error boundary itself
+
+
+
+
+
+
+<br> 
+
+
+## Q. What is lazy loading in reactjs ? 
+
+Lazy loading in React refers to the technique of delaying the loading of certain components or assets until they are needed. This is particularly useful for improving the performance of your application by reducing the initial bundle size and speeding up the initial load time.
+
+In React, lazy loading is typically achieved using dynamic imports and React's `React.lazy()` function, along with `Suspense` for handling loading states. Here's how it works:
+
+1. **Dynamic Imports**: Instead of importing a component directly at the top of your file, you import it dynamically using the `import()` function, which returns a Promise.
+
+2. **React.lazy()**: You wrap the dynamic import inside the `React.lazy()` function, which allows React to lazily load the component when it's needed.
+
+3. **Suspense**: You use the `Suspense` component from React to handle the loading state while the component is being fetched. This allows you to display a loading spinner or any other UI until the component is ready.
+
+Here's an example of how you can implement lazy loading in React:
+
+```jsx
+import React, { Suspense } from 'react';
+
+const LazyComponent = React.lazy(() => import('./LazyComponent'));
+
+function App() {
+  return (
+    <div>
+      <h1>My App</h1>
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyComponent />
+      </Suspense>
+    </div>
+  );
+}
+
+export default App;
+```
+
+In this example:
+
+- `LazyComponent` is the component that you want to lazy load.
+- We use `React.lazy()` to dynamically import `LazyComponent` only when it's needed.
+- The `Suspense` component is used to handle the loading state while `LazyComponent` is being fetched. The `fallback` prop specifies the UI to display during loading.
+
+Lazy loading is especially beneficial for large applications with many components, as it allows you to split your code into smaller, more manageable chunks and load them only when necessary, improving the overall performance of your application.
+
+
+
+
+
+
+<br> 
+
+
+
+## Difference between grid and flex ? 
+
+Both CSS Grid and Flexbox are layout models in CSS, but they have different use cases and functionalities:
+
+1. **Flexbox**:
+   - Primarily designed for one-dimensional layouts (either rows or columns).
+   - It works along a single axis at a time.
+   - Ideal for laying out items within a container in a single direction, allowing them to flex and fill available space.
+   - Great for aligning items horizontally or vertically.
+   - Useful for creating responsive layouts, navigation menus, and aligning items within a container.
+   - Best suited for smaller-scale layouts and components.
+
+2. **CSS Grid**:
+   - Designed for two-dimensional layouts with both rows and columns.
+   - It allows you to define both row and column layouts simultaneously.
+   - Offers more control over the placement and alignment of items in both axes.
+   - Enables you to create complex grid-based layouts with ease, such as grids with fixed or flexible widths and heights.
+   - Supports alignment, spacing, and sizing of grid tracks (rows and columns) independently.
+   - Suitable for larger-scale layouts like entire page layouts, grids with intricate designs, and complex user interfaces.
+
+In summary, Flexbox is best for one-dimensional layouts where you're primarily concerned with arranging items along a single axis, while CSS Grid is ideal for two-dimensional layouts where you need precise control over both rows and columns, making it suitable for creating complex grid-based designs. Depending on your layout requirements, you may choose to use one or both of these layout models in combination to achieve your desired design.
+
+
+
+
+<br>
+
 
 ## Q.51  How can I force a component to re-render with hooks in React?
 The **useState()** or **useReducer()** hooks can be used to force a React component to rerender.
