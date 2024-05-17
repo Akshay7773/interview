@@ -33,6 +33,28 @@ Overall, MongoDB's storage architecture is designed to provide flexibility, scal
 
 <br> 
 
+## Q. What is BSON ? 
+BSON stands for Binary JSON (JavaScript Object Notation). It is a binary-encoded serialization format used to store and transfer data in a structured format similar to JSON but optimized for efficient storage and traversal.
+
+Here are some key features and characteristics of BSON:
+
+1. **Binary Encoding**: Unlike JSON, which is a text-based format, BSON represents data in a binary format, making it more efficient for storage and transmission, especially over networks.
+
+2. **Data Types**: BSON supports a wider range of data types compared to JSON, including string, integer, floating-point, boolean, date, array, object, binary data, regular expression, and more. These data types align closely with those supported by programming languages like JavaScript, Python, and Ruby.
+
+3. **Compactness**: BSON is designed to be more compact than JSON, which can result in smaller data payloads, especially for large datasets. This can be beneficial for applications where storage space or bandwidth is limited.
+
+4. **Efficient Parsing**: Because BSON is binary-encoded, it can be parsed more efficiently by software compared to JSON, which requires additional processing to convert between its textual representation and internal data structures.
+
+5. **Used in MongoDB**: BSON is primarily associated with MongoDB, a popular NoSQL database. MongoDB stores data in BSON format internally, which allows it to directly manipulate and query data without the need for conversion between different formats.
+
+6. **Extensions**: BSON has been extended to support additional features not present in JSON, such as a richer set of data types and support for more complex data structures.
+
+Overall, BSON provides a binary representation of JSON-like data that is more efficient for storage and transmission, making it well-suited for use cases where performance, compactness, and compatibility with programming languages are important considerations.
+
+
+<br>
+
 ## Q.3 Mongodb is Schema-less database. If yes, How do you create schema in mongodb ? 
 As a NoSQL database, MongoDB is considered schemaless because it does not require a rigid, pre-defined schema like a relational database. The database management system (DBMS) enforces a partial schema as data is written, explicitly listing collections and indexes.
 
