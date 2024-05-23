@@ -2839,3 +2839,34 @@ In JavaScript, when you want to copy an object, you can perform either a shallow
 
 In summary, a shallow copy copies only the top-level properties of an object, while a deep copy copies all properties, including nested objects, creating a completely independent copy of the original object. The choice between shallow copy and deep copy depends on whether you need a completely independent copy of the original object or if shallow copying is sufficient.
 
+
+
+<br> 
+
+
+## What is the difference between localstorage and session storage ? 
+Certainly! Here's a table highlighting the key differences between LocalStorage and SessionStorage:
+
+| Feature                | LocalStorage                              | SessionStorage                           |
+|------------------------|-------------------------------------------|------------------------------------------|
+| **Persistence**        | Until explicitly deleted                  | Until the tab/window is closed           |
+| **Scope**              | Shared across all tabs/windows of the same origin | Specific to each tab/window              |
+| **Storage Limit**      | Typically 5-10 MB per origin              | Typically about 5 MB per origin          |
+| **Use Case Examples**  | User preferences, settings, cached data   | Temporary form data, session-specific data |
+
+
+
+<br> 
+
+
+## Difference between cookies, localstorage and session Storage ? 
+Certainly! Here’s a table comparing Cookies, LocalStorage, and SessionStorage:
+
+| Feature                | Cookies                                     | LocalStorage                           | SessionStorage                        |
+|------------------------|---------------------------------------------|----------------------------------------|---------------------------------------|
+| **Storage Location**   | Browser, sent with every HTTP request       | Browser (client-side only)             | Browser (client-side only)            |
+| **Persistence**        | Can be set to expire at a specific time     | Until explicitly deleted               | Until the tab/window is closed        |
+| **Scope**              | Domain and path                             | Origin (domain and protocol)           | Origin (domain and protocol)          |
+| **Size Limit**         | ~4 KB per cookie                            | 5-10 MB per origin                     | ~5 MB per origin                      |
+| **Use Cases**          | Session management, personalization, tracking | Persistent data like settings and preferences | Temporary data like session-specific information |
+| **Security Options**   | Secure, HttpOnly flags                      | No inherent security features          | No inherent security features         |
