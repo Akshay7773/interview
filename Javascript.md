@@ -2870,3 +2870,29 @@ Certainly! Here’s a table comparing Cookies, LocalStorage, and SessionStorage:
 | **Size Limit**         | ~4 KB per cookie                            | 5-10 MB per origin                     | ~5 MB per origin                      |
 | **Use Cases**          | Session management, personalization, tracking | Persistent data like settings and preferences | Temporary data like session-specific information |
 | **Security Options**   | Secure, HttpOnly flags                      | No inherent security features          | No inherent security features         |
+
+
+
+
+
+<br> 
+
+
+## IMPORTANT REGARDING PROMISES : 
+```jsx
+console.log("hello")
+new Promise((resolved, reject)=>{
+    console.log("hii")
+    resolved("10")
+}).then((res)=>console.log("promise resolved"))
+
+console.log("after promise")
+
+output :
+
+hello
+hii
+after promise
+promise resolved
+
+```
