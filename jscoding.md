@@ -1124,7 +1124,7 @@ console.log(subArr(arr));
 
 ## array code 
 ```jsx
-let arr=["eat","bat", "ate", "nat", "eta", "tan","abt"]
+let arr=["eat","bat", "ate", "nat", "eta", "tan", "abt"]
 let arr2=[];
 for(let i=0;i<arr.length-1;i++){
     let element=arr[i];
@@ -1148,11 +1148,13 @@ for(let i=0;i<arr.length-1;i++){
         arr2.push(arr3)   
     }
 }
-
+let ele=arr.filter(ar=>ar!=-1)
+if(ele.length) arr2.push(ele)
 console.log(arr2)
 
 
 output :
 [ [ 'eat', 'ate', 'eta' ], [ 'bat', 'abt' ], [ 'nat', 'tan' ] ]
+
 
 ```
