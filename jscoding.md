@@ -1118,3 +1118,41 @@ function subArr(arr){
 }
 console.log(subArr(arr));
 ```
+
+
+<br> 
+
+## array code 
+```jsx
+let arr=["eat","bat", "ate", "nat", "eta", "tan","abt"]
+let arr2=[];
+for(let i=0;i<arr.length-1;i++){
+    let element=arr[i];
+    let arr3=[]
+    for(let j=i+1;j<arr.length;j++){
+        let counter=0;
+        for(let k=0;k<element.length;k++){
+            if(arr[j]!=-1){
+            if(arr[j].includes(element[k])){
+                counter++;
+            }}
+        }
+        if(counter===3){
+            arr3.push(arr[j])
+            arr[j]=-1
+        }
+    }
+    if(arr3.length){
+        arr3.unshift(arr[i])
+        arr[i]=-1
+        arr2.push(arr3)   
+    }
+}
+
+console.log(arr2)
+
+
+output :
+[ [ 'eat', 'ate', 'eta' ], [ 'bat', 'abt' ], [ 'nat', 'tan' ] ]
+
+```
