@@ -1178,3 +1178,65 @@ Output:
 
 
 ```
+
+
+
+## IMPORTANT ABOUT PROMISES
+```jsx
+console.log("hello")
+new Promise((resolved, reject)=>{
+    console.log("hii")
+    resolved("10")
+}).then((res)=>console.log("promise resolved"))
+
+console.log("after promise")
+
+output :
+
+hello
+hii
+after promise
+promise resolved
+
+```
+
+
+## GET KEYS INSIDE OBJECT USING RECURSION 
+
+```jsx
+function getKeys(obj) {
+    let keys = [];
+
+    function recurse(currentObj) {
+        for (let key in currentObj) {
+            if (currentObj.hasOwnProperty(key)) {
+                keys.push(key);
+                if (typeof currentObj[key] === 'object' && currentObj[key] !== null) {
+                    recurse(currentObj[key]);
+                }
+            }
+        }
+    }
+
+    recurse(obj);
+    return keys;
+}
+
+// Example usage
+let exampleObj = {
+    name: "akshay",
+    details: {
+        age: 30,
+        address: {
+            city: "Mumbai",
+            pincode: 400001
+        }
+    },
+    profession: "developer"
+};
+
+let keys = getKeys(exampleObj);
+console.log(keys);  // Output: ["name", "details", "age", "address", "city", "pincode", "profession"]
+
+
+```
