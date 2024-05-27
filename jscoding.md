@@ -1158,3 +1158,23 @@ output :
 
 
 ```
+
+
+
+## REVERSE STRING USING RECURSION 
+```jsx
+function revString(str){
+    if(str==="") return ""
+    return revString(str.slice(1))+str[0]
+}
+
+let str="akshay laxman gawade"
+let revStr=revString(str)
+console.log(revStr)
+
+
+Output:
+	edawag namxal yahska
+
+
+```
