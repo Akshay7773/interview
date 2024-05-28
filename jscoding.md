@@ -1159,8 +1159,26 @@ output :
 
 ```
 
+## second way
+
+```jsx
+let arr=["eat","bat", "ate", "nat", "eta", "tan", "abt"]
+let obj={}
+for(let i=0;i<arr.length;i++){
+    let element=arr[i].split("").sort().join("")
+    if(element in obj){
+        obj[element].push(arr[i])
+    }else{
+        let ele=element;
+        obj[element]=[arr[i]]
+    }
+}
+console.log(Object.values(obj))
 
 
+output :
+[ [ 'eat', 'ate', 'eta' ], [ 'bat', 'abt' ], [ 'nat', 'tan' ] ]
+```
 ## REVERSE STRING USING RECURSION 
 ```jsx
 function revString(str){
