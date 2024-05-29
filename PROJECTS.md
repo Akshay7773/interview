@@ -2,7 +2,8 @@
 
 ## Interviewer: Can you tell me about the Insurance Rating Engine (ERP) project you worked on?
 
-You: Absolutely! The Insurance Rating Engine is a comprehensive system that revolutionizes the way insurance companies manage their operations. It's essentially an end-to-end solution that 
+You: In this system we have automated the entire process of insurance company, right from the leads
+to Bind Policy. It's essentially an end-to-end solution that 
 automates everything from lead generation to policy issuance.
 
 
