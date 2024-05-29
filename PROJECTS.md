@@ -1,4 +1,4 @@
-# 1. NSURANCE RATING ENGINE : 
+# 1. INSURANCE RATING ENGINE : 
 
 ## Interviewer: Can you tell me about the Insurance Rating Engine (ERP) project you worked on?
 
