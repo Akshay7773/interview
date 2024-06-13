@@ -1611,6 +1611,32 @@ When implementing JWT-based authentication, it's up to the application developer
 Including an expiration time also helps with managing server resources by ensuring that expired tokens are not unnecessarily processed or stored on the server side.
 
 
+e.g. 
+```jsx
+// generate token
+  const token = jwt.sign({ id: user.username }, JWT_SECRET, { expiresIn: '1h' });
+
+
+  //authentication token
+
+  const authenticateToken = (req, res, next) => {
+  const token = req.header('Authorization');
+  if (!token) return res.status(401).json({ message: 'Access denied' });
+
+  try {
+    const verified = jwt.verify(token, JWT_SECRET);
+    req.user = verified;
+    next();
+  } catch (error) {
+    res.status(400).json({ message: 'Invalid token' });
+  }
+};
+
+
+
+
+```
+
 <br> 
 
 ## Q.38 middleware is related with request only or I can use it with response also ?
