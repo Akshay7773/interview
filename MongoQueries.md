@@ -32,6 +32,54 @@ NOTE : MOST OF THE ACCUMULATORS ARE USED WITH GROUP
 ```
 
 
+
+
+
+
+
+====================IMPORTAANT ============================
+I have two collection collection class and collection student
+
+in class collection I have fields 
+sr no    class    class_teacher 
+
+and in student I have fields 
+sr no     name contact  class
+
+I want output in mongodb as 
+sr no  name contact class class_teacher 
+
+how can I write query for it  
+
+
+```jsx
+db.order_logs.aggregate([
+  {
+    $lookup:{
+      from:"userds",
+      localField:"borough",
+      foreignField:"borough",
+      as:"first"
+    }
+  },
+  {
+    $unwind:"$first"
+  },
+  {
+    $project:{
+      product:1,
+      qty:1,
+      borough:1,
+      cuisine:"$first.cuisine",
+      name:"$first.name"
+    }
+  }
+  ])
+
+
+
+```
+
 ===================> SUM , UNWIND AND GROUP <====================
 
   EXAMPLES =>
