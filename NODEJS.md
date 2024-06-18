@@ -311,6 +311,109 @@ This is a basic implementation of the MVC pattern in a Node.js application. The 
 
 =================================================================================================================================================
 
+## Q. What is ODM?  
+In Node.js using MongoDB, ORM (Object-Relational Mapping) is not the correct term because MongoDB is a NoSQL database, and ORM typically refers to tools and libraries used with relational databases like MySQL, PostgreSQL, etc. However, in the context of MongoDB and Node.js, a more appropriate term would be ODM (Object-Document Mapper).
+
+ODM (Object-Document Mapper) is similar to ORM but specifically tailored for working with document databases like MongoDB, where data is stored in a schema-less JSON-like format (documents).
+
+**Mongoose** is the most popular ODM library for MongoDB in Node.js. It provides a straightforward way to model your application data, define schemas, and interact with MongoDB using a simple and consistent API.
+
+Here’s a brief overview of how you would use Mongoose (ODM) in Node.js with MongoDB:
+
+1. **Installation**: First, you need to install Mongoose in your Node.js project using npm or yarn.
+
+   ```bash
+   npm install mongoose
+   ```
+
+2. **Connecting to MongoDB**: Use Mongoose to connect to your MongoDB database.
+
+   ```javascript
+   const mongoose = require('mongoose');
+
+   mongoose.connect('mongodb://localhost/my_database', {
+     useNewUrlParser: true,
+     useUnifiedTopology: true,
+     useCreateIndex: true,
+   });
+
+   // Connection instance
+   const db = mongoose.connection;
+
+   db.on('error', console.error.bind(console, 'connection error:'));
+   db.once('open', function() {
+     console.log('Connected to MongoDB');
+   });
+   ```
+
+3. **Defining Schemas**: Define a schema that represents the structure of documents in a collection.
+
+   ```javascript
+   const { Schema } = mongoose;
+
+   const userSchema = new Schema({
+     name: String,
+     email: { type: String, unique: true },
+     age: Number,
+   });
+
+   const User = mongoose.model('User', userSchema);
+   ```
+
+4. **Creating and Querying Documents**: Use the defined model (`User`) to perform CRUD operations.
+
+   ```javascript
+   // Creating a new document
+   const newUser = new User({
+     name: 'John Doe',
+     email: 'john@example.com',
+     age: 28,
+   });
+
+   newUser.save()
+     .then(() => {
+       console.log('User saved');
+     })
+     .catch((err) => {
+       console.error('Error saving user:', err);
+     });
+
+   // Querying documents
+   User.find({ age: { $gte: 18 } })
+     .then((users) => {
+       console.log('Users found:', users);
+     })
+     .catch((err) => {
+       console.error('Error finding users:', err);
+     });
+   ```
+
+5. **Updating and Deleting Documents**: Use Mongoose methods to update and delete documents as needed.
+
+   ```javascript
+   // Updating a document
+   User.findOneAndUpdate({ name: 'John Doe' }, { age: 30 })
+     .then((user) => {
+       console.log('User updated:', user);
+     })
+     .catch((err) => {
+       console.error('Error updating user:', err);
+     });
+
+   // Deleting a document
+   User.findOneAndDelete({ name: 'John Doe' })
+     .then((user) => {
+       console.log('User deleted:', user);
+     })
+     .catch((err) => {
+       console.error('Error deleting user:', err);
+     });
+   ```
+
+In summary, while the term ORM traditionally refers to tools for relational databases, in the context of Node.js and MongoDB, Mongoose provides similar functionality tailored for document databases, which is referred to as an ODM (Object-Document Mapper). It simplifies working with MongoDB by providing a schema-based approach and methods for CRUD operations.
+
+
+=================================================================================================================================================
 ## multer example in node js 
 ```jsx
 const express = require('express');
