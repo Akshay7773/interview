@@ -414,6 +414,22 @@ In summary, while the term ORM traditionally refers to tools for relational data
 
 
 =================================================================================================================================================
+
+## Q. What is ORM ? 
+ORM stands for Object-Relational Mapping. It is a technique that allows you to interact with your database using an object-oriented paradigm instead of writing raw SQL queries. In the context of Node.js, an ORM provides a way to define models (representations of your database tables) and perform CRUD (Create, Read, Update, Delete) operations on those models using JavaScript code.
+
+Benefits of Using an ORM
+Abstraction: Abstracts database interactions, allowing you to work with higher-level objects.
+Productivity: Increases productivity by reducing the amount of boilerplate code.
+Portability: Makes it easier to switch databases since the ORM handles the SQL generation.
+Validation: Provides built-in validation for model attributes.
+Relationships: Simplifies the management of complex relationships between tables.
+Popular ORMs in Node.js
+Sequelize: One of the most popular ORMs for Node.js, supporting various SQL databases like MySQL, PostgreSQL, SQLite, and MSSQL.
+TypeORM: A versatile ORM supporting both SQL and NoSQL databases, offering TypeScript support.
+Mongoose: An ODM (Object-Document Mapper) specifically designed for MongoDB.
+
+=================================================================================================================================================
 ## multer example in node js 
 ```jsx
 const express = require('express');
