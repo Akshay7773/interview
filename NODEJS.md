@@ -158,6 +158,159 @@ This division ensures a clean, modular architecture, making the application easi
 
 =================================================================================================================================================
 
+## Q. What is MVC in node js ? 
+MVC, which stands for Model-View-Controller, is a design pattern used to separate concerns within an application, making it easier to manage and scale. In the context of Node.js, MVC helps organize your application into three main components:
+
+1. **Model**: This represents the data and the business logic of the application. It directly manages the data, logic, and rules of the application. Models typically interact with the database and define the structure of the data.
+
+2. **View**: This is the user interface of the application. Views are responsible for displaying the data to the user and capturing user input. In a web application, views are often HTML files with embedded code to display dynamic data.
+
+3. **Controller**: Controllers act as intermediaries between Models and Views. They process user input, interact with models to fetch or update data, and then render the appropriate view to the user.
+
+Here's an overview of how to implement MVC in a Node.js application:
+
+### 1. Setting Up the Project
+First, set up a basic Node.js project. Initialize a new project and install necessary packages:
+```bash
+mkdir mvc-example
+cd mvc-example
+npm init -y
+npm install express ejs mongoose body-parser
+```
+
+### 2. Directory Structure
+Create a directory structure that follows the MVC pattern:
+```
+mvc-example
+│
+├── models
+│   └── user.js
+├── views
+│   └── index.ejs
+├── controllers
+│   └── userController.js
+├── routes
+│   └── userRoutes.js
+├── app.js
+└── package.json
+```
+
+### 3. Implementing the Model
+In `models/user.js`, define the user model using Mongoose (a MongoDB ODM):
+```javascript
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
+});
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
+```
+
+### 4. Implementing the Controller
+In `controllers/userController.js`, create functions to handle business logic:
+```javascript
+const User = require('../models/user');
+
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.render('index', { users });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.createUser = async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    res.redirect('/');
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+```
+
+### 5. Implementing the View
+In `views/index.ejs`, create the view template:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Users</title>
+</head>
+<body>
+  <h1>Users</h1>
+  <ul>
+    <% users.forEach(user => { %>
+      <li><%= user.name %> - <%= user.email %></li>
+    <% }); %>
+  </ul>
+  <form action="/users" method="post">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Add User</button>
+  </form>
+</body>
+</html>
+```
+
+### 6. Setting Up Routes
+In `routes/userRoutes.js`, define the routes:
+```javascript
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/userController');
+
+router.get('/', userController.getUsers);
+router.post('/users', userController.createUser);
+
+module.exports = router;
+```
+
+### 7. Setting Up the Application
+In `app.js`, configure the Express application:
+```javascript
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const userRoutes = require('./routes/userRoutes');
+
+const app = express();
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost/mvc-example', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// Set up middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
+
+// Use routes
+app.use('/', userRoutes);
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+```
+
+### Summary
+This is a basic implementation of the MVC pattern in a Node.js application. The model handles data and database interactions, the view renders the user interface, and the controller manages the application logic and user input. This separation of concerns makes your application easier to manage, test, and scale.
+
+
+
+=================================================================================================================================================
+
 ## multer example in node js 
 ```jsx
 const express = require('express');
