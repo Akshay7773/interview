@@ -157,6 +157,8 @@ This division ensures a clean, modular architecture, making the application easi
 =================================================================================================================================================
 
 ## Q. Upload image on s3 bucket ? 
+
+```jsx
 const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
@@ -198,7 +200,7 @@ const bucketName = 'your-s3-bucket-name';
 const key = 'yourfile.txt'; // Name to save the file in S3
 
 uploadFile(filePath, bucketName, key);
-
+```
 =================================================================================================================================================
 
 ## Q. What is MVC in node js ? 
