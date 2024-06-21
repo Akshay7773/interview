@@ -154,7 +154,50 @@ In summary, the event loop is the heart of Node.js, enabling it to handle asynch
 
 This division ensures a clean, modular architecture, making the application easier to maintain, test, and scale.
 
+=================================================================================================================================================
 
+## Q. Upload image on s3 bucket ? 
+const AWS = require('aws-sdk');
+const fs = require('fs');
+const path = require('path');
+
+// Configure the AWS SDK with your credentials and region
+AWS.config.update({
+  accessKeyId: 'YOUR_ACCESS_KEY_ID',
+  secretAccessKey: 'YOUR_SECRET_ACCESS_KEY',
+  region: 'YOUR_AWS_REGION' // e.g., 'us-west-2'
+});
+
+// Create an S3 client
+const s3 = new AWS.S3();
+
+// Function to upload a file to S3
+const uploadFile = (filePath, bucketName, key) => {
+  // Read content from the file
+  const fileContent = fs.readFileSync(filePath);
+
+  // Set the parameters
+  const params = {
+    Bucket: bucketName,
+    Key: key, // File name you want to save as in S3
+    Body: fileContent,
+  };
+
+  // Uploading files to the bucket
+  s3.upload(params, (err, data) => {
+    if (err) {
+      throw err;
+    }
+    console.log(`File uploaded successfully. ${data.Location}`);
+  });
+};
+
+// Example usage
+const filePath = path.join(__dirname, 'yourfile.txt'); // Replace with the path to your file
+const bucketName = 'your-s3-bucket-name';
+const key = 'yourfile.txt'; // Name to save the file in S3
+
+uploadFile(filePath, bucketName, key);
 
 =================================================================================================================================================
 
