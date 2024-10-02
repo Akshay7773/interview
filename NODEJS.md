@@ -1,4 +1,13 @@
-
+## configure s3
+````jsx
+const s3Client = new S3Client({
+    region: "ap-south-1",
+    credentials: {
+	accessKeyId: 'YOUR_ACCESS_KEY_ID',
+  	secretAccessKey: 'YOUR_SECRET_ACCESS_KEY',
+    }
+})
+````
 ## Q. 1 Node js is single threaded or multi-threaded? How can we make node application multi threaded? 
 Node.js is primarily single-threaded. It uses an event-driven architecture, based on the JavaScript event loop, which allows it to handle concurrent operations without multiple threads. This single-threaded model can handle asynchronous I/O operations efficiently.
 
