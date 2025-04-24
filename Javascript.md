@@ -1,4 +1,4 @@
-
+# Javascript
 ## Q. What is javascript ? 
 JavaScript is a high-level programming language commonly used for creating dynamic and interactive content on websites. Initially developed by Brendan Eich at Netscape in 1995, it has since become one of the most widely used programming languages on the web.
 
