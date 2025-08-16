@@ -1,6 +1,99 @@
 
 ---
 
+
+
+# PROMISES Polyfils : 
+
+```js
+// Minimal Promise polyfill with .then and .catch support
+(function (global) {
+  function MyPromise(executor) {
+    var self = this;
+    self.state = "pending";
+    self.value = undefined;
+    self.reason = undefined;
+    self.onFulfilledCallbacks = [];
+    self.onRejectedCallbacks = [];
+    function resolve(value) {
+      if (self.state === "pending") {
+        self.state = "fulfilled";
+        self.value = value;
+        self.onFulfilledCallbacks.forEach(function (fn) { fn(value); });
+      }
+    }
+    function reject(reason) {
+      if (self.state === "pending") {
+        self.state = "rejected";
+        self.reason = reason;
+        self.onRejectedCallbacks.forEach(function (fn) { fn(reason); });
+      }
+    }
+    try {
+      executor(resolve, reject);
+    } catch (err) {
+      reject(err);
+    }
+  }
+
+  MyPromise.prototype.then = function (onFulfilled, onRejected) {
+    var self = this;
+    return new MyPromise(function (resolve, reject) {
+      function fulfilledCallback(value) {
+        try {
+          if (typeof onFulfilled === "function") {
+            resolve(onFulfilled(value));
+          } else {
+            resolve(value);
+          }
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejectedCallback(reason) {
+        try {
+          if (typeof onRejected === "function") {
+            resolve(onRejected(reason));
+          } else {
+            reject(reason);
+          }
+        } catch (e) {
+          reject(e);
+        }
+      }
+      if (self.state === "fulfilled") {
+        setTimeout(function () { fulfilledCallback(self.value); }, 0);
+      } else if (self.state === "rejected") {
+        setTimeout(function () { rejectedCallback(self.reason); }, 0);
+      } else {
+        self.onFulfilledCallbacks.push(fulfilledCallback);
+        self.onRejectedCallbacks.push(rejectedCallback);
+      }
+    });
+  };
+
+  MyPromise.prototype.catch = function (onRejected) {
+    return this.then(null, onRejected);
+  };
+
+  // Expose MyPromise to the global scope
+  global.MyPromise = MyPromise;
+})(typeof window !== "undefined" ? window : global);
+
+// Example usage:
+var promise = new MyPromise(function(resolve, reject) {
+  setTimeout(function() {
+    resolve("Hello, world!");
+  }, 1000);
+});
+promise.then(function(value) {
+  console.log("Resolved:", value);
+}).catch(function(err) {
+  console.error("Rejected:", err);
+});
+```
+
+
 ## 🟢 Array Methods
 
 ### 1. `Array.prototype.forEach`
