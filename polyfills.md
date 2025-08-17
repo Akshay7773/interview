@@ -94,6 +94,114 @@ promise.then(function(value) {
 ```
 
 
+# Polyfills of call, apply, bind 
+Here are simple **polyfills** for `.call()`, `.apply()`, and `.bind()` methods in JavaScript.
+
+These are often asked in interviews to test understanding of JavaScript's `this` and function context handling.
+
+---
+
+## 🔹 `Function.prototype.call` Polyfill
+
+### ✅ Usage: `func.call(thisArg, arg1, arg2, ...)`
+
+```js
+Function.prototype.myCall = function(context, ...args) {
+  context = context || globalThis; // default to global object (window in browsers)
+  
+  const fnSymbol = Symbol(); // avoid property name collision
+  context[fnSymbol] = this;  // assign function to context
+
+  const result = context[fnSymbol](...args); // invoke function
+
+  delete context[fnSymbol]; // clean up
+  return result;
+};
+```
+
+---
+
+## 🔹 `Function.prototype.apply` Polyfill
+
+### ✅ Usage: `func.apply(thisArg, [argsArray])`
+
+```js
+Function.prototype.myApply = function(context, args) {
+  context = context || globalThis;
+  
+  const fnSymbol = Symbol();
+  context[fnSymbol] = this;
+
+  const result = Array.isArray(args) ? context[fnSymbol](...args) : context[fnSymbol]();
+
+  delete context[fnSymbol];
+  return result;
+};
+```
+
+---
+
+## 🔹 `Function.prototype.bind` Polyfill
+
+### ✅ Usage: `const boundFunc = func.bind(thisArg, arg1, arg2, ...)`
+
+```js
+Function.prototype.myBind = function(context, ...args) {
+  const fn = this;
+
+  return function(...newArgs) {
+    return fn.apply(context, [...args, ...newArgs]);
+  };
+};
+```
+
+### 🔁 Optional: Bind with `new` support (more accurate)
+
+For a more complete polyfill (like native `bind`), it should handle being used as a constructor:
+
+```js
+Function.prototype.myBind = function(context, ...args) {
+  const fn = this;
+
+  function boundFunction(...newArgs) {
+    // If used with `new`, ignore context and use new instance
+    if (this instanceof boundFunction) {
+      return new fn(...args, ...newArgs);
+    }
+    return fn.apply(context, [...args, ...newArgs]);
+  }
+
+  // Optional: preserve prototype chain
+  boundFunction.prototype = Object.create(fn.prototype);
+
+  return boundFunction;
+};
+```
+
+---
+
+## ✅ Example Usage
+
+```js
+function greet(greeting, punctuation) {
+  return `${greeting}, ${this.name}${punctuation}`;
+}
+
+const person = { name: "Alice" };
+
+console.log(greet.myCall(person, "Hello", "!")); // "Hello, Alice!"
+console.log(greet.myApply(person, ["Hi", "."])); // "Hi, Alice."
+const greetAlice = greet.myBind(person, "Hey");
+console.log(greetAlice("?")); // "Hey, Alice?"
+```
+
+---
+
+Let me know if you want these polyfills explained line-by-line.
+
+
+
+
 ## 🟢 Array Methods
 
 ### 1. `Array.prototype.forEach`
