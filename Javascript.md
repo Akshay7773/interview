@@ -955,7 +955,7 @@ console.log(event)
 
 }
 
-# Event delegation:
+# Event propagation:
  it is a technique where you attach a single event handler to a parent element to handle events on its child element.
 
 1. Event bubbling: 
