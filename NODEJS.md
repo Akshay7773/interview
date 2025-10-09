@@ -2110,7 +2110,64 @@ The `package.json` file serves as a central configuration file for Node.js proje
 
 
 <br> 
+## Q. What are dependency and devDependency  ? 
+---
 
+## ✅ First, the two types of dependencies in `package.json`:
+
+```json
+{
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
+```
+
+### 💡 What's the difference?
+
+| Type              | Used For                                        | Installed In Production?   |
+| ----------------- | ----------------------------------------------- | -------------------------- |
+| `dependencies`    | Code your app **needs to run**                  | ✅ Yes                      |
+| `devDependencies` | Tools your app uses **during development only** | ❌ No (unless you force it) |
+
+---
+
+### 🛠️ Think of it like this:
+
+* **`dependencies`** are for the **real app**.
+* **`devDependencies`** are for **you, the developer**.
+
+---
+
+### ✅ Examples of each
+
+#### `dependencies`:
+
+These are libraries your code imports and uses when it runs:
+
+* `express` → web server
+* `mongoose` → database connection
+* `axios` → makes HTTP calls
+* `jsonwebtoken` → token handling
+
+Your app **won’t work** without these in production.
+
+#### `devDependencies`:
+
+These are tools for writing, testing, or building the app:
+
+* `nodemon` → auto-restarts your app during dev
+* `eslint` → code quality checker
+
+They are **not needed when the app is running in production**.
+
+---
+
+
+<br>
 ## Q.42 roll of Queue and Event Queue in node js ? 
 In Node.js, the event loop is a key mechanism that enables non-blocking I/O operations, allowing Node.js to handle multiple requests concurrently. The event loop manages the execution of asynchronous operations and callbacks, ensuring that they are executed in the appropriate order.
 
