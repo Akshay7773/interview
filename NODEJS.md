@@ -57,8 +57,43 @@ This way, the CPU-intensive task (calculating the factorial) is offloaded to a s
 
 ======================================================================================================================================================
 <br>
+## Q. While selecting node version, what is LTS means ? 
+Great question — this comes up a lot when choosing which Node.js version to use.
+
+---
+
+## 🔍 **LTS** stands for:
+
+### → **Long-Term Support**
+
+---
+
+### 🟢 What does it mean in Node.js?
+
+When a Node.js version is marked as **LTS**, it means:
+
+* It’s a **stable version**, recommended for most users
+* It will receive:
+
+  * ✅ **Bug fixes**
+  * ✅ **Security updates**
+  * ✅ **Performance improvements**
+* For a **long period** — usually **30 months** (2.5 years)
+
+> In short: **LTS = safe and reliable for production apps**
+
+---
+
+### 🔢 Example:
+
+| Node.js Version | Status    | Good for...                   |
+| --------------- | --------- | ----------------------------- |
+| `18.x`          | ✅ LTS     | Most stable and supported     |
+| `20.x`          | ✅ LTS     | Current active LTS            |
+| `21.x`          | ❌ Not LTS | Latest features, but unstable |
 
 
+<br>
 ## Q.2 What is event loop in node js ? 
 it's the mechanism that allows Node.js to handle asynchronous operations efficiently without blocking the execution of other tasks. Here's a brief overview of how the event loop works in Node.js:
 
