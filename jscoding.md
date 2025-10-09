@@ -329,7 +329,73 @@ o/p:
 6 4
 2 8
 ```
+<br>
+## Q. Flatten array implemenation
 
+// flatten.js
+```jsx
+function flattenArray(input){
+    let result = [];
+    for(const val of input){
+        if(Array.isArray(val)){
+            result.push(...flattenArray(val));
+        } else {
+            result.push(val);
+        }
+    }
+    return result;
+}
+
+const input = [1, [2, [3, [4]], 5]];
+console.log(flattenArray(input));  // Output: [1, 2, 3, 4, 5]
+```
+<br>
+ ## Q Create a function deepClone(obj) that makes a deep copy of any object, including nested objects and arrays.
+ const obj = { a: 1, b: { c: 2 }, d: [3, 4, { e: 5 }], };
+
+ ```jsx
+function deepClone(obj) {
+  // Handle null or primitive types (string, number, boolean, undefined, symbol)
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
+  }
+
+  // Handle Date
+  if (obj instanceof Date) {
+    return new Date(obj);
+  }
+
+  // Handle Array
+  if (Array.isArray(obj)) {
+    return obj.map(item => deepClone(item));
+  }
+
+  // Handle Object
+  const clonedObj = {};
+  for (const key in obj) {
+    // Use hasOwnProperty to avoid inherited properties
+    if (obj.hasOwnProperty(key)) {
+      clonedObj[key] = deepClone(obj[key]);
+    }
+  }
+  return clonedObj;
+}
+
+// Example usage:
+const obj = {
+  a: 1,
+  b: { c: 2 },
+  d: [3, 4, { e: 5 }],
+};
+
+const cloned = deepClone(obj);
+console.log(cloned);
+console.log(cloned.b === obj.b); // false, different objects
+console.log(cloned.d === obj.d); // false, different arrays
+
+
+```
+<br?
 //-------------------------------------str split logic--------------------------------
 
 ```jsx
