@@ -53,6 +53,341 @@ In this example:
 - The main thread listens for messages from the worker thread using `worker.on('message', ...)`, and when it receives the result, it logs it to the console.
 
 This way, the CPU-intensive task (calculating the factorial) is offloaded to a separate thread, allowing the main thread to remain responsive and handle other tasks concurrently.
+<br>
+======================================================================================================================================================
+
+
+
+## Q. What are indexes? How do you create a compound unique index ? 
+
+### **1. What is an Index in MongoDB?**
+
+In MongoDB, an **index** is a special data structure that stores a small portion of the collection’s data in an easy-to-traverse form.
+
+* Speeds up queries.
+* Supports sorting.
+* Can enforce uniqueness.
+
+---
+
+### **2. Compound Unique Index in MongoDB**
+
+A **compound index** indexes **multiple fields**.
+A **compound unique index** ensures that the **combination of values in the indexed fields is unique** across the collection.
+
+---
+
+### **3. Creating a Compound Unique Index in MongoDB**
+
+#### **Using `createIndex()`**
+
+Suppose we have a collection called `users` and we want the combination of `first_name` and `last_name` to be unique:
+
+```javascript
+db.users.createIndex(
+  { first_name: 1, last_name: 1 },  // fields to index
+  { unique: true }                  // make it unique
+)
+```
+
+* `{ first_name: 1, last_name: 1 }` → 1 = ascending order (you can also use -1 for descending)
+* `{ unique: true }` → enforces uniqueness on the combination
+* Name of the index is automatically generated, but you can specify it:
+
+```javascript
+db.users.createIndex(
+  { first_name: 1, last_name: 1 },
+  { unique: true, name: "unique_fullname" }
+)
+```
+
+---
+
+### **4. Important Notes**
+
+* If duplicate combinations already exist in the collection, MongoDB will throw an error when creating the unique index.
+* The order of fields matters: `{ first_name: 1, last_name: 1 }` is **different** from `{ last_name: 1, first_name: 1 }` when querying.
+
+---
+======================================================================================================================================================
+
+<br> 
+
+## Q.What is aggregation pipeline ? Name a few stages.
+
+### **1. What is the Aggregation Pipeline?**
+
+The **aggregation pipeline** in MongoDB is a framework for **data processing and transformation**. It allows you to process documents in a collection through a sequence of stages, where each stage **transforms the data** and passes it to the next stage.
+
+Think of it like a **factory assembly line**: each stage does something to the documents (filter, group, sort, compute), and the final output is what you need.
+
+**Why use it?**
+
+* Perform complex queries like **grouping, filtering, sorting, reshaping**.
+* Perform calculations like **sum, average, min, max**.
+* Transform data into reports or analytics results.
+
+---
+
+### **2. How it works**
+
+Each stage in the pipeline is specified as a **document** (an object) inside an array.
+
+**Example structure:**
+
+```javascript
+db.collection.aggregate([
+  { <stage1> },
+  { <stage2> },
+  ...
+])
+```
+
+---
+
+### **3. Common Aggregation Pipeline Stages**
+
+Here are some widely used stages:
+
+| Stage      | Purpose                                                                |
+| ---------- | ---------------------------------------------------------------------- |
+| `$match`   | Filters documents (like `WHERE` in SQL)                                |
+| `$group`   | Groups documents by a key and computes aggregates (`sum`, `avg`, etc.) |
+| `$project` | Reshapes documents, can include/exclude fields, create computed fields |
+| `$sort`    | Sorts documents by one or more fields                                  |
+| `$limit`   | Limits the number of documents                                         |
+| `$skip`    | Skips a number of documents (useful for pagination)                    |
+| `$unwind`  | Deconstructs an array field into multiple documents                    |
+| `$lookup`  | Performs a left join with another collection                           |
+
+---
+
+### **4. Simple Example**
+
+Suppose we have a `sales` collection:
+
+```javascript
+db.sales.aggregate([
+  { $match: { region: "North" } },           // stage 1: filter
+  { $group: { _id: "$product", total: { $sum: "$amount" } } }, // stage 2: group and sum
+  { $sort: { total: -1 } }                   // stage 3: sort descending
+])
+```
+
+* This finds total sales per product in the North region and sorts them by highest total.
+
+---
+======================================================================================================================================================
+<br> 
+
+
+## Q. How do you handle errors globally in node js ? 
+In **Node.js**, handling errors globally is important to ensure your application doesn’t crash unexpectedly and errors are logged or responded to consistently. There are several strategies depending on whether you’re dealing with **synchronous code, asynchronous callbacks, promises, or Express apps**. Let’s go through them carefully.
+
+---
+
+## **1. Handling Uncaught Exceptions**
+
+Uncaught exceptions are errors that are **thrown but not caught anywhere**. Node.js provides a global event:
+
+```js
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  // Ideally, shut down the process gracefully after logging
+  process.exit(1);
+});
+```
+
+**Note:** This should be used as a last resort. The application state may be unstable, so you usually log the error and restart the process (using something like PM2).
+
+---
+
+## **2. Handling Unhandled Promise Rejections**
+
+For promises that reject but have no `.catch()` handler:
+
+```js
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  // You can exit the process or handle gracefully
+});
+```
+
+---
+
+## **3. Global Error Handling in Express.js**
+
+If you are using **Express**, you can define a **global error-handling middleware**:
+
+```js
+// Error-handling middleware (must have 4 args)
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Log error
+  res.status(500).json({ message: 'Something went wrong!' });
+});
+```
+
+* Any `next(err)` call in your routes will go to this middleware.
+* Example usage:
+
+```js
+app.get('/test', (req, res, next) => {
+  try {
+    throw new Error('Test error');
+  } catch (err) {
+    next(err); // passes error to global handler
+  }
+});
+```
+
+---
+
+## **4. Using Async/Await with Express**
+
+Async functions in routes need proper error handling:
+
+```js
+const asyncHandler = fn => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
+
+// Usage
+app.get('/async-test', asyncHandler(async (req, res, next) => {
+  const data = await someAsyncOperation();
+  res.json(data);
+}));
+```
+
+This ensures that rejected promises go to the global error handler.
+
+---
+
+## **5. Logging Errors**
+
+For production, you usually want to log errors with libraries like **winston** or **pino** for persistence and monitoring.
+
+---
+
+✅ **Key Takeaways:**
+
+* `uncaughtException` → handles synchronous exceptions not caught anywhere.
+* `unhandledRejection` → handles promises without `.catch()`.
+* Express error middleware → central place for HTTP request errors.
+* Async routes → wrap in `try/catch` or use a helper like `asyncHandler`.
+* Always log errors and, if necessary, exit gracefully or restart your app.
+
+---
+
+<br> 
+
+## Q. How do you implement JWT authentication ? What is the use of bcrypt ?
+
+## **1. JWT Authentication (JSON Web Token)**
+
+JWT is a **token-based authentication system**. The server issues a token to a user after login, and the client sends this token in subsequent requests to authenticate.
+
+**Flow:**
+
+1. User sends credentials (e.g., email & password) to login.
+2. Server verifies credentials.
+3. Server generates a **JWT** and sends it to the client.
+4. Client stores the JWT (usually in localStorage or cookies).
+5. Client sends JWT in the `Authorization` header for protected routes.
+6. Server verifies JWT before granting access.
+
+---
+
+### **2. Steps to Implement JWT in Node.js**
+
+#### **Install required packages**
+
+```bash
+npm install jsonwebtoken bcryptjs
+```
+
+#### **1. Hash passwords using bcrypt (for signup)**
+
+```js
+const bcrypt = require('bcryptjs');
+
+const saltRounds = 10;
+const plainPassword = 'userpassword';
+
+bcrypt.hash(plainPassword, saltRounds, (err, hash) => {
+  if(err) throw err;
+  console.log('Hashed Password:', hash);
+  // Store hash in the database
+});
+```
+
+---
+
+#### **2. Compare password during login**
+
+```js
+const storedHash = 'hash_from_db';
+
+bcrypt.compare('userpassword', storedHash, (err, isMatch) => {
+  if(err) throw err;
+  if(isMatch) {
+    console.log('Password matched!');
+  } else {
+    console.log('Invalid password');
+  }
+});
+```
+
+---
+
+#### **3. Generate JWT after successful login**
+
+```js
+const jwt = require('jsonwebtoken');
+
+const payload = { userId: '12345' };
+const secretKey = 'your_secret_key';
+const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+
+console.log('JWT:', token);
+```
+
+---
+
+#### **4. Protect routes using JWT middleware**
+
+```js
+const authenticateJWT = (req, res, next) => {
+  const token = req.header('Authorization')?.split(' ')[1]; // Bearer token
+
+  if(!token) return res.status(401).json({ message: 'Access denied' });
+
+  try {
+    const decoded = jwt.verify(token, 'your_secret_key');
+    req.user = decoded; // attach user info to request
+    next();
+  } catch(err) {
+    res.status(401).json({ message: 'Invalid token' });
+  }
+};
+
+// Usage in Express
+app.get('/protected', authenticateJWT, (req, res) => {
+  res.send('This is a protected route');
+});
+```
+
+---
+
+## **3. What is bcrypt and why use it?**
+
+* `bcrypt` is a **password hashing library**.
+* It **hashes passwords** before storing in the database so that plaintext passwords are never saved.
+* It **adds salt** automatically, making it hard to reverse-engineer passwords even if the database is leaked.
+* `bcrypt.compare()` allows you to **check a plaintext password against the hashed version** securely.
+
+✅ **Key point:** JWT handles authentication, **bcrypt handles password security**. They work together for a safe login system.
+
+---
 
 
 ======================================================================================================================================================
