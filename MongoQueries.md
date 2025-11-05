@@ -1,3 +1,128 @@
+
+Absolutely! Here’s a **complete MongoDB script** with sample data and all the queries we discussed. You can copy-paste this directly into your MongoDB shell or Compass:
+
+```javascript
+// ------------------------
+// 1. Insert Sample Data
+// ------------------------
+db.students.insertMany([
+  {
+    name: "Alice",
+    age: 20,
+    grade: "A",
+    subjects: ["Math", "Physics"],
+    enrolled: true,
+    scores: { Math: 95, Physics: 88 }
+  },
+  {
+    name: "Bob",
+    age: 22,
+    grade: "B",
+    subjects: ["Biology", "Chemistry"],
+    enrolled: true,
+    scores: { Biology: 75, Chemistry: 80 }
+  },
+  {
+    name: "Charlie",
+    age: 21,
+    grade: "C",
+    subjects: ["Math", "Biology"],
+    enrolled: false,
+    scores: { Math: 65, Biology: 70 }
+  },
+  {
+    name: "David",
+    age: 23,
+    grade: "A",
+    subjects: ["Physics", "Chemistry"],
+    enrolled: true,
+    scores: { Physics: 90, Chemistry: 92 }
+  },
+  {
+    name: "Eva",
+    age: 20,
+    grade: "B",
+    subjects: ["Math", "Chemistry"],
+    enrolled: false,
+    scores: { Math: 85, Chemistry: 78 }
+  }
+]);
+
+// ------------------------
+// 2. Query Questions
+// ------------------------
+
+// a) Find students who are enrolled and have both "Math" and "Physics"
+db.students.find({
+  enrolled: true,
+  subjects: { $all: ["Math", "Physics"] }
+});
+
+// b) Find students who have a Math score greater than 80
+db.students.find({
+  "scores.Math": { $gt: 80 }
+});
+
+// Optional: show only name and Math score
+db.students.find(
+  { "scores.Math": { $gt: 80 } },
+  { name: 1, "scores.Math": 1, _id: 0 }
+);
+
+// c) Find students whose age is between 20 and 22 inclusive
+db.students.find({
+  age: { $gte: 20, $lte: 22 }
+});
+
+// Optional: show only name and age
+db.students.find(
+  { age: { $gte: 20, $lte: 22 } },
+  { name: 1, age: 1, _id: 0 }
+);
+
+// d) Increase the age of all students by 1
+db.students.updateMany(
+  {},
+  { $inc: { age: 1 } }
+);
+
+// Optional: check updated ages
+db.students.find({}, { name: 1, age: 1, _id: 0 });
+
+// e) Add "English" to the subjects of all enrolled students
+db.students.updateMany(
+  { enrolled: true },
+  { $addToSet: { subjects: "English" } }  // use $push if duplicates are okay
+);
+
+// Optional: check updated subjects for enrolled students
+db.students.find(
+  { enrolled: true },
+  { name: 1, subjects: 1, _id: 0 }
+);
+
+// f) Delete students who are not enrolled
+db.students.deleteMany({ enrolled: false });
+
+// Optional: check remaining students
+db.students.find({}, { name: 1, enrolled: 1, _id: 0 });
+
+// g) Delete students with grade "C"
+db.students.deleteMany({ grade: "C" });
+
+// Optional: check remaining students
+db.students.find({}, { name: 1, grade: 1, _id: 0 });
+```
+
+---
+
+This script covers **inserts, finds, updates, and deletes**—basically all the practice queries we discussed.
+
+If you want, I can also **add a few more advanced query examples** like using `$or`, `$and`, or sorting to make it a full practice set.
+
+Do you want me to add that?
+
+
 =============> ACCUMULATORS <=========================
                 1. $sum             2. $avg
                 3. $max             4. $min
