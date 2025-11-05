@@ -116,11 +116,375 @@ db.students.find({}, { name: 1, grade: 1, _id: 0 });
 
 ---
 
-This script covers **inserts, finds, updates, and deletes**—basically all the practice queries we discussed.
+Absolutely! The queries we’ve done so far cover the basics of **CRUD operations**. But in MongoDB, there are some **very useful query patterns** that are worth practicing, especially for real-world tasks. Here’s a list of important ones along with examples for your `students` collection:
 
-If you want, I can also **add a few more advanced query examples** like using `$or`, `$and`, or sorting to make it a full practice set.
+---
 
-Do you want me to add that?
+### **1. Logical Operators**
+
+* **$or** → match documents where **any** condition is true.
+
+```javascript
+// Students who are either enrolled or have grade "C"
+db.students.find({
+  $or: [
+    { enrolled: true },
+    { grade: "C" }
+  ]
+});
+```
+
+* **$and** → match documents where **all** conditions are true (optional, because multiple conditions in a query object are already ANDed)
+
+```javascript
+// Students who are enrolled AND age > 21
+db.students.find({
+  $and: [
+    { enrolled: true },
+    { age: { $gt: 21 } }
+  ]
+});
+```
+
+* **$not** → negates a condition
+
+```javascript
+// Students who do NOT have grade "A"
+db.students.find({
+  grade: { $not: { $eq: "A" } }
+});
+```
+
+---
+
+### **2. Sorting**
+
+* Sort documents by a field ascending (`1`) or descending (`-1`)
+
+```javascript
+// Sort students by age ascending
+db.students.find({}, { name: 1, age: 1, _id: 0 }).sort({ age: 1 });
+
+// Sort students by grade descending
+db.students.find({}, { name: 1, grade: 1, _id: 0 }).sort({ grade: -1 });
+```
+
+---
+
+### **3. Limiting and Skipping**
+
+* Useful for pagination
+
+```javascript
+// Get first 2 students sorted by age
+db.students.find({}, { name: 1, age: 1, _id: 0 }).sort({ age: 1 }).limit(2);
+
+// Skip the first 2 students
+db.students.find({}, { name: 1, age: 1, _id: 0 }).sort({ age: 1 }).skip(2);
+```
+
+---
+
+### **4. Count Documents**
+
+* Count matching documents
+
+```javascript
+// Number of enrolled students
+db.students.countDocuments({ enrolled: true });
+```
+
+---
+
+### **5. Using $exists**
+
+* Check if a field exists
+
+```javascript
+// Students who have a 'scores' field
+db.students.find({ scores: { $exists: true } });
+```
+
+---
+
+### **6. Using $in / $nin**
+
+* Match documents where a value is in a list
+
+```javascript
+// Students with grade A or B
+db.students.find({ grade: { $in: ["A", "B"] } });
+
+// Students whose grade is NOT A or B
+db.students.find({ grade: { $nin: ["A", "B"] } });
+```
+
+---
+
+### **7. Aggregation (optional but very important)**
+
+* Aggregation allows grouping, summing, averaging, etc.
+
+```javascript
+// Average Math score of all students
+db.students.aggregate([
+  { $group: { _id: null, avgMath: { $avg: "$scores.Math" } } }
+]);
+
+// Count of students per grade
+db.students.aggregate([
+  { $group: { _id: "$grade", count: { $sum: 1 } } }
+]);
+```
+
+---
+
+Absolutely! MongoDB interviews often focus not just on CRUD operations, but on **practical, real-world query patterns**, indexing, aggregation, and performance-related queries. Here’s a categorized list of **important MongoDB queries and operations that are commonly asked in interviews**:
+
+---
+
+## **1. Array Queries**
+
+* **Find documents with a field containing a specific element**
+
+```javascript
+// Students taking Math
+db.students.find({ subjects: "Math" });
+```
+
+* **Find documents containing all elements**
+
+```javascript
+// Students taking both Math and Physics
+db.students.find({ subjects: { $all: ["Math", "Physics"] } });
+```
+
+* **Check array length**
+
+```javascript
+// Students taking exactly 2 subjects
+db.students.find({ subjects: { $size: 2 } });
+```
+
+* **Find array elements greater than a value**
+
+```javascript
+// Students with any score in Math > 80
+db.students.find({ "scores.Math": { $gt: 80 } });
+```
+
+---
+
+## **2. Embedded Document Queries**
+
+* **Query nested fields**
+
+```javascript
+// Students with Chemistry score > 80
+db.students.find({ "scores.Chemistry": { $gt: 80 } });
+```
+
+* **Update nested fields**
+
+```javascript
+// Increase Math score by 5 for all students
+db.students.updateMany({}, { $inc: { "scores.Math": 5 } });
+```
+
+---
+
+## **3. Logical Operators**
+
+* `$or`, `$and`, `$not`, `$nor`
+
+```javascript
+// Students either enrolled or grade C
+db.students.find({ $or: [{ enrolled: true }, { grade: "C" }] });
+
+// Students who are NOT enrolled
+db.students.find({ enrolled: { $not: { $eq: true } } });
+```
+
+---
+
+## **4. Comparison Operators**
+
+* `$gt`, `$gte`, `$lt`, `$lte`, `$eq`, `$ne`
+
+```javascript
+// Students aged between 20 and 22
+db.students.find({ age: { $gte: 20, $lte: 22 } });
+
+// Students not having grade A
+db.students.find({ grade: { $ne: "A" } });
+```
+
+---
+
+## **5. Field Existence & Type**
+
+* `$exists` → check if a field exists
+
+```javascript
+// Students with a 'scores' field
+db.students.find({ scores: { $exists: true } });
+```
+
+* `$type` → check data type
+
+```javascript
+// Fields where age is a number
+db.students.find({ age: { $type: "int" } });
+```
+
+---
+
+## **6. `$in` and `$nin`**
+
+```javascript
+// Students with grade A or B
+db.students.find({ grade: { $in: ["A", "B"] } });
+
+// Students not having grade A or B
+db.students.find({ grade: { $nin: ["A", "B"] } });
+```
+
+---
+
+## **7. Sorting, Limiting, and Skipping**
+
+```javascript
+// Top 3 students by Math score
+db.students.find({}, { name: 1, "scores.Math": 1, _id: 0 })
+           .sort({ "scores.Math": -1 })
+           .limit(3);
+
+// Skip first 2 students sorted by age
+db.students.find({}, { name: 1, age: 1, _id: 0 }).sort({ age: 1 }).skip(2);
+```
+
+---
+
+## **8. Aggregation Framework (very important for interviews)**
+
+* **Group, Sum, Avg, Max, Min**
+
+```javascript
+// Average Math score
+db.students.aggregate([
+  { $group: { _id: null, avgMath: { $avg: "$scores.Math" } } }
+]);
+
+// Count students per grade
+db.students.aggregate([
+  { $group: { _id: "$grade", count: { $sum: 1 } } }
+]);
+```
+
+* **Filter and then aggregate**
+
+```javascript
+// Average Math score for enrolled students
+db.students.aggregate([
+  { $match: { enrolled: true } },
+  { $group: { _id: null, avgMath: { $avg: "$scores.Math" } } }
+]);
+```
+
+* **Project fields**
+
+```javascript
+// Show student name and total score
+db.students.aggregate([
+  { $project: { name: 1, totalScore: { $sum: ["$scores.Math", "$scores.Physics", "$scores.Chemistry", "$scores.Biology"] }, _id: 0 } }
+]);
+```
+
+---
+
+## **9. Text Search & Regex**
+
+* **Regex queries**
+
+```javascript
+// Students whose name starts with 'A'
+db.students.find({ name: { $regex: /^A/ } });
+```
+
+* **Case-insensitive search**
+
+```javascript
+db.students.find({ name: { $regex: /^alice$/i } });
+```
+
+---
+
+## **10. Updates**
+
+* `$inc`, `$set`, `$push`, `$addToSet`, `$pull`
+
+```javascript
+// Increment age by 1
+db.students.updateMany({}, { $inc: { age: 1 } });
+
+// Add "English" to subjects only if not present
+db.students.updateMany({ enrolled: true }, { $addToSet: { subjects: "English" } });
+
+// Remove "Biology" from subjects
+db.students.updateMany({}, { $pull: { subjects: "Biology" } });
+```
+
+---
+
+## **11. Deletes**
+
+```javascript
+// Delete students who are not enrolled
+db.students.deleteMany({ enrolled: false });
+
+// Delete students with grade C
+db.students.deleteMany({ grade: "C" });
+```
+
+---
+
+### **12. Indexing & Performance (discussion questions in interviews)**
+
+* **Create index on a field**
+
+```javascript
+db.students.createIndex({ age: 1 });
+db.students.createIndex({ "scores.Math": -1 });
+```
+
+* **Check indexes**
+
+```javascript
+db.students.getIndexes();
+```
+
+* **Explain query plan**
+
+```javascript
+db.students.find({ age: { $gte: 20 } }).explain("executionStats");
+```
+
+---
+
+💡 **Tips for MongoDB interviews:**
+
+* Be comfortable with **arrays, embedded documents, and aggregation**.
+* Know the difference between `$push` and `$addToSet`.
+* Understand **indexing** and how it affects query performance.
+* Practice **sorting, limiting, skipping**, and **logical operators**.
+* Be ready to write **real-world aggregation pipelines** (group, sum, average, project).
+
+---
+
+If you want, I can create a **single comprehensive MongoDB script** that includes **all these queries with examples for your `students` collection**, so you can just copy-paste and run it for practice.
+
+Do you want me to do that?
+
 
 
 =============> ACCUMULATORS <=========================
