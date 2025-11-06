@@ -1194,9 +1194,92 @@ function App() {
 
 ---
 
-If you want, I can make a **super simple infographic showing all these hooks with one-liner “think of it like…” descriptions**, so it’s very easy to memorize.
+## Web workers & Service workers
+---
 
-Do you want me to make that?
+### 🧠 1. **Web Worker**
+
+**Purpose:** Run computationally expensive or long-running JavaScript code in the background, so it doesn’t block the UI.
+
+#### ✅ Key Features:
+
+* Runs in a **separate thread** from the main UI.
+* Used for **parallel processing** — heavy calculations, data processing, etc.
+* Has **no access to DOM**, `window`, or `document`.
+* Communicates with the main thread via **`postMessage()`** and **`onmessage`**.
+* Exists **only while the page is open** (ends when the page is closed or refreshed).
+
+#### 🧩 Example:
+
+```js
+// main.js
+const worker = new Worker('worker.js');
+worker.postMessage(10); // Send data to worker
+
+worker.onmessage = (event) => {
+  console.log('Result from worker:', event.data);
+};
+
+// worker.js
+onmessage = (event) => {
+  let n = event.data;
+  let result = n * n;
+  postMessage(result);
+};
+```
+
+🗣️ **Use case:** Offloading CPU-heavy operations (e.g., image processing, sorting large datasets).
+
+---
+
+### ⚙️ 2. **Service Worker**
+
+**Purpose:** Act as a **network proxy** between the web app and the network, enabling features like offline support, caching, and background sync.
+
+#### ✅ Key Features:
+
+* Runs in the background — even **when the page is not open**.
+* Can **intercept and handle network requests**.
+* Supports **offline-first** web apps (Progressive Web Apps / PWAs).
+* Uses a **lifecycle** (`install`, `activate`, `fetch`, etc.).
+* Has access to **Cache API**, **Push API**, and **Background Sync**.
+
+#### 🧩 Example:
+
+```js
+// service-worker.js
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open('v1').then((cache) => cache.addAll(['/index.html', '/style.css']))
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => response || fetch(event.request))
+  );
+});
+```
+
+🗣️ **Use case:** Caching static assets for offline use, enabling push notifications, or background sync.
+
+---
+
+### ⚖️ Summary Comparison
+
+| Feature             | **Web Worker**        | **Service Worker**                 |
+| ------------------- | --------------------- | ---------------------------------- |
+| Runs in background? | ✅ Yes                 | ✅ Yes                              |
+| Threaded?           | Separate JS thread    | Separate JS thread                 |
+| Access to DOM?      | ❌ No                  | ❌ No                               |
+| Lifetime            | Ends when page closes | Persists even when no page is open |
+| Primary purpose     | Heavy computation     | Network control, offline caching   |
+| Communication       | `postMessage()`       | Intercepts `fetch` events          |
+| Used in PWAs?       | ❌ No                  | ✅ Yes                              |
+
+---
+
+
 
 
 
