@@ -348,7 +348,37 @@ function flattenArray(input){
 
 const input = [1, [2, [3, [4]], 5]];
 console.log(flattenArray(input));  // Output: [1, 2, 3, 4, 5]
+
 ```
+
+## Second way : 
+```jsx
+// Polyfill for Array.prototype.flatMethod
+if (!Array.prototype.flatMethod) {
+  Array.prototype.flatMethod = function(depth = 1) {
+    const flatten = (arr, depth) => {
+      let result = [];
+      for (const item of arr) {
+        if (Array.isArray(item) && depth > 0) {
+          result = result.concat(flatten(item, depth - 1));
+        } else {
+          result.push(item);
+        }
+      }
+      return result;
+    };
+    return flatten(this, depth);
+  };
+}
+
+// Example usage
+const input = [1, [2, [3, [4]], 5]];
+
+console.log(input.flatMethod());         // Flatten 1 level: [1, 2, [3, [4]], 5]
+console.log(input.flatMethod(2));        // Flatten 2 levels: [1, 2, 3, [4], 5]
+console.log(input.flatMethod(Infinity)); // Flatten all levels: [1, 2, 3, 4, 5]
+```
+
 <br>
  ## Q Create a function deepClone(obj) that makes a deep copy of any object, including nested objects and arrays.
  const obj = { a: 1, b: { c: 2 }, d: [3, 4, { e: 5 }], };
