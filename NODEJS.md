@@ -69,47 +69,157 @@ In MongoDB, an **index** is a special data structure that stores a small portion
 * Can enforce uniqueness.
 
 ---
-
-### **2. Compound Unique Index in MongoDB**
-
-A **compound index** indexes **multiple fields**.
-A **compound unique index** ensures that the **combination of values in the indexed fields is unique** across the collection.
-
----
-
-### **3. Creating a Compound Unique Index in MongoDB**
-
-#### **Using `createIndex()`**
-
-Suppose we have a collection called `users` and we want the combination of `first_name` and `last_name` to be unique:
-
-```javascript
-db.users.createIndex(
-  { first_name: 1, last_name: 1 },  // fields to index
-  { unique: true }                  // make it unique
-)
-```
-
-* `{ first_name: 1, last_name: 1 }` → 1 = ascending order (you can also use -1 for descending)
-* `{ unique: true }` → enforces uniqueness on the combination
-* Name of the index is automatically generated, but you can specify it:
-
-```javascript
-db.users.createIndex(
-  { first_name: 1, last_name: 1 },
-  { unique: true, name: "unique_fullname" }
-)
-```
-
----
-
-### **4. Important Notes**
-
-* If duplicate combinations already exist in the collection, MongoDB will throw an error when creating the unique index.
-* The order of fields matters: `{ first_name: 1, last_name: 1 }` is **different** from `{ last_name: 1, first_name: 1 }` when querying.
-
----
 ======================================================================================================================================================
+
+### 🧱 1. **Single Field Index**
+
+* Indexes on a single field of a document.
+* Created automatically on the `_id` field.
+* Can be created on other fields as well.
+
+```js
+db.users.createIndex({ age: 1 }) // 1 for ascending order, -1 for descending
+```
+
+**Use case:** Speeds up queries filtering or sorting by one field.
+
+---
+
+### 🧩 2. **Compound Index**
+
+* Indexes on **multiple fields** in a specified order.
+* The order of fields in a compound index matters.
+
+```js
+db.users.createIndex({ age: 1, name: -1 })
+```
+
+**Use case:** Queries that filter or sort on multiple fields (e.g., `age` and `name`).
+
+---
+
+### 🧠 3. **Multikey Index**
+
+* Used when the indexed field contains an **array**.
+* MongoDB creates index entries for each element in the array.
+
+```js
+db.products.createIndex({ tags: 1 })
+```
+
+**Use case:** Efficient searching inside arrays.
+
+---
+
+### 📍 4. **Geospatial Indexes**
+
+Used for location-based queries.
+
+* **2d Index** – for planar (flat) geometry.
+* **2dsphere Index** – for spherical geometry (Earth-like coordinates).
+
+```js
+db.places.createIndex({ location: "2dsphere" })
+```
+
+**Use case:** Queries involving geolocation, like finding nearby places.
+
+---
+
+### 🔍 5. **Text Index**
+
+* Supports text search on string content.
+* Can be on one or multiple string fields.
+
+```js
+db.articles.createIndex({ content: "text" })
+```
+
+**Use case:** Full-text search queries like `$text: { $search: "mongodb indexing" }`.
+
+---
+
+### 🎚️ 6. **Hashed Index**
+
+* Indexes the **hashed value** of a field.
+* Commonly used for **shard keys** in sharded clusters.
+
+```js
+db.users.createIndex({ user_id: "hashed" })
+```
+
+**Use case:** Distributes data evenly in a sharded cluster.
+
+---
+
+### ⚙️ 7. **Wildcard Index (MongoDB 4.2+)**
+
+* Dynamically indexes **all fields** or **fields that match a pattern**.
+
+```js
+db.records.createIndex({ "$**": 1 })
+```
+
+**Use case:** Flexible indexing when schema is dynamic or unpredictable.
+
+---
+
+### 🪄 8. **TTL (Time-To-Live) Index**
+
+* Automatically deletes documents after a specified time period.
+
+```js
+db.sessions.createIndex({ createdAt: 1 }, { expireAfterSeconds: 3600 })
+```
+
+**Use case:** Session data, logs, or temporary data that expires.
+
+---
+
+### 📊 9. **Partial Index**
+
+* Indexes only documents that match a given **filter expression**.
+
+```js
+db.orders.createIndex(
+  { status: 1 },
+  { partialFilterExpression: { status: { $eq: "active" } } }
+)
+```
+
+**Use case:** Save space and improve performance when only some documents need indexing.
+
+---
+
+### 🧩 10. **Sparse Index**
+
+* Only indexes documents that **contain** the indexed field (ignores missing fields).
+
+```js
+db.users.createIndex({ nickname: 1 }, { sparse: true })
+```
+
+**Use case:** Fields that exist only in some documents.
+
+---
+
+### Summary Table
+
+| Index Type               | Description           | Example                                   |
+| ------------------------ | --------------------- | ----------------------------------------- |
+| Single Field             | Index on one field    | `{ age: 1 }`                              |
+| Compound                 | Multiple fields       | `{ age: 1, name: -1 }`                    |
+| Multikey                 | Index array fields    | `{ tags: 1 }`                             |
+| Geospatial (2d/2dsphere) | Location-based        | `{ location: "2dsphere" }`                |
+| Text                     | Full-text search      | `{ content: "text" }`                     |
+| Hashed                   | Hash-based            | `{ user_id: "hashed" }`                   |
+| Wildcard                 | All fields            | `{ "$**": 1 }`                            |
+| TTL                      | Auto-expiring         | `{ createdAt: 1 }` + `expireAfterSeconds` |
+| Partial                  | Conditional index     | `partialFilterExpression`                 |
+| Sparse                   | Ignore missing fields | `{ nickname: 1, sparse: true }`           |
+
+---
+
 
 <br> 
 
