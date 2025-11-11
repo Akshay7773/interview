@@ -1405,7 +1405,27 @@ self.addEventListener('fetch', (event) => {
 
 ---
 
+## IMPORTANT 
+```jsx
+let arr=[2,2,34,4,[3,3,[5,6],6],8]
+Array.prototype.myFlat=function(depth=1){
+     function inner(arr, depth){
+        let result=[]
+        for(const val of arr){
+            if(Array.isArray(val) && depth>0){
+                result=result.concat(inner(val, depth-1))
+            }else{
+                result.push(val)
+            }
+        }
+        return result;
+    }
+    return inner(this, depth)
+}
 
+let arr2=arr.myFlat(Infinity)
+console.log(arr2)
+```
 
 
 
