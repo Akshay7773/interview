@@ -18,7 +18,7 @@ There is no relation between Java and JS, both are totally different languages.
 
 <br> 
 
-
+## Q.2 SIMPLE CODE ( ARRAY ) 
 ```javascript
 let arr=[2,2,43,4,65,7,4,3,43,5,6,78,8,6,8,9,10]
 let arr2=[];
@@ -39,7 +39,7 @@ OUTPUT :
   [ 4, 3, 78, 9 ]
 ]
 ```
-
+<br> 
 
 ## Q. What is throttling in javascript ? 
 
