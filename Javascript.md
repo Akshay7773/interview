@@ -18,6 +18,29 @@ There is no relation between Java and JS, both are totally different languages.
 
 <br> 
 
+
+```javascript
+let arr=[2,2,43,4,65,7,4,3,43,5,6,78,8,6,8,9,10]
+let arr2=[];
+for(let i=0;i<4;i++){
+    let temp=[];
+    for(let j=i;j<arr.length;j+=4){
+        temp.push(arr[j])
+    }
+    arr2.push(temp)
+}
+console.log(arr2)
+
+OUTPUT : 
+[
+  [ 2, 65, 43, 8, 10 ],
+  [ 2, 7, 5, 6 ],
+  [ 43, 4, 6, 8 ],
+  [ 4, 3, 78, 9 ]
+]
+```
+
+
 ## Q. What is throttling in javascript ? 
 
  Throttling is a technique used to control the rate at which a function is executed. It's commonly used to limit the frequency of execution of a function, especially for events that may trigger rapidly, such as scroll or resize events.
