@@ -349,6 +349,124 @@ console.log(res)
 console.log(err)
 })
 
+
+---
+## Promises any & race: 
+
+# ⭐ **1. Promise.any()**
+
+### ✔ *Returns the FIRST promise that **fulfills** (succeeds).*
+
+### ✔ *Ignores rejected promises.*
+
+### ✔ *Fails ONLY if ALL promises reject.*
+
+---
+
+## ✅ Example
+
+```js
+const p1 = new Promise((resolve, reject) => setTimeout(reject, 100, "Error 1"));
+const p2 = new Promise(resolve => setTimeout(resolve, 200, "Success 2"));
+const p3 = new Promise(resolve => setTimeout(resolve, 300, "Success 3"));
+
+Promise.any([p1, p2, p3])
+  .then(result => console.log(result))  // "Success 2"
+  .catch(err => console.log(err));
+```
+
+**Why?**
+
+* p1 → rejects
+* p2 → resolves first → ✔ returned
+* p3 → ignored
+
+---
+
+## ❌ When does `Promise.any()` reject?
+
+Only if **all promises reject**:
+
+```js
+Promise.any([Promise.reject(), Promise.reject()])
+  .catch(err => console.log(err));  // AggregateError: All promises were rejected
+```
+
+---
+
+# ⭐ **2. Promise.race()**
+
+### ✔ *Returns the FIRST promise that settles (resolve OR reject).*
+
+### ✔ *Whichever happens first — success or failure — wins.*
+
+---
+
+## ✅ Example
+
+```js
+const p1 = new Promise(resolve => setTimeout(resolve, 300, "Done 1"));
+const p2 = new Promise((resolve, reject) => setTimeout(reject, 100, "Failed 2"));
+
+Promise.race([p1, p2])
+  .then(result => console.log(result))
+  .catch(err => console.log(err)); // "Failed 2"
+```
+
+**Why?**
+
+* p2 rejects first → race ends immediately
+
+---
+
+# ⭐ **Difference Summary**
+
+| Feature             | `Promise.any()`                         | `Promise.race()`                              |
+| ------------------- | --------------------------------------- | --------------------------------------------- |
+| Resolves with       | First **fulfilled** promise             | First **settled** promise (resolve or reject) |
+| Ignores rejections? | Yes                                     | No                                            |
+| Rejects when        | **All** promises fail                   | **Any** promise fails first                   |
+| Good for            | “Give me the first SUCCESSFUL response” | Timeouts, first-response wins                 |
+
+---
+
+# ⭐ **Real-World Examples**
+
+## 1️⃣ **Promise.any() → Fastest successful API response**
+
+Useful when calling multiple servers/CDNs:
+
+```js
+Promise.any([
+  fetch("https://server1.com"),
+  fetch("https://server2.com"),
+  fetch("https://server3.com")
+]).then(res => console.log("Fastest success:", res));
+```
+
+Even if one fails, it's ignored.
+
+---
+
+## 2️⃣ **Promise.race() → Timeout handling**
+
+```js
+const timeout = new Promise((_, reject) =>
+  setTimeout(() => reject("Request timed out"), 2000)
+);
+
+Promise.race([
+  fetch("https://api.com/data"),
+  timeout
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+```
+
+Whichever happens first wins.
+
+---
+
 NOTE ***********************************************************************************************
 
 WE CAN AVOID WRITING PROMISES USING THIS. 
