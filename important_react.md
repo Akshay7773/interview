@@ -1,3 +1,113 @@
+
+## Q. I want to restict my apis in node with www.google.com, how can I do that ? 
+Ah! You want to **restrict your Node.js API so that only requests coming from `www.google.com` (or your frontend hosted on that domain) can access it**. This is usually done using **CORS (Cross-Origin Resource Sharing)** or **checking the `Origin` or `Referer` headers**.
+
+Here’s a detailed guide:
+
+---
+
+## 1️⃣ Using CORS middleware (recommended)
+
+If you are using **Express**, you can use the `cors` package.
+
+### Install
+
+```bash
+npm install cors
+```
+
+### Example
+
+```js
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+
+// Allow only www.google.com
+const corsOptions = {
+  origin: 'https://www.google.com',
+};
+
+app.use(cors(corsOptions));
+
+app.get('/api/data', (req, res) => {
+  res.json({ message: 'Hello from API!' });
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+```
+
+✅ Now only requests coming from `https://www.google.com` will succeed; others will be blocked by the browser.
+
+> **Note:** This is enforced by the **browser**. Direct requests from Postman or curl will bypass CORS.
+
+---
+
+## 2️⃣ Restricting using `Origin` or `Referer` headers (server-side check)
+
+If you want to **restrict even server-to-server requests**, check the headers manually:
+
+```js
+app.use((req, res, next) => {
+  const allowedOrigin = 'https://www.google.com';
+  const origin = req.headers.origin || req.headers.referer;
+
+  if (origin && origin.startsWith(allowedOrigin)) {
+    next(); // allow
+  } else {
+    res.status(403).json({ message: 'Access denied' });
+  }
+});
+```
+
+This will **block requests from other domains**, including Postman or curl, if the `Origin`/`Referer` is missing or not allowed.
+
+---
+
+## 3️⃣ Using API keys (more secure approach)
+
+If you really want **secure API restriction**, relying on `Origin` or `Referer` is not enough because headers can be faked.
+
+Better approach:
+
+* Generate an **API key**
+* Only requests with that API key are accepted
+
+```js
+app.use((req, res, next) => {
+  const apiKey = req.headers['x-api-key'];
+  if (apiKey === process.env.MY_API_KEY) {
+    next();
+  } else {
+    res.status(403).json({ message: 'Invalid API key' });
+  }
+});
+```
+
+✅ This is much more secure for production APIs.
+
+---
+
+### Summary
+
+| Method                   | Restriction   | Notes                                  |
+| ------------------------ | ------------- | -------------------------------------- |
+| **CORS**                 | Browser-level | Only blocks cross-origin from browsers |
+| **Origin/Referer check** | Server-level  | Can block some direct requests         |
+| **API key / token**      | Secure        | Recommended for production             |
+
+---
+
+If you want, I can give a **ready-to-use Express middleware** that combines **CORS + Origin check + optional API key**, so your API is really restricted.
+
+Do you want me to do that?
+
+
+
+
 ## Q.1 what is indexed db ? 
 Great question! 👇
 
@@ -42,7 +152,6 @@ It’s basically a **NoSQL database** (object store) that runs **in the browser*
 | Indexing   | Supports indexes for queries     | No indexing            |
 
 ---
-Sure! Let’s go step-by-step through how to use **IndexedDB** in a **React (React.js)** app — with a simple example.
 
 ---
 
