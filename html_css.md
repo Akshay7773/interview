@@ -3,29 +3,221 @@ Here’s a **short, interview-ready answer**:
 
 ---
 
-### Difference between HTML and HTML5
+### Difference between HTML4 and HTML5
 
-* **HTML** is the older version used mainly for structuring web pages.
-* **HTML5** is the latest version with **built-in support for multimedia, better semantics, and modern web features**.
+
+
+## 1. What they are
+
+* **HTML4** (1997–1999): Older version of HTML, mainly for **static web pages**.
+* **HTML5** (2014 → now): Modern standard designed for **multimedia, apps, and interactive websites**.
 
 ---
 
-### Problems HTML5 Solved
+## 2. Doctype (very important)
 
-1. **No native audio/video support**
-   → HTML5 introduced `<audio>` and `<video>` tags (no Flash needed).
+### HTML4
 
-2. **Poor semantic structure**
-   → HTML5 added semantic tags like `<header>`, `<footer>`, `<section>`, `<article>`.
+Long and complicated:
 
-3. **Limited form controls**
-   → New input types like `email`, `date`, `number`, `range`.
+```html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+```
 
-4. **No support for modern web apps**
-   → APIs like **localStorage**, **sessionStorage**, **canvas**, **geolocation**.
+### HTML5
 
-5. **Heavy reliance on third-party plugins**
-   → HTML5 reduced dependency on Flash and other plugins.
+Simple and clean:
+
+```html
+<!DOCTYPE html>
+```
+
+✅ Easier to remember and write.
+
+---
+
+## 3. New semantic elements (big change)
+
+HTML4 mainly used `<div>` for layout.
+
+### HTML4
+
+```html
+<div id="header"></div>
+<div id="nav"></div>
+<div id="content"></div>
+<div id="footer"></div>
+```
+
+### HTML5
+
+Introduced **meaningful (semantic) tags**:
+
+```html
+<header></header>
+<nav></nav>
+<main></main>
+<section></section>
+<article></article>
+<footer></footer>
+```
+
+✅ Better for:
+
+* Readability
+* SEO
+* Accessibility
+
+---
+
+## 4. Multimedia support
+
+### HTML4
+
+* No native audio/video
+* Needed plugins like **Flash**
+
+```html
+<object data="video.swf"></object>
+```
+
+### HTML5
+
+* Built-in support
+
+```html
+<video controls>
+  <source src="video.mp4">
+</video>
+
+<audio controls>
+  <source src="audio.mp3">
+</audio>
+```
+
+✅ No plugins required.
+
+---
+
+## 5. Graphics
+
+### HTML4
+
+* No built-in graphics support
+
+### HTML5
+
+New elements:
+
+```html
+<canvas></canvas>
+<svg></svg>
+```
+
+Used for:
+
+* Games
+* Charts
+* Animations
+
+---
+
+## 6. Form improvements
+
+### HTML4
+
+Limited input types:
+
+```html
+<input type="text">
+```
+
+### HTML5
+
+New input types:
+
+```html
+<input type="email">
+<input type="date">
+<input type="number">
+<input type="range">
+```
+
+New attributes:
+
+```html
+required
+placeholder
+pattern
+```
+
+✅ Better validation without JavaScript.
+
+---
+
+## 7. APIs and features
+
+HTML5 introduced many APIs:
+
+| Feature       | HTML4 | HTML5 |
+| ------------- | ----- | ----- |
+| Local storage | ❌     | ✅     |
+| Geolocation   | ❌     | ✅     |
+| Drag & Drop   | ❌     | ✅     |
+| Web Workers   | ❌     | ✅     |
+| Offline apps  | ❌     | ✅     |
+
+---
+
+## 8. Mobile & performance
+
+### HTML4
+
+* Not mobile-friendly
+* Designed before smartphones
+
+### HTML5
+
+* Mobile-first
+* Faster, lighter
+* Works well on all devices
+
+---
+
+## 9. Deprecated elements
+
+HTML5 **removed outdated tags**:
+
+❌ HTML4 tags:
+
+```html
+<font>
+<center>
+<frameset>
+```
+
+✅ Use CSS and modern layout instead.
+
+---
+
+## 10. Summary table
+
+| Aspect         | HTML4   | HTML5    |
+| -------------- | ------- | -------- |
+| Doctype        | Complex | Simple   |
+| Semantics      | Poor    | Rich     |
+| Audio/Video    | Plugins | Native   |
+| Forms          | Basic   | Advanced |
+| APIs           | Few     | Many     |
+| Mobile support | Weak    | Strong   |
+
+---
+
+### In short
+
+* **HTML4** = old, structure only
+* **HTML5** = modern, semantic, multimedia-ready, app-friendly
+
 
 ---
 
