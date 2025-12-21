@@ -1,4 +1,4 @@
-## Q.1 What is the difference between HTML and HTML5? What problems did HTML5 solve?
+## Q.1 What is the difference between HTML4 and HTML5? What problems did HTML5 solve?
 Here’s a **short, interview-ready answer**:
 
 ---
