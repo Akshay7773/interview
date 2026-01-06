@@ -648,15 +648,15 @@ Here’s a **clear, interview-ready explanation** of CSS length units:
 ---
 | Unit | Description | Example |
 |------|------------|---------|
-| em | Relative to the font-size of the element (2em means 2 times the size of the current font) | [Try it](tryit.php?filename=trycss_unit_em) |
-| ex | Relative to the x-height of the current font (rarely used) | [Try it]([tryit.php?filename=trycss_unit_ex](https://www.w3schools.com/cssref/tryit.php?filename=trycss_unit_percentage)) |
-| ch | Relative to the width of the "0" (zero) | [Try it](tryit.php?filename=trycss_unit_ch) |
-| rem | Relative to font-size of the root element | [Try it](tryit.php?filename=trycss_unit_rem) |
-| vw | Relative to 1% of the width of the viewport | [Try it](tryit.php?filename=trycss_unit_vw) |
-| vh | Relative to 1% of the height of the viewport | [Try it](tryit.php?filename=trycss_unit_vh) |
-| vmin | Relative to 1% of viewport's smaller dimension | [Try it](tryit.php?filename=trycss_unit_vmin) |
-| vmax | Relative to 1% of viewport's larger dimension | [Try it](tryit.php?filename=trycss_unit_vmax) |
-| % | Relative to the parent element | [Try it](tryit.php?filename=trycss_unit_percentage) |
+| em | Relative to the font-size of the element (2em means 2 times the size of the current font) | [Try it](https://www.w3schools.com/cssref/tryit.php?filename=trycss_unit_em) |
+| ex | Relative to the x-height of the current font (rarely used) | [Try it](https://www.w3schools.com/cssref/tryit.php?filename=trycss_unit_ex) |
+| ch | Relative to the width of the "0" (zero) | [Try it](https://www.w3schools.com/cssref/tryit.php?filename=trycss_unit_ch) |
+| rem | Relative to font-size of the root element | [Try it](https://www.w3schools.com/cssref/tryit.php?filename=trycss_unit_rem) |
+| vw | Relative to 1% of the width of the viewport | [Try it](https://www.w3schools.com/cssref/tryit.php?filename=trycss_unit_vw) |
+| vh | Relative to 1% of the height of the viewport | [Try it](https://www.w3schools.com/cssref/tryit.php?filename=trycss_unit_vh) |
+| vmin | Relative to 1% of viewport's smaller dimension | [Try it](https://www.w3schools.com/cssref/tryit.php?filename=trycss_unit_vmin) |
+| vmax | Relative to 1% of viewport's larger dimension | [Try it](https://www.w3schools.com/cssref/tryit.php?filename=trycss_unit_vmax) |
+| % | Relative to the parent element | [Try it](https://www.w3schools.com/cssref/tryit.php?filename=trycss_unit_percentage) |
 
 
 ### 1. **`em`**
