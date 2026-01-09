@@ -1,3 +1,290 @@
+## Array methods 
+---
+
+# 📦 JavaScript Array Functions (Methods)
+
+---
+
+## 1️⃣ Create / Modify Arrays
+
+### `push()` – add to end
+
+```js
+const arr = [1, 2];
+arr.push(3); // [1, 2, 3]
+```
+
+### `pop()` – remove from end
+
+```js
+arr.pop(); // removes 3
+```
+
+### `unshift()` – add to start
+
+```js
+arr.unshift(0); // [0, 1, 2]
+```
+
+### `shift()` – remove from start
+
+```js
+arr.shift(); // removes 0
+```
+
+---
+
+## 2️⃣ Loop / Iterate
+
+### `forEach()` – loop (no return)
+
+```js
+arr.forEach(item => console.log(item));
+```
+
+⚠️ Cannot return a new array
+
+---
+
+## 3️⃣ Transform Arrays
+
+### `map()` – transform each item
+
+```js
+const doubled = [1, 2, 3].map(n => n * 2);
+// [2, 4, 6]
+```
+
+---
+
+### `flatMap()` – map + flatten
+
+```js
+[1, 2].flatMap(n => [n, n * 2]);
+// [1, 2, 2, 4]
+```
+
+---
+
+## 4️⃣ Filter / Find
+
+### `filter()` – return matching items
+
+```js
+[1, 2, 3, 4].filter(n => n > 2);
+// [3, 4]
+```
+
+### `find()` – first match
+
+```js
+[1, 2, 3].find(n => n > 1);
+// 2
+```
+
+### `findIndex()` – index of match
+
+```js
+[1, 2, 3].findIndex(n => n === 2);
+// 1
+```
+
+---
+
+## 5️⃣ Reduce (Very Important)
+
+### `reduce()` – reduce to single value
+
+```js
+[1, 2, 3].reduce((sum, n) => sum + n, 0);
+// 6
+```
+
+Use cases:
+
+* Sum
+* Grouping
+* Counting
+* Flatten arrays
+
+---
+
+## 6️⃣ Search / Check
+
+### `includes()` – exists or not
+
+```js
+[1, 2, 3].includes(2); // true
+```
+
+### `some()` – at least one match
+
+```js
+[1, 2, 3].some(n => n > 2); // true
+```
+
+### `every()` – all must match
+
+```js
+[2, 4, 6].every(n => n % 2 === 0); // true
+```
+
+---
+
+## 7️⃣ Sort / Reverse
+
+### `sort()` – sorts (⚠️ mutates)
+
+```js
+[3, 1, 2].sort(); // [1, 2, 3]
+```
+
+Numeric sort:
+
+```js
+[10, 2, 5].sort((a, b) => a - b);
+```
+
+### `reverse()` – reverse order
+
+```js
+[1, 2, 3].reverse();
+// [3, 2, 1]
+```
+
+---
+
+## 8️⃣ Slice vs Splice (Important Difference)
+
+### `slice()` – non-mutating
+
+```js
+[1, 2, 3, 4].slice(1, 3);
+// [2, 3]
+```
+
+### `splice()` – mutates original
+
+```js
+const arr = [1, 2, 3];
+arr.splice(1, 1);
+// arr = [1, 3]
+```
+
+---
+
+## 9️⃣ Combine / Convert
+
+### `concat()` – merge arrays
+
+```js
+[1, 2].concat([3, 4]);
+// [1, 2, 3, 4]
+```
+
+### `join()` – array to string
+
+```js
+["a", "b"].join("-");
+// "a-b"
+```
+
+### `toString()`
+
+```js
+[1, 2, 3].toString();
+// "1,2,3"
+```
+
+---
+
+## 🔟 Flatten Arrays
+
+### `flat()`
+
+```js
+[1, [2, [3]]].flat(2);
+// [1, 2, 3]
+```
+
+---
+
+## 1️⃣1️⃣ Index / Position
+
+### `indexOf()`
+
+```js
+["a", "b"].indexOf("b"); // 1
+```
+
+### `lastIndexOf()`
+
+```js
+["a", "b", "a"].lastIndexOf("a"); // 2
+```
+
+---
+
+## 1️⃣2️⃣ Create Arrays
+
+### `Array.from()`
+
+```js
+Array.from("abc");
+// ["a", "b", "c"]
+```
+
+### `Array.isArray()`
+
+```js
+Array.isArray([]); // true
+```
+
+---
+
+## 1️⃣3️⃣ Copy Within / Fill (Less common)
+
+### `fill()`
+
+```js
+new Array(3).fill(0);
+// [0, 0, 0]
+```
+
+### `copyWithin()`
+
+```js
+[1, 2, 3, 4].copyWithin(0, 2);
+// [3, 4, 3, 4]
+```
+
+---
+
+## 🧠 Mutating vs Non-Mutating (Very Important)
+
+### Mutates original array ❌
+
+* `push`, `pop`, `shift`, `unshift`
+* `sort`, `reverse`
+* `splice`, `copyWithin`, `fill`
+
+### Returns new array ✅
+
+* `map`, `filter`, `slice`, `concat`, `flat`
+
+---
+
+## 📌 Most important to master
+
+✔ `map()`
+✔ `filter()`
+✔ `reduce()`
+✔ `find()`
+✔ `some()` / `every()`
+✔ `slice()` vs `splice()`
+
+---
+
 
 ## Q. I want to restict my apis in node with www.google.com, how can I do that ? 
 Ah! You want to **restrict your Node.js API so that only requests coming from `www.google.com` (or your frontend hosted on that domain) can access it**. This is usually done using **CORS (Cross-Origin Resource Sharing)** or **checking the `Origin` or `Referer` headers**.
