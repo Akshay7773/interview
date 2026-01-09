@@ -1,3 +1,74 @@
+## Deep copy implementaion 
+Yes! Using `JSON.parse(JSON.stringify(obj))` is a common quick-and-dirty way to deep copy an object in JavaScript, but it has limitations: it **cannot copy functions, `Date`, `Map`, `Set`, `undefined`, `Infinity`, `RegExp`, or circular references**. There are better alternatives depending on your needs.
+
+
+---
+
+### **1. Using structuredClone (Modern, Recommended)**
+
+Modern browsers and Node.js support [`structuredClone`](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone), which can handle most data types including `Date`, `Map`, `Set`, and circular references.
+
+```javascript
+const original = { a: 1, b: new Date(), c: [1, 2, 3] };
+const copy = structuredClone(original);
+
+console.log(copy);
+console.log(copy.b instanceof Date); // true
+```
+
+✅ Pros: Handles many data types, circular references.
+❌ Cons: Not supported in very old environments.
+
+---
+
+### **2. Using a Recursive Function**
+
+You can manually create a recursive deep clone function. This gives you full control and works in any environment.
+
+```javascript
+function deepClone(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+
+  if (obj instanceof Date) return new Date(obj);
+  if (obj instanceof Array) return obj.map(deepClone);
+  if (obj instanceof Map) return new Map([...obj].map(([k, v]) => [deepClone(k), deepClone(v)]));
+  if (obj instanceof Set) return new Set([...obj].map(deepClone));
+  if (obj instanceof RegExp) return new RegExp(obj.source, obj.flags);
+
+  const cloned = {};
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      cloned[key] = deepClone(obj[key]);
+    }
+  }
+  return cloned;
+}
+
+const original = { a: 1, b: new Date(), c: [1, 2, { d: 4 }] };
+const copy = deepClone(original);
+console.log(copy);
+```
+
+✅ Pros: Full control, works in all environments.
+❌ Cons: Slightly more code; needs updates if you want to handle more complex types.
+
+---
+
+### **3. Using a Library**
+
+If you don’t want to reinvent the wheel, there are excellent libraries:
+
+* **Lodash**: `_.cloneDeep(obj)`
+
+```javascript
+const _ = require('lodash');
+const copy = _.cloneDeep(original);
+```
+
+
+---
+
+
 ## Array methods 
 ---
 
