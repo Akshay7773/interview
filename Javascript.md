@@ -1,4 +1,457 @@
 # Javascript
+
+
+# Some Tricky Coding Questions : 
+Perfect 👍
+Below are **ALL the questions with their outputs AND clear explanations**.
+These are **classic JavaScript interview “guess the output” questions**, so understanding *why* matters more than memorizing.
+
+---
+
+## 1️⃣ Hoisting
+
+### Q1
+
+```js
+console.log(a);
+var a = 10;
+```
+
+✅ **Output**
+
+```js
+undefined
+```
+
+🧠 **Why?**
+`var` declarations are hoisted to the top but **not initialized**.
+So JS sees:
+
+```js
+var a;
+console.log(a); // undefined
+a = 10;
+```
+
+---
+
+### Q2
+
+```js
+foo();
+
+function foo() {
+  console.log("Hello");
+}
+```
+
+✅ **Output**
+
+```js
+Hello
+```
+
+🧠 **Why?**
+Function declarations are **fully hoisted**, including their body.
+
+---
+
+### Q3
+
+```js
+foo();
+
+var foo = function () {
+  console.log("Hi");
+};
+```
+
+❌ **Output**
+
+```js
+TypeError: foo is not a function
+```
+
+🧠 **Why?**
+Only `var foo` is hoisted, not the function assignment.
+
+---
+
+## 2️⃣ `let`, `const`, and TDZ
+
+### Q4
+
+```js
+console.log(x);
+let x = 5;
+```
+
+❌ **Output**
+
+```js
+ReferenceError: Cannot access 'x' before initialization
+```
+
+🧠 **Why?**
+`let` variables exist in **Temporal Dead Zone (TDZ)** until initialized.
+
+---
+
+### Q5
+
+```js
+const obj = { a: 1 };
+obj.a = 2;
+console.log(obj.a);
+```
+
+✅ **Output**
+
+```js
+2
+```
+
+🧠 **Why?**
+`const` prevents reassignment, **not mutation**.
+
+---
+
+## 3️⃣ Closures
+
+### Q6
+
+```js
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const fn = outer();
+fn();
+fn();
+```
+
+✅ **Output**
+
+```js
+1
+2
+```
+
+🧠 **Why?**
+`inner` forms a **closure** over `count`.
+
+---
+
+### Q7
+
+```js
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, 1000);
+}
+```
+
+✅ **Output**
+
+```js
+3
+3
+3
+```
+
+🧠 **Why?**
+`var` is function-scoped.
+All callbacks share the same `i`, which becomes `3`.
+
+---
+
+### Q8
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, 1000);
+}
+```
+
+✅ **Output**
+
+```js
+0
+1
+2
+```
+
+🧠 **Why?**
+`let` creates a **new binding per iteration**.
+
+---
+
+## 4️⃣ `this` Keyword
+
+### Q9
+
+```js
+const obj = {
+  name: "JS",
+  getName() {
+    console.log(this.name);
+  }
+};
+
+const fn = obj.getName;
+fn();
+```
+
+✅ **Output**
+
+```js
+undefined
+```
+
+🧠 **Why?**
+`this` depends on **how a function is called**, not where it’s defined.
+
+---
+
+### Q10
+
+```js
+const obj = {
+  name: "JavaScript",
+  getName: () => {
+    console.log(this.name);
+  }
+};
+
+obj.getName();
+```
+
+✅ **Output**
+
+```js
+undefined
+```
+
+🧠 **Why?**
+Arrow functions **don’t have their own `this`**.
+
+---
+
+## 5️⃣ Equality (`==` vs `===`)
+
+### Q11
+
+```js
+console.log(0 == false);
+console.log(0 === false);
+```
+
+✅ **Output**
+
+```js
+true
+false
+```
+
+🧠 **Why?**
+`==` does type coercion, `===` does not.
+
+---
+
+### Q12
+
+```js
+console.log(null == undefined);
+console.log(null === undefined);
+```
+
+✅ **Output**
+
+```js
+true
+false
+```
+
+---
+
+## 6️⃣ Arrays & Objects
+
+### Q13
+
+```js
+let arr = [1, 2, 3];
+let arr2 = arr;
+
+arr2.push(4);
+console.log(arr);
+```
+
+✅ **Output**
+
+```js
+[1, 2, 3, 4]
+```
+
+🧠 **Why?**
+Arrays are **reference types**.
+
+---
+
+### Q14
+
+```js
+console.log(typeof null);
+```
+
+✅ **Output**
+
+```js
+object
+```
+
+🧠 **Why?**
+This is a **well-known JavaScript bug** kept for backward compatibility.
+
+---
+
+## 7️⃣ Event Loop ⭐ (Very Important)
+
+### Q15
+
+```js
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("Promise");
+});
+
+console.log("End");
+```
+
+✅ **Output**
+
+```js
+Start
+End
+Promise
+Timeout
+```
+
+🧠 **Why?**
+
+* Synchronous code first
+* Microtasks (Promises)
+* Macrotasks (`setTimeout`)
+
+---
+
+## 8️⃣ Tricky Ones 😈
+
+### Q16
+
+```js
+console.log([] + []);
+```
+
+✅ **Output**
+
+```js
+""
+```
+
+🧠 **Why?**
+Arrays convert to empty strings, then concatenate.
+
+---
+
+### Q17
+
+```js
+console.log({} + {});
+```
+
+✅ **Output**
+
+```js
+"[object Object][object Object]"
+```
+
+🧠 **Why?**
+Objects convert to strings.
+
+---
+
+### Q18
+
+```js
+console.log(true + true);
+```
+
+✅ **Output**
+
+```js
+2
+```
+
+🧠 **Why?**
+`true` → `1`, so `1 + 1 = 2`.
+
+---
+
+## 9️⃣ Function Arguments
+
+### Q19
+
+```js
+function test(a, b, c) {
+  console.log(a, b, c);
+}
+
+test(1, 2);
+```
+
+✅ **Output**
+
+```js
+1 2 undefined
+```
+
+---
+
+### Q20
+
+```js
+function foo(a, b = 2) {
+  console.log(a + b);
+}
+
+foo(5, undefined);
+```
+
+✅ **Output**
+
+```js
+7
+```
+
+🧠 **Why?**
+Passing `undefined` triggers the default value.
+
+---
+
+
+
 ## Q. What is javascript ? 
 JavaScript is a high-level programming language commonly used for creating dynamic and interactive content on websites. Initially developed by Brendan Eich at Netscape in 1995, it has since become one of the most widely used programming languages on the web.
 
