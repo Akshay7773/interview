@@ -3,10 +3,52 @@
 
 # Some Tricky Coding Questions : 
 Perfect 👍
-Below are **ALL the questions with their outputs AND clear explanations**.
-These are **classic JavaScript interview “guess the output” questions**, so understanding *why* matters more than memorizing.
+```js
+let i = 0;
+for (i = 0; i < 5; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, 0);
+}
+```
+output : 
+5 
+5
+5
+5
+5
 
----
+how to make it working, using var or let anything 
+```js
+for (var i = 0; i < 5; i++) {
+  (function (j) {
+    setTimeout(() => {
+      console.log(j);
+    }, 0);
+  })(i);
+}
+```
+
+OR 
+
+```js
+let i=0;
+for(i=0;i<5 ;i++ ){
+    function fun(j){
+        setTimeout(()=>{
+        console.log(j)
+     },0)
+    }
+    fun(i)
+}
+```
+Ouput : 
+0
+1
+2
+3
+4
+
 
 ## 1️⃣ Hoisting
 
