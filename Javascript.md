@@ -491,8 +491,37 @@ foo(5, undefined);
 Passing `undefined` triggers the default value.
 
 ---
+## Longest substring important code 
+```jsx
+function longestSubstring(str){
+   let set=new Set();
+   let left=0;
+   let maxLength=0;
+   let startIndex=0;
+   for(let right=0;right<str.length;right++){
+       while(set.has(str[right])){
+           set.delete(str[left])
+           left++;
+       }
+       set.add(str[right])
+       if(right-left+1 > maxLength){
+           maxLength=right-left+1;
+           startIndex=left;
+       }
+   }
+   return{
+       maxLength,
+       substr:str.slice(startIndex,startIndex+maxLength)
+   }
+}
+
+let a=longestSubstring("abcabcda")
+console.log(a)
 
 
+```
+
+---
 
 ## Q. What is javascript ? 
 JavaScript is a high-level programming language commonly used for creating dynamic and interactive content on websites. Initially developed by Brendan Eich at Netscape in 1995, it has since become one of the most widely used programming languages on the web.
