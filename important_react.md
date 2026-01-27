@@ -1,3 +1,144 @@
+## CSS variables 
+CSS variables (officially called **CSS Custom Properties**) let you store values once and reuse them throughout your styles. They’re super handy for theming, consistency, and avoiding repetition.
+
+Here’s the practical breakdown 👇
+
+---
+
+## 1. Declaring a CSS variable
+
+You define variables using `--name` syntax, usually inside `:root` so they’re available everywhere:
+
+```css
+:root {
+  --main-color: #4f46e5;
+  --spacing: 16px;
+  --font-main: 'Inter', sans-serif;
+}
+```
+
+* `:root` = global scope
+* Variable names **must** start with `--`
+
+---
+
+## 2. Using a variable with `var()`
+
+Use the `var()` function wherever you’d normally put a value:
+
+```css
+body {
+  font-family: var(--font-main);
+  color: var(--main-color);
+}
+
+button {
+  padding: var(--spacing);
+  background-color: var(--main-color);
+}
+```
+
+---
+
+## 3. Local (scoped) variables
+
+Variables can be scoped to a specific selector:
+
+```css
+.card {
+  --card-bg: #f9fafb;
+  background-color: var(--card-bg);
+}
+```
+
+Only `.card` and its children can access `--card-bg`.
+
+---
+
+## 4. Fallback values (very useful)
+
+If a variable isn’t defined, you can provide a fallback:
+
+```css
+color: var(--text-color, black);
+```
+
+If `--text-color` doesn’t exist → `black` is used.
+
+---
+
+## 5. Updating variables with media queries
+
+Great for responsive design:
+
+```css
+:root {
+  --padding: 12px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --padding: 24px;
+  }
+}
+```
+
+All elements using `--padding` update automatically.
+
+---
+
+## 6. Dynamic theming (light / dark mode)
+
+```css
+:root {
+  --bg: white;
+  --text: black;
+}
+
+[data-theme="dark"] {
+  --bg: #111;
+  --text: #eee;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+```
+
+Toggle the theme by changing the `data-theme` attribute with JS.
+
+---
+
+## 7. CSS variables vs preprocessor variables
+
+Quick comparison:
+
+| CSS Variables          | Sass/Less Variables         |
+| ---------------------- | --------------------------- |
+| Work at runtime        | Compiled at build time      |
+| Can change dynamically | Cannot change after compile |
+| Cascade & inherit      | Do not                      |
+
+---
+
+## 8. Common mistakes to avoid ❌
+
+* ❌ Forgetting `--` in variable names
+* ❌ Using variables outside their scope
+* ❌ Expecting math without `calc()`
+
+Correct math usage:
+
+```css
+width: calc(var(--spacing) * 2);
+```
+
+---
+
+
+
+
 ## Deep copy implementaion 
 Yes! Using `JSON.parse(JSON.stringify(obj))` is a common quick-and-dirty way to deep copy an object in JavaScript, but it has limitations: it **cannot copy functions, `Date`, `Map`, `Set`, `undefined`, `Infinity`, `RegExp`, or circular references**. There are better alternatives depending on your needs.
 
