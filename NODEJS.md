@@ -1,3 +1,139 @@
+## worker, child processes and Cluster
+---
+
+## 1️⃣ Worker Threads ( `worker_threads` )
+
+**What they are**
+
+* Real **threads** inside the *same Node.js process*
+* Share memory (via `SharedArrayBuffer`)
+* Best for **CPU-heavy work**
+
+**Why they exist**
+Node is single-threaded by default. If you do heavy math, encryption, image processing, etc., the event loop gets blocked. Worker threads fix that.
+
+**Key points**
+
+* Same process, multiple threads
+* Can share memory
+* Lower overhead than child processes
+* Communication via messages (or shared memory)
+
+**Example**
+
+```js
+const { Worker } = require('worker_threads');
+
+const worker = new Worker('./worker.js');
+
+worker.on('message', msg => {
+  console.log('Result:', msg);
+});
+```
+
+Use when:
+✔ CPU-intensive tasks
+✔ You want fast communication
+✔ You don’t need full isolation
+
+---
+
+## 2️⃣ Child Processes ( `child_process` )
+
+**What they are**
+
+* **Separate OS processes**
+* Each has its own memory, event loop, and V8 instance
+* Can run **other Node scripts or even shell commands**
+
+**Why they exist**
+For isolation and running external programs.
+
+**Key points**
+
+* No shared memory
+* Safer isolation
+* Higher memory & startup cost
+* Communicate via IPC (messages / stdio)
+
+**Example**
+
+```js
+const { fork } = require('child_process');
+
+const child = fork('./child.js');
+
+child.on('message', msg => {
+  console.log('From child:', msg);
+});
+```
+
+Use when:
+✔ You need isolation
+✔ Running external commands
+✔ A crash should NOT kill the parent
+
+---
+
+## 3️⃣ Cluster 
+
+**What it is**
+
+* Built on top of **child processes**
+* Lets you run **multiple Node processes** that share the same server port
+* Mainly for **scaling web servers**
+
+**Why it exists**
+Node uses one CPU core by default. Cluster lets you use **all CPU cores**.
+
+**Key points**
+
+* Multiple processes
+* Each handles requests
+* OS load-balances connections
+* No shared memory
+
+**Example**
+
+```js
+const cluster = require('cluster');
+const os = require('os');
+
+if (cluster.isPrimary) {
+  for (let i = 0; i < os.cpus().length; i++) {
+    cluster.fork();
+  }
+} else {
+  require('./server');
+}
+```
+
+Use when:
+✔ High-traffic servers
+✔ Horizontal scaling on one machine
+
+---
+
+## 🧠 Quick Comparison
+
+| Feature        | Worker Threads | Child Processes | Cluster |
+| -------------- | -------------- | --------------- | ------- |
+| CPU heavy work | ✅ Best         | ⚠️ Okay         | ❌       |
+| Memory shared  | ✅ Yes          | ❌ No            | ❌ No    |
+| Isolation      | ❌ Low          | ✅ High          | ✅ High  |
+| Startup cost   | Low            | High            | High    |
+| Web scaling    | ❌              | ❌               | ✅       |
+
+---
+
+## 💡 Rule of Thumb
+
+* **CPU-heavy tasks?** → Worker Threads
+* **Need isolation or shell commands?** → Child Process
+* **Scale a Node server across CPUs?** → Cluster
+👌
+
+
 ## Q. 1 Node js is single threaded or multi-threaded? How can we make node application multi threaded? 
 Node.js is primarily single-threaded. It uses an event-driven architecture, based on the JavaScript event loop, which allows it to handle concurrent operations without multiple threads. This single-threaded model can handle asynchronous I/O operations efficiently.
 
