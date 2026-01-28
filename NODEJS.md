@@ -1,4 +1,28 @@
 ## worker, child processes and Cluster
+
+---
+
+## Big picture first (one-liner each)
+
+* **child_process** → Run **another program or Node process**
+* **cluster** → Run **multiple Node processes** to use **multiple CPU cores** for servers
+* **worker_threads** → Run **multiple threads inside one Node process** for CPU-heavy work
+
+---
+
+## Core differences table
+
+| Feature        | child_process          | cluster               | worker_threads                  |
+| -------------- | ---------------------- | --------------------- | ------------------------------- |
+| Type           | Separate OS process    | Separate OS processes | Threads inside same process     |
+| Memory         | ❌ Not shared           | ❌ Not shared          | ✅ Can share (SharedArrayBuffer) |
+| CPU cores      | ✅ Yes                  | ✅ Yes                 | ✅ Yes                           |
+| Best for       | Running other programs | Scaling servers       | CPU-intensive tasks             |
+| Communication  | IPC (messages, stdio)  | IPC (messages)        | Fast messaging / shared memory  |
+| Crashes affect | Only that child        | Only that worker      | Can crash whole process         |
+| Overhead       | High                   | High                  | Low                             |
+| Node version   | Oldest                 | Older                 | Newer (Node ≥ 10.5+)            |
+
 ---
 
 ## 1️⃣ Worker Threads ( `worker_threads` )
