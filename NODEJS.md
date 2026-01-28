@@ -1,3 +1,128 @@
+## process.nextTick, setImmediate, setTimeout
+---
+
+### **1️⃣ `process.nextTick()`**
+
+* **Definition:** Schedules a callback to execute **immediately after the current operation completes**, before the event loop continues.
+* **Phase:** Runs in the **“next tick queue”**, which is **before the event loop continues** to the next phase.
+* **Use case:** You want something to run **as soon as possible**, but still asynchronously, without letting I/O or timers run first.
+* **Example:**
+
+```js
+console.log('start');
+
+process.nextTick(() => {
+  console.log('nextTick callback');
+});
+
+console.log('end');
+```
+
+**Output:**
+
+```
+start
+end
+nextTick callback
+```
+
+> Notice how `nextTick` runs **before anything else scheduled asynchronously**, even before `setTimeout`.
+
+---
+
+### **2️⃣ `setImmediate()`**
+
+* **Definition:** Schedules a callback to run **on the next iteration of the event loop**, after I/O events.
+* **Phase:** Runs in the **check phase** of the event loop.
+* **Use case:** You want a callback to run **after I/O events** but **before timers scheduled for the next tick**.
+* **Example:**
+
+```js
+console.log('start');
+
+setImmediate(() => {
+  console.log('setImmediate callback');
+});
+
+console.log('end');
+```
+
+**Output:**
+
+```
+start
+end
+setImmediate callback
+```
+
+> Similar to `nextTick`, but it runs **after the current phase and I/O callbacks**, not immediately.
+
+---
+
+### **3️⃣ `setTimeout(callback, 0)`**
+
+* **Definition:** Schedules a callback to run **after at least the given time** (in ms), usually 0.
+* **Phase:** Runs in the **timers phase** of the event loop.
+* **Use case:** You want something to run **later**, after at least one tick of the event loop.
+* **Example:**
+
+```js
+console.log('start');
+
+setTimeout(() => {
+  console.log('setTimeout callback');
+}, 0);
+
+console.log('end');
+```
+
+**Output:**
+
+```
+start
+end
+setTimeout callback
+```
+
+> Even with `0ms`, it always runs **after the current call stack is empty and the timers phase is reached**.
+
+---
+
+### **Comparison Table**
+
+| Feature            | `process.nextTick`                                   | `setImmediate`                             | `setTimeout(fn, 0)`                                |
+| ------------------ | ---------------------------------------------------- | ------------------------------------------ | -------------------------------------------------- |
+| **When runs**      | After current operation, before event loop continues | Next iteration of event loop (check phase) | After minimum delay, in timers phase               |
+| **Phase**          | Next tick queue                                      | Check phase                                | Timers phase                                       |
+| **I/O precedence** | Runs **before I/O callbacks**                        | Runs **after I/O callbacks**               | May run before or after I/O, depends on timing     |
+| **Use case**       | Immediate async execution                            | Run after I/O events                       | Run after a short delay or schedule in future tick |
+
+---
+
+### **Visual of Event Loop Phases (simplified)**
+
+```
+1. Timers (setTimeout, setInterval)
+2. I/O callbacks
+3. Idle, prepare
+4. Poll (fetch new I/O events)
+5. Check (setImmediate)
+6. Close callbacks
+```
+
+**Important:** `process.nextTick()` **runs before any of these phases**, no matter what.
+
+---
+
+✅ **Key takeaway:**
+
+* `process.nextTick()` → **as soon as possible, before I/O or timers**.
+* `setImmediate()` → **after I/O, next iteration of event loop**.
+* `setTimeout(fn, 0)` → **after at least 0ms, in the timers phase**.
+
+---
+
+
 ## worker, child processes and Cluster
 
 ---
