@@ -1387,126 +1387,104 @@ h1 + p { margin-top: 0; } /* first <p> after <h1> */
 ```css
 h1 ~ p { color: gray; } /* all <p> after <h1> */
 ```
+Perfect! I can convert **all your HTML content** into **Markdown** that you can copy directly into a `.md` file. It will:
+
+* Keep all headings, paragraphs, and links.
+* Format code examples properly.
+* Make it readable in GitHub or VS Code.
+* Remove unnecessary raw HTML tags.
+
+Here’s your full content in **ready-to-paste Markdown**:
 
 ---
 
-```html
-<div class="w3-col l10 m12" id="main">
+# CSS Combinators
 
-  <div id="mainLeaderboard" style="overflow:hidden;">
-    <div data-hbdbrk-parent="true" data-actirise="true" class="nomargin" data-actirise-template="loader" style="min-height: 300px;">
-      <div data-hbdbrk="643b1e30-a2fe-5e06-acf8-9c3faa8f8da8" data-hbdbrk-name="top-page" id="id-643b1e30-a2fe-5e06-acf8-9c3faa8f8da8-0" style="transform: scale3d(1, 1, 1); min-height: 300px;"></div>
-    </div>
-  </div>
+A combinator is something that defines the relationship between two or more selectors.
 
-  <h1 class="with-bookmark">
-    <div id="bookmark-btn" class="bookmark-btn" title="Click to add bookmark">
-      <div class="-svg-icon -on" style="mask: url('/lib/my-learning/icon/main/bookmark-on.svg') center center / auto 100% no-repeat;"></div>
-      <div class="-svg-icon -off -active" style="mask: url('/lib/my-learning/icon/main/bookmark-off.svg') center center / auto 100% no-repeat;"></div>
-    </div>
-    CSS <span class="color_h1">Combinators</span>
-  </h1>
+A CSS selector can contain more than one selector. Between the selectors, we can include a combinator, to create a more specific selection.
 
-  <div class="w3-clear nextprev">
-    <a class="w3-left w3-btn" href="css_align.asp">❮ Previous</a>
-    <a class="w3-right w3-btn" href="css_pseudo_classes.asp">Next ❯</a>
-  </div>
+There are four different combinators in CSS:
 
-  <hr>
+* Descendant combinator (space)
+* Child combinator (`>`)
+* Next sibling combinator (`+`)
+* Subsequent-sibling combinator (`~`)
 
-  <h2>CSS Combinators</h2>
-  <p>A combinator is something that defines the relationship between two or more selectors.</p>
-  <p>A CSS selector can contain more than one selector. Between the selectors, we can include a combinator, to create a more specific selection.</p>
-  <p>There are four different combinators in CSS:</p>
-  <ul>
-    <li>Descendant combinator (space)</li>
-    <li>Child combinator (&gt;)</li>
-    <li>Next sibling combinator (+)</li>
-    <li>Subsequent-sibling combinator (~)</li>
-  </ul>
+---
 
-  <hr>
+## Descendant Combinator (space)
 
-  <h2>Descendant Combinator (space)</h2>
-  <p>The <a href="/cssref/sel_element_element.php">descendant combinator</a> matches all elements that are descendants 
-  (children, grandchildren, etc.) of a specified element.</p>
-  <p>The following example selects all &lt;p&gt; elements inside &lt;div&gt; elements:</p>
-  <div class="w3-example">
-    <h3>Example</h3>
-    <div class="w3-code notranslate cssHigh">
-      div p { background-color: yellow; }
-    </div>
-    <a target="_blank" href="tryit.asp?filename=trycss_sel_element_element" class="w3-btn w3-margin-bottom">Try it Yourself »</a>
-  </div>
+The [descendant combinator](https://www.w3schools.com/cssref/sel_element_element.php) matches all elements that are descendants (children, grandchildren, etc.) of a specified element.
 
-  <hr>
+**Example:** Select all `<p>` elements inside `<div>` elements:
 
-  <h2>Child Combinator (&gt;)</h2>
-  <p>The <a href="/cssref/sel_element_gt.php">child combinator</a> selects all elements that are direct children of a specified element.</p>
-  <p>The following example selects all &lt;p&gt; elements that are direct children of &lt;div&gt;:</p>
-  <div class="w3-example">
-    <h3>Example</h3>
-    <div class="w3-code notranslate cssHigh">
-      div &gt; p { background-color: yellow; }
-    </div>
-    <a target="_blank" href="tryit.asp?filename=trycss_sel_element_gt" class="w3-btn w3-margin-bottom">Try it Yourself »</a>
-  </div>
-
-  <hr>
-
-  <h2>Next Sibling Combinator (+)</h2>
-  <p>The <a href="/cssref/sel_element_pluss.php">next sibling combinator</a> is used to select an element that is directly after a specific element. Sibling elements must have the same parent element.</p>
-  <p>Example: Select the first &lt;p&gt; element immediately following a &lt;div&gt;:</p>
-  <div class="w3-example">
-    <h3>Example</h3>
-    <div class="w3-code notranslate cssHigh">
-      div + p { background-color: yellow; }
-    </div>
-    <a target="_blank" href="tryit.asp?filename=trycss_sel_element_pluss" class="w3-btn w3-margin-bottom">Try it Yourself »</a>
-  </div>
-
-  <hr>
-
-  <h2>Subsequent-sibling Combinator (~)</h2>
-  <p>The <a href="/cssref/sel_gen_sibling.php">subsequent-sibling combinator</a> selects all elements that are next siblings of a specified element.</p>
-  <p>Example: Select all &lt;p&gt; elements that are next siblings of &lt;div&gt;:</p>
-  <div class="w3-example">
-    <h3>Example</h3>
-    <div class="w3-code notranslate cssHigh">
-      div ~ p { background-color: yellow; }
-    </div>
-    <a target="_blank" href="tryit.asp?filename=trycss_sel_element_tilde" class="w3-btn w3-margin-bottom">Try it Yourself »</a>
-  </div>
-
-  <hr>
-
-  <h2>CSS Combinators Reference</h2>
-  <div class="ws-note w3-panel">
-    <p>For a complete list of all CSS combinators, visit our <a href="/cssref/css_ref_combinators.php">CSS Combinators Reference</a>.</p>
-  </div>
-
-</div>
-
-<style>
-  .w3s-pathfinder.-teaser { background-color: transparent !important; }
-  .track-progress-btn-wrapper { display: flex; justify-content: center; }
-  a.track-progress-btn {
-    position: absolute;
-    padding: 8px 20px;
-    border: 1px solid #ddd;
-    top:-65px;
-    background-color: #fff;
-    color: #333;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  @media screen and (max-width: 600px) {
-    a.track-progress-btn { top: 6px; width: 100%; }
-  }
-</style>
-
+```css
+div p {
+  background-color: yellow;
+}
 ```
+
+[Try it Yourself »](https://www.w3schools.com/css/tryit.asp?filename=trycss_sel_element_element)
+
+---
+
+## Child Combinator (>)
+
+The [child combinator](https://www.w3schools.com/cssref/sel_element_gt.php) selects all elements that are direct children of a specified element.
+
+**Example:** Select all `<p>` elements that are direct children of `<div>`:
+
+```css
+div > p {
+  background-color: yellow;
+}
+```
+
+[Try it Yourself »](https://www.w3schools.com/css/tryit.asp?filename=trycss_sel_element_gt)
+
+---
+
+## Next Sibling Combinator (+)
+
+The [next sibling combinator](https://www.w3schools.com/cssref/sel_element_pluss.php) is used to select an element that is directly after a specific element. Sibling elements must have the same parent element.
+
+**Example:** Select the first `<p>` element immediately following a `<div>`:
+
+```css
+div + p {
+  background-color: yellow;
+}
+```
+
+[Try it Yourself »](https://www.w3schools.com/css/tryit.asp?filename=trycss_sel_element_pluss)
+
+---
+
+## Subsequent-sibling Combinator (~)
+
+The [subsequent-sibling combinator](https://www.w3schools.com/cssref/sel_gen_sibling.php) selects all elements that are next siblings of a specified element.
+
+**Example:** Select all `<p>` elements that are next siblings of `<div>`:
+
+```css
+div ~ p {
+  background-color: yellow;
+}
+```
+
+[Try it Yourself »](https://www.w3schools.com/css/tryit.asp?filename=trycss_sel_element_tilde)
+
+---
+
+## CSS Combinators Reference
+
+For a complete list of all CSS combinators, visit the [CSS Combinators Reference](https://www.w3schools.com/css/css_ref_combinators.php).
+
+---
+
+---
+
 ### One-line summary:
 
 > **Child selectors target direct descendants, adjacent sibling (+) targets the next element, and general sibling (~) targets all following siblings with the same parent.**
