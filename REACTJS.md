@@ -1,6 +1,142 @@
 
   ============================================================ ## REACT OLD ## ==========================================================================================================
 
+
+## Q. Apart from setState, what else cause react to re-render component? 
+
+## Main things that cause a re-render
+
+### 1. **Props change**
+
+If a parent re-renders and passes **new props**, the child re-renders.
+
+```jsx
+<Child value={count} />
+```
+
+If `count` changes → `Child` re-renders.
+
+⚠️ Even if the *value looks the same*, a **new reference** (object, array, function) counts as changed.
+
+---
+
+### 2. **Parent component re-renders**
+
+By default, when a parent re-renders, **all children re-render** too.
+
+```jsx
+function Parent() {
+  return <Child />;
+}
+```
+
+Even if `Child` has no props at all — it still re-renders unless memoized.
+
+---
+
+### 3. **Context value changes**
+
+Any component using `useContext` will re-render when the context value changes.
+
+```jsx
+const theme = useContext(ThemeContext);
+```
+
+If `ThemeContext.Provider`’s `value` changes → all consumers re-render.
+
+---
+
+### 4. **useState setter with same value (sometimes)**
+
+React may still re-render if you do:
+
+```jsx
+setCount(count);
+```
+
+React bails out for primitives sometimes, but **don’t rely on it**, especially with objects.
+
+---
+
+### 5. **useReducer dispatch**
+
+Same idea as `setState`:
+
+```jsx
+dispatch({ type: "INCREMENT" });
+```
+
+Dispatch → re-render if state changes.
+
+---
+
+### 6. **Force update**
+
+Rare, but exists:
+
+```jsx
+const [, forceUpdate] = useReducer(x => x + 1, 0);
+forceUpdate();
+```
+
+Or in class components:
+
+```js
+this.forceUpdate();
+```
+
+---
+
+### 7. **Key change**
+
+Changing a `key` forces React to **unmount and remount** a component.
+
+```jsx
+<Component key={id} />
+```
+
+Different key = fresh render + fresh state.
+
+---
+
+### 8. **Strict Mode (development only)**
+
+In React 18, **StrictMode intentionally double-renders** components to detect side effects.
+
+This does **not happen in production**, but confuses a LOT of people.
+
+---
+
+### 9. **Hooks that cause state updates**
+
+Indirectly:
+
+* `useEffect` → calls `setState`
+* `useLayoutEffect`
+* subscriptions, event listeners, timers
+
+If they update state → re-render.
+
+---
+
+## What does *NOT* cause a re-render
+
+* Updating a `useRef`
+* Changing local variables
+* Mutating state **without** using the setter (but this causes bugs 👀)
+
+---
+
+## How to prevent unnecessary re-renders
+
+* `React.memo`
+* `useCallback`
+* `useMemo`
+* Stable object/function references
+* Split components smaller
+
+---
+
   ## Q.1 WHAT IS REACT AND HOW YOU CAN BEST DESCRIBES IT ? 
   React is an open-source JavaScript library developed and maintained by Facebook. It is primarily used for building user interfaces (UI) for single-page applications where the content can be dynamically updated without requiring a full page reload. React allows developers to create reusable UI components and manage the state of an application efficiently.
 
